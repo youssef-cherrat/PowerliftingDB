@@ -204,19 +204,21 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="Arial Bold" size="13.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets right="5.0" />
-                           </GridPane.margin>
-                        </Button>
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Label prefHeight="21.0" prefWidth="1084.0" text="(Execs only!)" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                      <columnConstraints>
                         <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="151.0" />
