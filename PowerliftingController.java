@@ -35,7 +35,7 @@ public class PowerliftingController {
         password.setText("");
         messageLabel.setText("");
     }
-}
+
     public void closeAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
