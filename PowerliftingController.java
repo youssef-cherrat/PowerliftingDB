@@ -1,4 +1,5 @@
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -6,9 +7,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class PowerliftingController {
+public class PowerliftingController implements Initializable {
     @FXML private Label messageLabel;
     @FXML private AnchorPane loginRegisterScreen;
     @FXML private Button closeButton;
@@ -163,4 +166,10 @@ public class PowerliftingController {
         }
     }
 
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayLoginPane();
+    }
 }
