@@ -35,7 +35,7 @@ Powerlifting is a strength sport consisting of three events: squat, bench, and d
 
 ## Entity Relationship Diagram (ERD)
 
-![ERD](path_to_your_erd_image.png)
+![ERD](PL_Lucid.png)
 
 ## Database Schema
 
