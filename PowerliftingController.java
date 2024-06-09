@@ -105,28 +105,6 @@ public class PowerliftingController {
 //        displayMemberSearch(); (Again, needs to be implemented)
     }
 
-    public void addMemberAction() {
-        // Placeholder for adding a new member logic
-        messageLabel.setText("Member added successfully");
-        messageLabel.setVisible(true);
-    }
-
-    public void updateMemberAction() {
-        // Placeholder for updating member information logic
-        messageLabel.setText("Member updated successfully");
-        messageLabel.setVisible(true);
-    }
-
-    public void deleteMemberAction() {
-        // Placeholder for deleting member logic
-        messageLabel.setText("Member deleted successfully");
-        messageLabel.setVisible(true);
-    }
-    public void displayMemberSearch() {
-        loginRegisterScreen.setVisible(false);
-        memberSearchPane.setVisible(true);
-    }
-
     public void searchMemberAction() {
         String searchQuery = username.getText();
         if (searchQuery.isBlank()) {
