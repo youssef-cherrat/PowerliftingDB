@@ -221,7 +221,7 @@ SELECT * FROM Competition_Member;
 
 ### Select statement that shows only Female Member List
     
-    ```sql
+```sql
 SELECT * FROM Member
 WHERE Member_Gender = 'Female';
 ```
