@@ -7,130 +7,165 @@ import java.sql.Statement;
 public class DatabaseDriver {
 
     // SQLite connection URL
-    private static final String URL = "jdbc:sqlite:powerlifting.db";
+    private static final String URL = "jdbc:sqlite:powerlifting.sqlite";
+    private Connection connection;
 
-    public static void main(String[] args) {
+    static {
         try {
-            // Load JDBC driver
             Class.forName("org.sqlite.JDBC");
-
-            // Establish connection
-            try (Connection connection = DriverManager.getConnection(URL)) {
-                try (Statement statement = connection.createStatement()) {
-                    // Create tables
-                    createTables(statement);
-
-                    // Insert initial data
-                    insertInitialData(statement);
-
-                    // Perform queries
-                    performQueries(statement);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private static void createTables(Statement statement) throws SQLException {
-        // Create Year table
-        String createYearTable = "CREATE TABLE IF NOT EXISTS Year ("
-                + "Year_ID INTEGER PRIMARY KEY, "
-                + "Start_Date DATE, "
-                + "End_Date DATE);";
-
-        // Create Semester table
-        String createSemesterTable = "CREATE TABLE IF NOT EXISTS Semester ("
-                + "Semester_ID INTEGER PRIMARY KEY, "
-                + "Year_ID INTEGER, "
-                + "Session_Name TEXT, "
-                + "Member_Dues_Deadline DATETIME, "
-                + "Start_Date DATE, "
-                + "End_Date DATE, "
-                + "FOREIGN KEY (Year_ID) REFERENCES Year(Year_ID));";
-
-        // Create Member table
-        String createMemberTable = "CREATE TABLE IF NOT EXISTS Member ("
-                + "Member_ID INTEGER PRIMARY KEY, "
-                + "Semester_ID INTEGER, "
-                + "Member_First_Name TEXT, "
-                + "Member_Last_Name TEXT, "
-                + "Member_Date_of_Birth DATE, "
-                + "Member_Grad_Date DATE, "
-                + "Member_Weight_Class FLOAT, "
-                + "Member_Best_Total_KG FLOAT, "
-                + "Member_Gender TEXT, "
-                + "Member_Email TEXT, "
-                + "Member_Password_Hash TEXT, "
-                + "FOREIGN KEY (Semester_ID) REFERENCES Semester(Semester_ID));";
-
-        // Create Executive table
-        String createExecutiveTable = "CREATE TABLE IF NOT EXISTS Executive ("
-                + "Executive_ID INTEGER PRIMARY KEY, "
-                + "Semester_ID INTEGER, "
-                + "Executive_First_Name TEXT, "
-                + "Executive_Last_Name TEXT, "
-                + "Executive_Role TEXT, "
-                + "Executive_Email TEXT, "
-                + "Executive_Password_Hash TEXT, "
-                + "FOREIGN KEY (Semester_ID) REFERENCES Semester(Semester_ID));";
-
-        // Create Alumni table
-        String createAlumniTable = "CREATE TABLE IF NOT EXISTS Alumni ("
-                + "Alumni_ID INTEGER PRIMARY KEY, "
-                + "Alumni_First_Name TEXT, "
-                + "Alumni_Last_Name TEXT, "
-                + "Alumni_Class_Year INTEGER, "
-                + "Alumni_Email TEXT, "
-                + "Semester_ID INTEGER, "
-                + "FOREIGN KEY (Semester_ID) REFERENCES Semester(Semester_ID));";
-
-        // Create Practice table
-        String createPracticeTable = "CREATE TABLE IF NOT EXISTS Practice ("
-                + "Practice_ID INTEGER PRIMARY KEY, "
-                + "Date DATE, "
-                + "Location TEXT);";
-
-        // Create Attendance table
-        String createAttendanceTable = "CREATE TABLE IF NOT EXISTS Attendance ("
-                + "Member_ID INTEGER, "
-                + "Practice_ID INTEGER, "
-                + "Status TEXT, "
-                + "PRIMARY KEY (Member_ID, Practice_ID), "
-                + "FOREIGN KEY (Member_ID) REFERENCES Member(Member_ID), "
-                + "FOREIGN KEY (Practice_ID) REFERENCES Practice(Practice_ID));";
-
-        // Create Competition table
-        String createCompetitionTable = "CREATE TABLE IF NOT EXISTS Competition ("
-                + "Competition_ID INTEGER PRIMARY KEY, "
-                + "Location TEXT, "
-                + "Year_ID INTEGER, "
-                + "Competition_Date DATE, "
-                + "FOREIGN KEY (Year_ID) REFERENCES Year(Year_ID));";
-
-        // Create Competition_Member table
-        String createCompetitionMemberTable = "CREATE TABLE IF NOT EXISTS Competition_Member ("
-                + "Competition_ID INTEGER, "
-                + "Member_ID INTEGER, "
-                + "PRIMARY KEY (Competition_ID, Member_ID), "
-                + "FOREIGN KEY (Competition_ID) REFERENCES Competition(Competition_ID), "
-                + "FOREIGN KEY (Member_ID) REFERENCES Member(Member_ID));";
-
-        statement.execute(createYearTable);
-        statement.execute(createSemesterTable);
-        statement.execute(createMemberTable);
-        statement.execute(createExecutiveTable);
-        statement.execute(createAlumniTable);
-        statement.execute(createPracticeTable);
-        statement.execute(createAttendanceTable);
-        statement.execute(createCompetitionTable);
-        statement.execute(createCompetitionMemberTable);
+    public void connect() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            throw new IllegalStateException("Connection already open.");
+        }
+        connection = DriverManager.getConnection(URL);
     }
 
-    private static void insertInitialData(Statement statement) throws SQLException {
+    public void commit() throws SQLException {
+        connection.commit();
+    }
+    public void rollback() throws SQLException {
+        connection.rollback();
+    }
+    public void disconnect() throws SQLException {
+        connection.close();
+    }
+
+//    public static void main(String[] args) {
+//        try {
+//            // Load JDBC driver
+//            Class.forName("org.sqlite.JDBC");
+//
+//            // Establish connection
+//            try (Connection connection = DriverManager.getConnection(URL)) {
+//                try (Statement statement = connection.createStatement()) {
+//                    // Create tables
+//                    createTables(statement);
+//
+//                    // Insert initial data
+//                    insertInitialData(statement);
+//
+//                    // Perform queries
+//                    performQueries(statement);
+//
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    private void createTables() throws SQLException {
+        try {
+            Statement statement = connection.createStatement();
+
+            // Create Year table
+            String createYearTable = "CREATE TABLE IF NOT EXISTS Year ("
+                    + "Year_ID INTEGER PRIMARY KEY, "
+                    + "Start_Date DATE, "
+                    + "End_Date DATE);";
+
+            // Create Semester table
+            String createSemesterTable = "CREATE TABLE IF NOT EXISTS Semester ("
+                    + "Semester_ID INTEGER PRIMARY KEY, "
+                    + "Year_ID INTEGER, "
+                    + "Session_Name TEXT, "
+                    + "Member_Dues_Deadline DATETIME, "
+                    + "Start_Date DATE, "
+                    + "End_Date DATE, "
+                    + "FOREIGN KEY (Year_ID) REFERENCES Year(Year_ID));";
+
+            // Create Member table
+            String createMemberTable = "CREATE TABLE IF NOT EXISTS Member ("
+                    + "Member_ID INTEGER PRIMARY KEY, "
+                    + "Semester_ID INTEGER, "
+                    + "Member_First_Name TEXT, "
+                    + "Member_Last_Name TEXT, "
+                    + "Member_Date_of_Birth DATE, "
+                    + "Member_Grad_Date DATE, "
+                    + "Member_Weight_Class FLOAT, "
+                    + "Member_Best_Total_KG FLOAT, "
+                    + "Member_Gender TEXT, "
+                    + "Member_Email TEXT, "
+                    + "Member_Password_Hash TEXT, "
+                    + "FOREIGN KEY (Semester_ID) REFERENCES Semester(Semester_ID));";
+
+            // Create Executive table
+            String createExecutiveTable = "CREATE TABLE IF NOT EXISTS Executive ("
+                    + "Executive_ID INTEGER PRIMARY KEY, "
+                    + "Semester_ID INTEGER, "
+                    + "Executive_First_Name TEXT, "
+                    + "Executive_Last_Name TEXT, "
+                    + "Executive_Role TEXT, "
+                    + "Executive_Email TEXT, "
+                    + "Executive_Password_Hash TEXT, "
+                    + "FOREIGN KEY (Semester_ID) REFERENCES Semester(Semester_ID));";
+
+            // Create Alumni table
+            String createAlumniTable = "CREATE TABLE IF NOT EXISTS Alumni ("
+                    + "Alumni_ID INTEGER PRIMARY KEY, "
+                    + "Alumni_First_Name TEXT, "
+                    + "Alumni_Last_Name TEXT, "
+                    + "Alumni_Class_Year INTEGER, "
+                    + "Alumni_Email TEXT, "
+                    + "Semester_ID INTEGER, "
+                    + "FOREIGN KEY (Semester_ID) REFERENCES Semester(Semester_ID));";
+
+            // Create Practice table
+            String createPracticeTable = "CREATE TABLE IF NOT EXISTS Practice ("
+                    + "Practice_ID INTEGER PRIMARY KEY, "
+                    + "Date DATE, "
+                    + "Location TEXT);";
+
+            // Create Attendance table
+            String createAttendanceTable = "CREATE TABLE IF NOT EXISTS Attendance ("
+                    + "Member_ID INTEGER, "
+                    + "Practice_ID INTEGER, "
+                    + "Status TEXT, "
+                    + "PRIMARY KEY (Member_ID, Practice_ID), "
+                    + "FOREIGN KEY (Member_ID) REFERENCES Member(Member_ID), "
+                    + "FOREIGN KEY (Practice_ID) REFERENCES Practice(Practice_ID));";
+
+            // Create Competition table
+            String createCompetitionTable = "CREATE TABLE IF NOT EXISTS Competition ("
+                    + "Competition_ID INTEGER PRIMARY KEY, "
+                    + "Location TEXT, "
+                    + "Year_ID INTEGER, "
+                    + "Competition_Date DATE, "
+                    + "FOREIGN KEY (Year_ID) REFERENCES Year(Year_ID));";
+
+            // Create Competition_Member table
+            String createCompetitionMemberTable = "CREATE TABLE IF NOT EXISTS Competition_Member ("
+                    + "Competition_ID INTEGER, "
+                    + "Member_ID INTEGER, "
+                    + "PRIMARY KEY (Competition_ID, Member_ID), "
+                    + "FOREIGN KEY (Competition_ID) REFERENCES Competition(Competition_ID), "
+                    + "FOREIGN KEY (Member_ID) REFERENCES Member(Member_ID));";
+
+            statement.execute(createYearTable);
+            statement.execute(createSemesterTable);
+            statement.execute(createMemberTable);
+            statement.execute(createExecutiveTable);
+            statement.execute(createAlumniTable);
+            statement.execute(createPracticeTable);
+            statement.execute(createAttendanceTable);
+            statement.execute(createCompetitionTable);
+            statement.execute(createCompetitionMemberTable);
+        } catch (SQLException e) {
+            rollback();
+            throw e;
+        }
+    }
+
+    private void insertInitialData() throws SQLException {
+        Statement statement = connection.createStatement();
+        
         // Insert data into Year table
         String insertYears = "INSERT INTO Year (Year_ID, Start_Date, End_Date) VALUES "
                 + "(1, '2024-01-01', '2024-12-31'), "
@@ -203,7 +238,9 @@ public class DatabaseDriver {
         statement.execute(insertCompetitionMembers);
     }
 
-    private static void performQueries(Statement statement) throws SQLException {
+    private void performQueries() throws SQLException {
+        Statement statement = connection.createStatement();
+
         // Execute and print all query results
         executeSelectAll(statement, "Year");
         executeSelectAll(statement, "Semester");
@@ -310,7 +347,8 @@ public class DatabaseDriver {
         resultSet.close();
     }
     // Method to search for a specific member
-    private static void searchMember(Statement statement, String searchTerm) throws SQLException {
+    private void searchMember(String searchTerm) throws SQLException {
+        Statement statement = connection.createStatement();
         String query = "SELECT * FROM Member WHERE Member_First_Name LIKE '%" + searchTerm + "%' OR Member_Last_Name LIKE '%" + searchTerm + "%';";
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) {
@@ -321,7 +359,8 @@ public class DatabaseDriver {
     }
 
     // Method to check member credentials
-    private static boolean checkCredentials(Statement statement, String email, String passwordHash) throws SQLException {
+    private boolean checkCredentials(String email, String passwordHash) throws SQLException {
+        Statement statement = connection.createStatement();
         String query = "SELECT * FROM Member WHERE Member_Email = '" + email + "' AND Member_Password_Hash = '" + passwordHash + "';";
         ResultSet resultSet = statement.executeQuery(query);
         boolean valid = resultSet.next();
