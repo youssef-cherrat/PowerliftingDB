@@ -138,6 +138,7 @@ CREATE TABLE Competition_Member (
     FOREIGN KEY (Competition_ID) REFERENCES Competition(Competition_ID),
     FOREIGN KEY (Member_ID) REFERENCES Member(Member_ID)
 );
+'''
 
 ### Create Insert Statemntes for Tables
 
@@ -201,6 +202,7 @@ VALUES (1, 1),
        (2, 1),
        (2, 3),
        (3, 4);
+'''
 
 ### Select staements for each table
 
@@ -215,13 +217,14 @@ SELECT * FROM Practice;
 SELECT * FROM Attendance;
 SELECT * FROM Competition;
 SELECT * FROM Competition_Member;
+'''
 
 ### Select statement that shows only Female Member List
     
     ```sql
 SELECT * FROM Member
 WHERE Member_Gender = 'Female';
-
+'''
 ### Query to group attendance and count number of practices attended by each member
 
 ```sql
@@ -229,6 +232,7 @@ SELECT Member_ID, COUNT(Practice_ID) AS NumberOfPractices
 FROM Attendance
 WHERE Status = 'Present'
 GROUP BY Member_ID;
+'''
 
 ### SQL statement on master detail report - Member and Competition_Member tables
 
@@ -249,3 +253,4 @@ JOIN
     Practice ON Attendance.Practice_ID = Practice.Practice_ID
 ORDER BY 
     Member.Member_ID, Practice.Date;
+'''
