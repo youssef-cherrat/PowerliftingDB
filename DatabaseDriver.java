@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseDriver {
 
@@ -28,9 +30,11 @@ public class DatabaseDriver {
     public void commit() throws SQLException {
         connection.commit();
     }
+
     public void rollback() throws SQLException {
         connection.rollback();
     }
+
     public void disconnect() throws SQLException {
         connection.close();
     }
@@ -165,7 +169,7 @@ public class DatabaseDriver {
 
     private void insertInitialData() throws SQLException {
         Statement statement = connection.createStatement();
-        
+
         // Insert data into Year table
         String insertYears = "INSERT INTO Year (Year_ID, Start_Date, End_Date) VALUES "
                 + "(1, '2024-01-01', '2024-12-31'), "
@@ -346,6 +350,7 @@ public class DatabaseDriver {
         }
         resultSet.close();
     }
+
     // Method to search for a specific member
     private void searchMember(String searchTerm) throws SQLException {
         Statement statement = connection.createStatement();
@@ -366,5 +371,41 @@ public class DatabaseDriver {
         boolean valid = resultSet.next();
         resultSet.close();
         return valid;
+    }
+
+    private List<Member> getMemberData() throws SQLException {
+        List<Member> members = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT Member_ID, Member_First_Name, Member_Last_Name, Member_Gender, Member_Email FROM Member;");
+            while (rs.next()) {
+                int memberId = rs.getInt("Member_ID");
+                String firstName = rs.getString("Member_First_Name");
+                String lastName = rs.getString("Member_Last_Name");
+                String gender = rs.getString("Member_Gender");
+                String email = rs.getString("Member_Email");
+                int totalPracticesAttended = getTotalPracticesAttended(memberId);
+                members.add(new Member(firstName, lastName, gender, email, totalPracticesAttended));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
+
+    private int getTotalPracticesAttended(int memberId) throws SQLException {
+        int totalPracticesAttended = 0;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT COUNT(*) AS TotalPracticesAttended FROM Attendance WHERE Member_ID = " + memberId + " AND Status = 'Present'");
+            if (rs.next()) {
+                totalPracticesAttended = rs.getInt("TotalPracticesAttended");
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalPracticesAttended;
     }
 }
