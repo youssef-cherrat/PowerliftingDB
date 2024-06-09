@@ -12,21 +12,30 @@ import java.util.ResourceBundle;
 
 
 public class PowerliftingController implements Initializable {
+    PowerliftingService service;
+
     @FXML private Label messageLabel;
     @FXML private AnchorPane loginRegisterScreen;
     @FXML private Button closeButton;
     @FXML private GridPane loginPane;
     @FXML private GridPane registerPane;
-    @FXML private TextField username;
+    @FXML private TextField email;
     @FXML private PasswordField password;
-    @FXML private TextField newUser;
+    @FXML private TextField newEmail;
     @FXML private PasswordField newPassword;
 
-    @FXML private GridPane memberSearchPane;
+    @FXML private AnchorPane memberSearchPane;
+
+
+    private String loginEmail;
+
+    public void setService (PowerliftingService service) {
+        this.service = service;
+    }
 
     public void displayRegisterPane() {
         loginPane.setVisible(false);
-        newUser.setText("");
+        newEmail.setText("");
         newPassword.setText("");
         messageLabel.setText("");
         registerPane.setVisible(true);
@@ -36,7 +45,7 @@ public class PowerliftingController implements Initializable {
         loginRegisterScreen.setVisible(true);
         registerPane.setVisible(false);
         loginPane.setVisible(true);
-        username.setText("");
+        email.setText("");
         password.setText("");
         messageLabel.setText("");
     }
@@ -54,19 +63,18 @@ public class PowerliftingController implements Initializable {
 
 
     public void loginAction() {
-        String enteredUsername = username.getText();
+        String enteredEmail = email.getText();
         String enteredPassword = password.getText();
-        boolean placeholder = false; // Placeholder for if statement conditional logic
-        if (enteredUsername.isBlank() || enteredPassword.isBlank()) {
+        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
             showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
         } else {
 //            check if creds are valid, dependent on dbDriver
 //            if valid, display member search screen and set login screen to invis
-            if (placeholder == true) {
-//                loginUser = enteredUsername;
-//                loginRegisterScreen.setVisible(false);
-                //                Needs to be implemented
-//                displayMemberSearch();
+            boolean validCreds = service.checkCredentials(enteredEmail, enteredPassword);
+            if (validCreds) {
+                loginEmail = enteredEmail;
+                loginRegisterScreen.setVisible(false);
+                displayMemberSearch();
             } else {
                 showMessage(messageLabel, "Invalid username or password. Please enter a valid combination.", Color.RED);
             }
@@ -74,7 +82,7 @@ public class PowerliftingController implements Initializable {
     }
 
     public void createUserAction() {
-        String enteredUsername = newUser.getText();
+        String enteredUsername = newEmail.getText();
         String enteredPassword = newPassword.getText();
 //        For testing purposes:
 //        System.out.println("Entered Username: " + enteredUsername);
@@ -103,13 +111,21 @@ public class PowerliftingController implements Initializable {
         displayLoginPane();
     }
 
+    public void displayMemberSearch() {
+        memberSearchPane.setVisible(true);
+        registerPane.setVisible(false);
+        loginPane.setVisible(true);
+        email.setText("");
+        password.setText("");
+    }
+
     public void backButtonAction() {
         loginRegisterScreen.setVisible(false);
 //        displayMemberSearch(); (Again, needs to be implemented)
     }
 
     public void searchMemberAction() {
-        String searchQuery = username.getText();
+        String searchQuery = email.getText();
         if (searchQuery.isBlank()) {
             showMessage(messageLabel, "Please enter a valid search query.", Color.RED);
         } else {
@@ -123,7 +139,7 @@ public class PowerliftingController implements Initializable {
     }
 
     public void addMemberAction() {
-        String newMemberName = newUser.getText();
+        String newMemberName = newEmail.getText();
         String newMemberDetails = newPassword.getText();
         if (newMemberName.isBlank() || newMemberDetails.isBlank()) {
             showMessage(messageLabel, "Please enter valid member details.", Color.RED);
@@ -138,7 +154,7 @@ public class PowerliftingController implements Initializable {
     }
 
     public void updateMemberAction() {
-        String memberName = newUser.getText();
+        String memberName = newEmail.getText();
         String memberDetails = newPassword.getText();
         if (memberName.isBlank() || memberDetails.isBlank()) {
             showMessage(messageLabel, "Please enter valid member details.", Color.RED);
@@ -153,7 +169,7 @@ public class PowerliftingController implements Initializable {
     }
 
     public void deleteMemberAction() {
-        String memberName = newUser.getText();
+        String memberName = newEmail.getText();
         if (memberName.isBlank()) {
             showMessage(messageLabel, "Please enter a valid member name.", Color.RED);
         } else {

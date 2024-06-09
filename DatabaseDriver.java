@@ -359,7 +359,7 @@ public class DatabaseDriver {
     }
 
     // Method to check member credentials
-    private boolean checkCredentials(String email, String passwordHash) throws SQLException {
+    public boolean checkCredentials(String email, String passwordHash) throws SQLException {
         Statement statement = connection.createStatement();
         String query = "SELECT * FROM Member WHERE Member_Email = '" + email + "' AND Member_Password_Hash = '" + passwordHash + "';";
         ResultSet resultSet = statement.executeQuery(query);

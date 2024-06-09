@@ -16,11 +16,11 @@ public class PowerliftingApplication extends Application {
         Parent root = fxmlLoader.load();
 
         PowerliftingController controller = fxmlLoader.getController();
-        Configuration configuration = new Configuration();
-//        DatabaseDriver db = new DatabaseDriver(configuration);
-//        PowerliftingService service = new PowerliftingService(db);
+//        Configuration configuration = new Configuration();
+        DatabaseDriver db = new DatabaseDriver();
+        PowerliftingService service = new PowerliftingService(db);
 //        service.createTables();
-//        controller.setService(service);
+        controller.setService(service);
 
         Scene scene = new Scene(root);
         stage.setTitle("UVA Club Powerlifting Application");
