@@ -309,4 +309,23 @@ public class DatabaseDriver {
         }
         resultSet.close();
     }
+    // Method to search for a specific member
+    private static void searchMember(Statement statement, String searchTerm) throws SQLException {
+        String query = "SELECT * FROM Member WHERE Member_First_Name LIKE '%" + searchTerm + "%' OR Member_Last_Name LIKE '%" + searchTerm + "%';";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            System.out.println(resultSet.getInt("Member_ID") + ": " + resultSet.getString("Member_First_Name") + " " + resultSet.getString("Member_Last_Name") +
+                    ", Email: " + resultSet.getString("Member_Email") + ", Weight Class: " + resultSet.getFloat("Member_Weight_Class"));
+        }
+        resultSet.close();
+    }
+
+    // Method to check member credentials
+    private static boolean checkCredentials(Statement statement, String email, String passwordHash) throws SQLException {
+        String query = "SELECT * FROM Member WHERE Member_Email = '" + email + "' AND Member_Password_Hash = '" + passwordHash + "';";
+        ResultSet resultSet = statement.executeQuery(query);
+        boolean valid = resultSet.next();
+        resultSet.close();
+        return valid;
+    }
 }
