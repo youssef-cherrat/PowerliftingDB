@@ -121,7 +121,67 @@ public class DatabaseDriver {
     }
 
     private static void insertInitialData(Statement statement) throws SQLException {
+        String insertYears = "INSERT INTO Year (Year_ID, Start_Date, End_Date) VALUES "
+                + "(1, '2024-01-01', '2024-12-31'), "
+                + "(2, '2025-01-01', '2025-12-31');";
 
+        String insertSemesters = "INSERT INTO Semester (Semester_ID, Year_ID, Session_Name, Member_Dues_Deadline, Start_Date, End_Date) VALUES "
+                + "(1, 1, 'Spring 2024', '2024-01-15 23:59:59', '2024-01-10', '2024-05-20'), "
+                + "(2, 1, 'Fall 2024', '2024-08-15 23:59:59', '2024-08-20', '2024-12-15'), "
+                + "(3, 2, 'Spring 2025', '2025-01-15 23:59:59', '2025-01-10', '2025-05-20');";
+
+        String insertMembers = "INSERT INTO Member (Member_ID, Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender, Member_Email, Member_Password_Hash) VALUES "
+                + "(1, 1, 'John', 'Doe', '2000-01-01', '2024-05-20', 75.0, 500.0, 'Male', 'john.doe@example.com', 'hash1'), "
+                + "(2, 1, 'Jane', 'Smith', '2001-02-01', '2025-05-20', 60.0, 450.0, 'Female', 'jane.smith@example.com', 'hash3'), "
+                + "(3, 2, 'Mike', 'Brown', '1999-03-03', '2024-12-15', 82.5, 600.0, 'Male', 'mike.brown@example.com', 'hash4'), "
+                + "(4, 3, 'Emily', 'Davis', '2002-04-04', '2025-12-15', 70.0, 550.0, 'Female', 'emily.davis@example.com', 'hash5');";
+
+        String insertExecutives = "INSERT INTO Executive (Executive_ID, Semester_ID, Executive_First_Name, Executive_Last_Name, Executive_Role, Executive_Email, Executive_Password_Hash) VALUES "
+                + "(1, 1, 'Alice', 'Smith', 'President', 'alice.smith@example.com', 'hash2'), "
+                + "(2, 2, 'Robert', 'Lee', 'Vice President', 'robert.lee@example.com', 'hash6'), "
+                + "(3, 3, 'Linda', 'White', 'Secretary', 'linda.white@example.com', 'hash7');";
+
+        String insertAlumni = "INSERT INTO Alumni (Alumni_ID, Alumni_First_Name, Alumni_Last_Name, Alumni_Class_Year, Alumni_Email, Semester_ID) VALUES "
+                + "(1, 'Bob', 'Johnson', 2023, 'bob.johnson@example.com', 1), "
+                + "(2, 'Sara', 'Williams', 2022, 'sara.williams@example.com', 1), "
+                + "(3, 'Tom', 'Wilson', 2023, 'tom.wilson@example.com', 2);";
+
+        String insertPractices = "INSERT INTO Practice (Practice_ID, Date, Location) VALUES "
+                + "(1, '2024-02-01', 'Gym A'), "
+                + "(2, '2024-02-03', 'Gym B'), "
+                + "(3, '2024-02-05', 'Gym C'), "
+                + "(4, '2024-08-21', 'Gym A');";
+
+        String insertAttendance = "INSERT INTO Attendance (Member_ID, Practice_ID, Status) VALUES "
+                + "(1, 1, 'Present'), "
+                + "(1, 2, 'Present'), "
+                + "(1, 3, 'Absent'), "
+                + "(2, 2, 'Present'), "
+                + "(2, 4, 'Present'), "
+                + "(3, 3, 'Present'), "
+                + "(4, 4, 'Absent');";
+
+        String insertCompetitions = "INSERT INTO Competition (Competition_ID, Location, Year_ID, Competition_Date) VALUES "
+                + "(1, 'City Arena', 1, '2024-03-15'), "
+                + "(2, 'Downtown Gym', 1, '2024-10-10'), "
+                + "(3, 'UVA Stadium', 2, '2025-04-20');";
+
+        String insertCompetitionMembers = "INSERT INTO Competition_Member (Competition_ID, Member_ID) VALUES "
+                + "(1, 1), "
+                + "(1, 2), "
+                + "(2, 1), "
+                + "(2, 3), "
+                + "(3, 4);";
+
+        statement.execute(insertYears);
+        statement.execute(insertSemesters);
+        statement.execute(insertMembers);
+        statement.execute(insertExecutives);
+        statement.execute(insertAlumni);
+        statement.execute(insertPractices);
+        statement.execute(insertAttendance);
+        statement.execute(insertCompetitions);
+        statement.execute(insertCompetitionMembers);
     }
 
     private static void performQueries(Statement statement) throws SQLException {
@@ -146,6 +206,5 @@ public class DatabaseDriver {
         statement.executeQuery(selectAllCompetitions);
         statement.executeQuery(selectAllCompetitionMembers);
 
-        // Additional queries for specific requirements can be added here
     }
 }
