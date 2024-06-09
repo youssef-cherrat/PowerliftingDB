@@ -25,6 +25,19 @@ public class PowerliftingController implements Initializable {
     @FXML private PasswordField newPassword;
 
     @FXML private AnchorPane memberSearchPane;
+    @FXML private Button searchMemberButton;
+    @FXML private Button logoutButton;
+    @FXML private Button addMemberButton;
+    @FXML private TextField searchFirstName;
+    @FXML private TextField searchLastName;
+    @FXML private TextField searchEmail;
+    @FXML private TableView<Member> memberRosterTable;
+    @FXML private TableColumn<Member, String> memberFirstNameColumn;
+    @FXML private TableColumn<Member, String> memberLastNameColumn;
+    @FXML private TableColumn<Member, String> memberGenderColumn;
+    @FXML private TableColumn<Member, String> memberEmailColumn;
+    @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
+
 
 
     private String loginEmail;
@@ -187,5 +200,10 @@ public class PowerliftingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayLoginPane();
+        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("First_Name"));
+        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Last_Name"));
+        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Gender"));
+        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
+        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
     }
 }

@@ -59,7 +59,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Username:" GridPane.rowIndex="1">
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Email:" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -69,7 +69,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="username" prefWidth="186.0" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="email" prefWidth="186.0" promptText="email" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -114,7 +114,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Username:" GridPane.rowIndex="1">
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Email:" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -124,7 +124,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="newUser" prefWidth="186.0" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="newEmail" prefWidth="186.0" promptText="email" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -159,7 +159,7 @@
                   <Label fx:id="messageLabel" layoutX="375.0" layoutY="160.0" prefHeight="25.0" prefWidth="550.0" text="Message" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane id="memberSearchPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #F9DCBF;" visible="false">
+            <AnchorPane id="memberSearchPane" fx:id="memberSearchPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #F9DCBF;" visible="false">
                <children>
                   <HBox prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
@@ -189,27 +189,27 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <TextField alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.rowIndex="1">
+                        <TextField fx:id="searchFirstName" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField prefHeight="32.0" prefWidth="655.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <TextField fx:id="searchEmail" prefHeight="32.0" prefWidth="655.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="searchLastName" alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <Button fx:id="searchMemberButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button fx:id="addMemberButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -237,13 +237,13 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TableView layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
+                  <TableView fx:id="memberRosterTable" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
                      <columns>
-                        <TableColumn maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
-                        <TableColumn maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
-                        <TableColumn maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Gender" />
-                        <TableColumn maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
-                        <TableColumn maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
+                        <TableColumn fx:id="memberFirstNameColumn" maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn fx:id="memberLastNameColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                        <TableColumn fx:id="memberGenderColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Gender" />
+                        <TableColumn fx:id="memberEmailColumn" maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
+                        <TableColumn fx:id="memberAttendanceColumn" maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
                      </columns>
                   </TableView>
                </children>
