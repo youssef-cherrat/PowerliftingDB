@@ -408,7 +408,7 @@ public class DatabaseDriver {
         }
         return totalPracticesAttended;
     }
-}
+
     public List<Member> searchMembersByFirstName(String firstName) throws SQLException {
         List<Member> members = new ArrayList<>();
         Statement statement = connection.createStatement();
@@ -462,4 +462,5 @@ public class DatabaseDriver {
         resultSet.close();
         return members;
     }
+}
 
