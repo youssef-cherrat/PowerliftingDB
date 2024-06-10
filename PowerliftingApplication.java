@@ -27,4 +27,5 @@ public class PowerliftingApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
 }
