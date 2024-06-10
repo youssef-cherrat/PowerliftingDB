@@ -409,3 +409,57 @@ public class DatabaseDriver {
         return totalPracticesAttended;
     }
 }
+    public List<Member> searchMembersByFirstName(String firstName) throws SQLException {
+        List<Member> members = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Member WHERE Member_First_Name LIKE '%" + firstName + "%';";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            members.add(new Member(
+                    resultSet.getString("Member_First_Name"),
+                    resultSet.getString("Member_Last_Name"),
+                    resultSet.getString("Member_Gender"),
+                    resultSet.getString("Member_Email"),
+                    getTotalPracticesAttended(resultSet.getInt("Member_ID"))
+            ));
+        }
+        resultSet.close();
+        return members;
+    }
+
+    public List<Member> searchMembersByLastName(String lastName) throws SQLException {
+        List<Member> members = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Member WHERE Member_Last_Name LIKE '%" + lastName + "%';";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            members.add(new Member(
+                    resultSet.getString("Member_First_Name"),
+                    resultSet.getString("Member_Last_Name"),
+                    resultSet.getString("Member_Gender"),
+                    resultSet.getString("Member_Email"),
+                    getTotalPracticesAttended(resultSet.getInt("Member_ID"))
+            ));
+        }
+        resultSet.close();
+        return members;
+    }
+
+    public List<Member> searchMembersByEmail(String email) throws SQLException {
+        List<Member> members = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM Member WHERE Member_Email LIKE '%" + email + "%';";
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            members.add(new Member(
+                    resultSet.getString("Member_First_Name"),
+                    resultSet.getString("Member_Last_Name"),
+                    resultSet.getString("Member_Gender"),
+                    resultSet.getString("Member_Email"),
+                    getTotalPracticesAttended(resultSet.getInt("Member_ID"))
+            ));
+        }
+        resultSet.close();
+        return members;
+    }
+
