@@ -1,4 +1,6 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PowerliftingService {
     private DatabaseDriver dbDriver;
@@ -17,5 +19,17 @@ public class PowerliftingService {
             userValid = false;
         }
         return userValid;
+    }
+
+    public List<Member> getMemberData() {
+        List<Member> membersList = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            membersList = dbDriver.getMemberData();
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            //
+        }
+        return membersList;
     }
 }

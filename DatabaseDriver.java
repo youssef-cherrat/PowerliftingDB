@@ -373,7 +373,7 @@ public class DatabaseDriver {
         return valid;
     }
 
-    private List<Member> getMemberData() throws SQLException {
+    public List<Member> getMemberData() throws SQLException {
         List<Member> members = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();

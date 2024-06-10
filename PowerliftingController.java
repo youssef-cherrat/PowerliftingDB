@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -130,6 +131,16 @@ public class PowerliftingController implements Initializable {
         loginPane.setVisible(true);
         email.setText("");
         password.setText("");
+        displayAllMembers();
+    }
+
+    public void displayMembers(List<Member> membersList) {
+        memberRosterTable.getItems().setAll(membersList);
+    }
+
+    public void displayAllMembers() {
+        List<Member> memersList = service.getMemberData();
+        displayMembers(memersList);
     }
 
     public void backButtonAction() {
