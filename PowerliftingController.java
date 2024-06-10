@@ -39,6 +39,11 @@ public class PowerliftingController implements Initializable {
     @FXML private TableColumn<Member, String> memberEmailColumn;
     @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
 
+    @FXML private AnchorPane addMemberPane;
+    @FXML private Button backButton1;
+
+
+
 
 
     private String loginEmail;
@@ -96,12 +101,12 @@ public class PowerliftingController implements Initializable {
     }
 
     public void createUserAction() {
-        String enteredUsername = newEmail.getText();
+        String enteredEmail = newEmail.getText();
         String enteredPassword = newPassword.getText();
 //        For testing purposes:
 //        System.out.println("Entered Username: " + enteredUsername);
 //        System.out.println("Entered Password: " + enteredPassword);
-        if (enteredUsername.isBlank() || enteredPassword.isBlank()) {
+        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
             showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
         } else {
 //            boolean userAlreadyExists = service.userExists(enteredUsername);
@@ -143,10 +148,16 @@ public class PowerliftingController implements Initializable {
         displayMembers(memersList);
     }
 
+    public void addMemberScreenChange() {
+        displayAddMemberPane();
+    }
+
     public void backButtonAction() {
         loginRegisterScreen.setVisible(false);
-//        displayMemberSearch(); (Again, needs to be implemented)
+        addMemberPane.setVisible(false);
+        displayMemberSearch();
     }
+
 
     public void searchMemberAction() {
         String searchQuery = email.getText();
@@ -162,20 +173,20 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void addMemberAction() {
-        String newMemberName = newEmail.getText();
-        String newMemberDetails = newPassword.getText();
-        if (newMemberName.isBlank() || newMemberDetails.isBlank()) {
-            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
-        } else {
-            boolean placeholder_addMember = true;
-            if (placeholder_addMember) {
-                showMessage(messageLabel, "Member added successfully.", Color.GREEN);
-            } else {
-                showMessage(messageLabel, "Failed to add member. Please try again.", Color.RED);
-            }
-        }
-    }
+//    public void addMemberAction() {
+//        String newMemberName = newEmail.getText();
+//        String newMemberDetails = newPassword.getText();
+//        if (newMemberName.isBlank() || newMemberDetails.isBlank()) {
+//            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
+//        } else {
+//            boolean placeholder_addMember = true;
+//            if (placeholder_addMember) {
+//                showMessage(messageLabel, "Member added successfully.", Color.GREEN);
+//            } else {
+//                showMessage(messageLabel, "Failed to add member. Please try again.", Color.RED);
+//            }
+//        }
+//    }
 
     public void updateMemberAction() {
         String memberName = newEmail.getText();
@@ -204,6 +215,11 @@ public class PowerliftingController implements Initializable {
                 showMessage(messageLabel, "Failed to delete member. Please try again.", Color.RED);
             }
         }
+    }
+
+    public void displayAddMemberPane() {
+        memberSearchPane.setVisible(false);
+        addMemberPane.setVisible(true);
     }
 
 

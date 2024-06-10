@@ -209,7 +209,7 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button fx:id="addMemberButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMemberScreenChange" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -369,7 +369,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane id="MemberInfoPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
+            <AnchorPane id="MemberInfoPane" fx:id="addMemberPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
                <children>
                   <HBox prefHeight="30.0" prefWidth="1220.0">
                      <children>
