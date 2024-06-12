@@ -15,56 +15,32 @@ import java.util.ResourceBundle;
 public class PowerliftingController implements Initializable {
     PowerliftingService service;
 
-    @FXML
-    private Label messageLabel;
-    @FXML
-    private AnchorPane loginRegisterScreen;
-    @FXML
-    private Button closeButton;
-    @FXML
-    private GridPane loginPane;
-    @FXML
-    private GridPane registerPane;
-    @FXML
-    private TextField email;
-    @FXML
-    private PasswordField password;
-    @FXML
-    private TextField newEmail;
-    @FXML
-    private PasswordField newPassword;
+    @FXML private Label messageLabel;
+    @FXML private AnchorPane loginRegisterScreen;
+    @FXML private Button closeButton;
+    @FXML private GridPane loginPane;
+    @FXML private GridPane registerPane;
+    @FXML private TextField email;
+    @FXML private PasswordField password;
+    @FXML private TextField newEmail;
+    @FXML private PasswordField newPassword;
 
-    @FXML
-    private AnchorPane memberSearchPane;
-    @FXML
-    private Button searchMemberButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private Button addMemberButton;
-    @FXML
-    private TextField searchFirstName;
-    @FXML
-    private TextField searchLastName;
-    @FXML
-    private TextField searchEmail;
-    @FXML
-    private TableView<Member> memberRosterTable;
-    @FXML
-    private TableColumn<Member, String> memberFirstNameColumn;
-    @FXML
-    private TableColumn<Member, String> memberLastNameColumn;
-    @FXML
-    private TableColumn<Member, String> memberGenderColumn;
-    @FXML
-    private TableColumn<Member, String> memberEmailColumn;
-    @FXML
-    private TableColumn<Member, Integer> memberAttendanceColumn;
+    @FXML private AnchorPane memberSearchPane;
+    @FXML private Button searchMemberButton;
+    @FXML private Button logoutButton;
+    @FXML private Button addMemberButton;
+    @FXML private TextField searchFirstName;
+    @FXML private TextField searchLastName;
+    @FXML private TextField searchEmail;
+    @FXML private TableView<Member> memberRosterTable;
+    @FXML private TableColumn<Member, String> memberFirstNameColumn;
+    @FXML private TableColumn<Member, String> memberLastNameColumn;
+    @FXML private TableColumn<Member, String> memberGenderColumn;
+    @FXML private TableColumn<Member, String> memberEmailColumn;
+    @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
 
-    @FXML
-    private AnchorPane addMemberPane;
-    @FXML
-    private Button backButton1;
+    @FXML private AnchorPane addMemberPane;
+    @FXML private Button backButton1;
 
 
     private String loginEmail;
