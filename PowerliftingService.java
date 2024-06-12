@@ -32,7 +32,7 @@ public class PowerliftingService {
         }
         return membersList;
     }
-}
+
     public List<Member> searchMembersByFirstName(String firstName) {
         List<Member> members = new ArrayList<>();
         try {
@@ -68,3 +68,4 @@ public class PowerliftingService {
         }
         return members;
     }
+}
