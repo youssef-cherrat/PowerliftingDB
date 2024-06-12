@@ -234,3 +234,33 @@ public class PowerliftingController implements Initializable {
         memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
     }
 }
+
+    public void searchMembersByFirstName() {
+        String firstName = searchFirstName.getText();
+        List<Member> members = service.searchMembersByFirstName(firstName);
+        if (members.isEmpty()) {
+            showMessage(messageLabel, "No members found with the given first name.", Color.RED);
+        } else {
+            displayMembers(members);
+        }
+    }
+
+    public void searchMembersByLastName() {
+        String lastName = searchLastName.getText();
+        List<Member> members = service.searchMembersByLastName(lastName);
+        if (members.isEmpty()) {
+            showMessage(messageLabel, "No members found with the given last name.", Color.RED);
+        } else {
+            displayMembers(members);
+        }
+    }
+
+    public void searchMembersByEmail() {
+        String email = searchEmail.getText();
+        List<Member> members = service.searchMembersByEmail(email);
+        if (members.isEmpty()) {
+            showMessage(messageLabel, "No members found with the given email.", Color.RED);
+        } else {
+            displayMembers(members);
+        }
+    }

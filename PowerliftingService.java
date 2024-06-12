@@ -33,3 +33,38 @@ public class PowerliftingService {
         return membersList;
     }
 }
+    public List<Member> searchMembersByFirstName(String firstName) {
+        List<Member> members = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            members = dbDriver.searchMembersByFirstName(firstName);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
+
+    public List<Member> searchMembersByLastName(String lastName) {
+        List<Member> members = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            members = dbDriver.searchMembersByLastName(lastName);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
+
+    public List<Member> searchMembersByEmail(String email) {
+        List<Member> members = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            members = dbDriver.searchMembersByEmail(email);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
