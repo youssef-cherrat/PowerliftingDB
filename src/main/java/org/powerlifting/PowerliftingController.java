@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
@@ -106,6 +108,24 @@ public class PowerliftingController implements Initializable {
         label.setVisible(true);
     }
 
+    public static String hashString(String input) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(input.getBytes("UTF-8"));
+            return bytesToHex(hashBytes);
+        } catch (NoSuchAlgorithmException | java.io.UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
 
     public void loginAction() {
         String enteredEmail = email.getText();
@@ -115,7 +135,9 @@ public class PowerliftingController implements Initializable {
         } else {
 //            check if creds are valid, dependent on dbDriver
 //            if valid, display member search screen and set login screen to invis
-            boolean validCreds = service.checkCredentials(enteredEmail, enteredPassword);
+            //hash entered password
+            String hashed_password = hashString(enteredPassword);
+            boolean validCreds = service.checkCredentials(enteredEmail, hashed_password);
             if (validCreds) {
                 loginEmail = enteredEmail;
                 loginRegisterScreen.setVisible(false);
@@ -303,14 +325,16 @@ public class PowerliftingController implements Initializable {
         String e = verifyEmail.getText();
         String oldPW = oldPassword.getText();
         String newPW = newPassword.getText();
+        String hashednewPW = hashString(newPW);
         String confirmPW = confirmNewPassword.getText();
+        String hashedconfirmPW = hashString(confirmPW);
         boolean validCreds = service.checkCredentials(e, oldPW);
         if (e.isBlank() || oldPW.isBlank() || newPW.isBlank() || confirmPW.isBlank()) {
             showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
         }
         else {
             if (validCreds && (newPW.equals(confirmPW))) {
-                service.changePassword(e, oldPW, newPW);
+                service.changePassword(e, oldPW, hashednewPW);
                 showMessage(messageLabel, "Successfully updated password!", Color.GREEN);
 
             } else {

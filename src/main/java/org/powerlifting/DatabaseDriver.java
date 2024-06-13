@@ -521,27 +521,10 @@ public class DatabaseDriver {
             pstmt.setString(9, member.getEmail());
             //append the first name and last name and primary key together
             String password = member.getFirst_Name() + member.getLast_Name();
+            pstmt.setString(10, password);
             pstmt.executeUpdate();
         }
     }
-    //
-    public static String hashString(String input) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = digest.digest(input.getBytes("UTF-8"));
-            return bytesToHex(hashBytes);
-        } catch (NoSuchAlgorithmException | java.io.UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
-    private static String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
 
 }
