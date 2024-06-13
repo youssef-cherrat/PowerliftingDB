@@ -21,11 +21,15 @@ public class PowerliftingController implements Initializable {
     @FXML private AnchorPane loginRegisterScreen;
     @FXML private Button closeButton;
     @FXML private GridPane loginPane;
-    @FXML private GridPane registerPane;
+    @FXML private GridPane changePasswordPane;
     @FXML private TextField email;
     @FXML private PasswordField password;
-    @FXML private TextField newEmail;
+    @FXML private TextField verifyEmail;
+    @FXML private PasswordField oldPassword;
     @FXML private PasswordField newPassword;
+    @FXML private PasswordField confirmNewPassword;
+    @FXML private Button changePasswordButton;
+
 
     @FXML private AnchorPane memberSearchPane;
     @FXML private Button searchMemberButton;
@@ -44,6 +48,10 @@ public class PowerliftingController implements Initializable {
     @FXML private AnchorPane addMemberPane;
     @FXML private Button backButton1;
 
+    @FXML private AnchorPane alumniPane;
+    @FXML private Button viewAlumniButton;
+    @FXML private Button returnToLoginButton;
+
 
     private String loginEmail;
 
@@ -51,17 +59,19 @@ public class PowerliftingController implements Initializable {
         this.service = service;
     }
 
-    public void displayRegisterPane() {
+    public void displayChangePasswordPane() {
         loginPane.setVisible(false);
-        newEmail.setText("");
+        verifyEmail.setText("");
+        oldPassword.setText("");
         newPassword.setText("");
+        confirmNewPassword.setText("");
         messageLabel.setText("");
-        registerPane.setVisible(true);
+        changePasswordPane.setVisible(true);
     }
 
     public void displayLoginPane() {
         loginRegisterScreen.setVisible(true);
-        registerPane.setVisible(false);
+        changePasswordPane.setVisible(false);
         loginPane.setVisible(true);
         email.setText("");
         password.setText("");
@@ -99,29 +109,29 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void createUserAction() {
-        String enteredEmail = newEmail.getText();
-        String enteredPassword = newPassword.getText();
-//        For testing purposes:
-//        System.out.println("Entered Username: " + enteredUsername);
-//        System.out.println("Entered Password: " + enteredPassword);
-        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
-            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
-        } else {
-//            boolean userAlreadyExists = service.userExists(enteredUsername);
-            boolean placeholder_userExists = true;
-            if (placeholder_userExists) {
-                showMessage(messageLabel, "Username already exists. Please choose another username.", Color.RED);
-            } else {
-//              Placeholder to create and add user to database, needs to be implemented using dbDriver and service
-                boolean placeholder_addUser = false;
-                if (placeholder_addUser) {
-                    displayLoginPane();
-                    showMessage(messageLabel, "Registration successful. Please log in with your new credentials.", Color.GREEN);
-                }
-            }
-        }
-    }
+//    public void createUserAction() {
+//        String enteredEmail = verifyEmail.getText();
+//        String enteredPassword = newPassword.getText();
+////        For testing purposes:
+////        System.out.println("Entered Username: " + enteredUsername);
+////        System.out.println("Entered Password: " + enteredPassword);
+//        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
+//            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
+//        } else {
+////            boolean userAlreadyExists = service.userExists(enteredUsername);
+//            boolean placeholder_userExists = true;
+//            if (placeholder_userExists) {
+//                showMessage(messageLabel, "Username already exists. Please choose another username.", Color.RED);
+//            } else {
+////              Placeholder to create and add user to database, needs to be implemented using dbDriver and service
+//                boolean placeholder_addUser = false;
+//                if (placeholder_addUser) {
+//                    displayLoginPane();
+//                    showMessage(messageLabel, "Registration successful. Please log in with your new credentials.", Color.GREEN);
+//                }
+//            }
+//        }
+//    }
 
     public void logoutAction() {
         memberSearchPane.setVisible(false);
@@ -131,7 +141,7 @@ public class PowerliftingController implements Initializable {
 
     public void displayMemberSearch() {
         memberSearchPane.setVisible(true);
-        registerPane.setVisible(false);
+        changePasswordPane.setVisible(false);
         loginPane.setVisible(true);
         email.setText("");
         password.setText("");
@@ -186,39 +196,49 @@ public class PowerliftingController implements Initializable {
 //            }
 //        }
 //    }
-
-    public void updateMemberAction() {
-        String memberName = newEmail.getText();
-        String memberDetails = newPassword.getText();
-        if (memberName.isBlank() || memberDetails.isBlank()) {
-            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
-        } else {
-            boolean placeholder_updateMember = true;
-            if (placeholder_updateMember) {
-                showMessage(messageLabel, "Member updated successfully.", Color.GREEN);
-            } else {
-                showMessage(messageLabel, "Failed to update member. Please try again.", Color.RED);
-            }
-        }
-    }
-
-    public void deleteMemberAction() {
-        String memberName = newEmail.getText();
-        if (memberName.isBlank()) {
-            showMessage(messageLabel, "Please enter a valid member name.", Color.RED);
-        } else {
-            boolean placeholder_deleteMember = true;
-            if (placeholder_deleteMember) {
-                showMessage(messageLabel, "Member deleted successfully.", Color.GREEN);
-            } else {
-                showMessage(messageLabel, "Failed to delete member. Please try again.", Color.RED);
-            }
-        }
-    }
+//
+//    public void updateMemberAction() {
+//        String memberName = newEmail.getText();
+//        String memberDetails = newPassword.getText();
+//        if (memberName.isBlank() || memberDetails.isBlank()) {
+//            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
+//        } else {
+//            boolean placeholder_updateMember = true;
+//            if (placeholder_updateMember) {
+//                showMessage(messageLabel, "Member updated successfully.", Color.GREEN);
+//            } else {
+//                showMessage(messageLabel, "Failed to update member. Please try again.", Color.RED);
+//            }
+//        }
+//    }
+//
+//    public void deleteMemberAction() {
+//        String memberName = newEmail.getText();
+//        if (memberName.isBlank()) {
+//            showMessage(messageLabel, "Please enter a valid member name.", Color.RED);
+//        } else {
+//            boolean placeholder_deleteMember = true;
+//            if (placeholder_deleteMember) {
+//                showMessage(messageLabel, "Member deleted successfully.", Color.GREEN);
+//            } else {
+//                showMessage(messageLabel, "Failed to delete member. Please try again.", Color.RED);
+//            }
+//        }
+//    }
 
     public void displayAddMemberPane() {
         memberSearchPane.setVisible(false);
         addMemberPane.setVisible(true);
+    }
+
+    public void displayAlumniPane() {
+        loginRegisterScreen.setVisible(false);
+        alumniPane.setVisible(true);
+    }
+
+    public void returnToLogin() {
+        alumniPane.setVisible(false);
+        loginRegisterScreen.setVisible(true);
     }
 
 

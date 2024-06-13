@@ -19,494 +19,594 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane id="mainWindow" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.powerlifting.PowerliftingController">
-    <top>
-        <AnchorPane id="topPane" prefHeight="40.0" prefWidth="1280.0" style="-fx-background-color: #232D4B;" BorderPane.alignment="CENTER">
-            <children>
-                <Label layoutX="444.0" layoutY="-1.0" prefHeight="59.0" prefWidth="542.0" text="UVA Powerlifting Club" textFill="#e57200">
-                    <font>
-                        <Font name="Arial Bold" size="36.0" />
-                    </font>
-                </Label>
-                <Button fx:id="closeButton" layoutX="1144.0" layoutY="13.0" mnemonicParsing="false" onAction="#closeAction" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #e57200;" text="Close Application" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Button>
-            </children>
-        </AnchorPane>
-    </top>
-    <left>
-        <AnchorPane id="leftPane" prefHeight="660.0" prefWidth="30.0" style="-fx-background-color: #E57200;" BorderPane.alignment="CENTER" />
-    </left>
-    <bottom>
-        <AnchorPane id="bottomPane" prefHeight="20.0" prefWidth="1280.0" style="-fx-background-color: #232D4B;" BorderPane.alignment="CENTER" />
-    </bottom>
-    <center>
-        <AnchorPane id="centerPane" prefHeight="660.0" prefWidth="1220.0" BorderPane.alignment="CENTER">
-            <children>
-                <AnchorPane id="loginScreen" fx:id="loginRegisterScreen" layoutX="260.0" layoutY="175.0" prefHeight="300.0" prefWidth="950.0" visible="false">
-                    <children>
-                        <GridPane id="LoginPane" fx:id="loginPane" prefHeight="250.0" prefWidth="500.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Email:" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Password:" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="email" prefWidth="186.0" promptText="email" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </TextField>
-                                <PasswordField fx:id="password" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </PasswordField>
-                                <AnchorPane prefHeight="33.0" prefWidth="217.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <children>
-                                        <Button fx:id="loginButton" layoutY="6.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="27.0" prefWidth="95.0" text="Login">
-                                            <font>
-                                                <Font size="14.0" />
-                                            </font>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="185.0" text="Executive Login" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="Arial Bold" size="16.0" />
-                                    </font>
-                                </Label>
-                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <children>
-                                        <Label layoutX="-1.0" layoutY="17.0" text="Don't have an account?" />
-                                        <Hyperlink fx:id="registerLink" layoutX="130.0" layoutY="14.0" onAction="#displayRegisterPane" text="REGISTER" />
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </GridPane>
-                        <GridPane id="RegisterPane" fx:id="registerPane" prefHeight="250.0" prefWidth="500.0" visible="false">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Email:" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Password:" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="newEmail" prefWidth="186.0" promptText="email" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </TextField>
-                                <PasswordField fx:id="newPassword" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
-                                </PasswordField>
-                                <AnchorPane prefHeight="33.0" prefWidth="217.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <children>
-                                        <Button fx:id="newUserButton" alignment="CENTER" layoutX="-1.0" layoutY="3.0" mnemonicParsing="false" onAction="#createUserAction" prefHeight="27.0" prefWidth="95.0" text="Create User">
-                                            <font>
-                                                <Font size="14.0" />
-                                            </font>
-                                        </Button>
-                                    </children>
-                                </AnchorPane>
-                                <Label alignment="CENTER" prefHeight="17.0" prefWidth="185.0" text="User Registration" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="Arial Bold" size="16.0" />
-                                    </font>
-                                </Label>
-                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <children>
-                                        <Label layoutX="-1.0" layoutY="9.0" text="Already have an account?" />
-                                        <Hyperlink fx:id="loginLink" layoutX="143.0" layoutY="6.0" onAction="#displayLoginPane" text="LOGIN" />
-                                    </children>
-                                </AnchorPane>
-                            </children>
-                        </GridPane>
-                        <Label fx:id="messageLabel" layoutX="375.0" layoutY="160.0" prefHeight="25.0" prefWidth="550.0" text="Message" visible="false" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="memberSearchPane" fx:id="memberSearchPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #F9DCBF;" visible="false">
-                    <children>
-                        <HBox prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
-                            <children>
-                                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                                <Button fx:id="logoutButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#logoutAction" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #E57200;" text="LOG OUT" textAlignment="CENTER" textFill="WHITE">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Region prefHeight="30.0" prefWidth="25.0" />
-                            </children>
-                        </HBox>
-                        <GridPane layoutY="30.0" prefHeight="90.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
-                            <children>
-                                <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="First Name">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER" prefHeight="16.0" prefWidth="128.0" text="Last Name" GridPane.columnIndex="1">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER" prefHeight="16.0" prefWidth="173.0" text="Email" GridPane.columnIndex="2">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <TextField fx:id="searchFirstName" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin>
-                                </TextField>
-                                <TextField fx:id="searchEmail" prefHeight="32.0" prefWidth="655.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin>
-                                </TextField>
-                                <TextField fx:id="searchLastName" alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin>
-                                </TextField>
-                                <Button fx:id="searchMemberButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMemberScreenChange" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Label prefHeight="21.0" prefWidth="1084.0" text="(Execs only!)" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="Arial Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                            <columnConstraints>
-                                <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="151.0" />
-                                <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
-                                <ColumnConstraints maxWidth="678.0" minWidth="419.0" prefWidth="678.0" />
-                                <ColumnConstraints />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints />
-                                <RowConstraints maxHeight="53.0" minHeight="39.0" prefHeight="53.0" />
-                                <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="42.0" />
-                            </rowConstraints>
-                        </GridPane>
-                        <Label layoutX="7.0" layoutY="131.0" prefHeight="21.0" prefWidth="1084.0" text="Member Information:">
-                            <font>
-                                <Font name="Arial Bold" size="18.0" />
-                            </font>
+   <top>
+      <AnchorPane id="topPane" prefHeight="40.0" prefWidth="1280.0" style="-fx-background-color: #232D4B;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="444.0" layoutY="-1.0" prefHeight="59.0" prefWidth="542.0" text="UVA Powerlifting Club" textFill="#e57200">
+               <font>
+                  <Font name="Arial Bold" size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="closeButton" layoutX="1144.0" layoutY="13.0" mnemonicParsing="false" onAction="#closeAction" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #e57200;" text="Close Application" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="viewAlumniButton" layoutX="6.0" layoutY="15.0" mnemonicParsing="false" onAction="#displayAlumniPane" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: #e57200;" text="View Alumni" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane id="leftPane" prefHeight="660.0" prefWidth="30.0" style="-fx-background-color: #E57200;" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <AnchorPane id="bottomPane" prefHeight="20.0" prefWidth="1280.0" style="-fx-background-color: #232D4B;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane id="centerPane" prefHeight="660.0" prefWidth="1220.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane id="loginScreen" fx:id="loginRegisterScreen" layoutX="260.0" layoutY="175.0" prefHeight="300.0" prefWidth="950.0" visible="false">
+               <children>
+                  <GridPane id="LoginPane" fx:id="loginPane" prefHeight="250.0" prefWidth="500.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Email:" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
-                        <TableView fx:id="memberRosterTable" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
-                            <columns>
-                                <TableColumn fx:id="memberFirstNameColumn" maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
-                                <TableColumn fx:id="memberLastNameColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
-                                <TableColumn fx:id="memberGenderColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Gender" />
-                                <TableColumn fx:id="memberEmailColumn" maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
-                                <TableColumn fx:id="memberAttendanceColumn" maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
-                            </columns>
-                        </TableView>
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="memberDetailsLogPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
-                    <children>
-                        <HBox prefHeight="30.0" prefWidth="1220.0">
-                            <children>
-                                <Region prefHeight="30.0" prefWidth="10.0" />
-                                <Button fx:id="backButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #E57200;" text="BACK" textAlignment="CENTER" textFill="WHITE">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Region prefHeight="30.0" prefWidth="500.0" />
-                            </children>
-                        </HBox>
-                        <VBox layoutX="200.0" layoutY="30.0" prefHeight="130.0" prefWidth="140.0">
-                            <children>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Name">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Age : ">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Rank : ">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Weight Class : ">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <VBox layoutX="340.0" layoutY="30.0" prefHeight="130.0" prefWidth="700.0" style="-fx-border-color: #F1F1EF;">
-                            <children>
-                                <Label alignment="CENTER" prefHeight="25.0" prefWidth="142.0" text="Member Details">
-                                    <font>
-                                        <Font name="Arial Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="640.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <HBox layoutY="220.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
-                            <children>
-                                <Region prefHeight="30.0" prefWidth="300.0" />
-                                <TextField prefHeight="30.0" prefWidth="150.0" promptText="Enter event type here">
-                                    <font>
-                                        <Font name="Arial" size="13.0" />
-                                    </font>
-                                </TextField>
-                                <TextField prefHeight="30.0" prefWidth="550.0" promptText="Enter event description here" translateX="10.0">
-                                    <font>
-                                        <Font name="Arial" size="13.0" />
-                                    </font>
-                                </TextField>
-                            </children>
-                        </HBox>
-                        <HBox layoutY="260.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
-                            <children>
-                                <Region prefHeight="30.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="10.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="20.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Region prefHeight="30.0" prefWidth="470.0" />
-                            </children>
-                        </HBox>
-                        <TableView layoutY="320.0" prefHeight="320.0" prefWidth="1220.0">
-                            <columns>
-                                <TableColumn maxWidth="170.89409065246582" prefWidth="170.89409065246582" style="-fx-alignment: CENTER;" text="Type (Practice/Comp)" />
-                                <TableColumn maxWidth="300.0" prefWidth="249.10592651367188" style="-fx-alignment: CENTER;" text="Date" />
-                                <TableColumn maxWidth="800.0" prefWidth="800.0" style="-fx-alignment: CENTER-LEFT;" text="Title/Description" />
-                            </columns>
-                        </TableView>
-                        <Label layoutY="290.0" prefHeight="25.0" prefWidth="300.0" text="Attended Events Log " translateX="5.0">
-                            <font>
-                                <Font name="Arial Bold" size="18.0" />
-                            </font>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Password:" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Label>
-                    </children>
-                </AnchorPane>
-                <AnchorPane id="MemberInfoPane" fx:id="addMemberPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
-                    <children>
-                        <HBox prefHeight="30.0" prefWidth="1220.0">
-                            <children>
-                                <Region prefHeight="30.0" prefWidth="10.0" />
-                                <Button fx:id="backButton1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #E57200;" text="BACK" textAlignment="CENTER" textFill="WHITE">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Button>
-                                <Region prefHeight="30.0" prefWidth="500.0" />
-                            </children>
-                        </HBox>
-                        <VBox layoutX="200.0" layoutY="30.0" prefHeight="130.0" prefWidth="140.0">
-                            <children>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Name">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Age : ">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Rank : ">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Weight Class : ">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <VBox layoutX="340.0" layoutY="30.0" prefHeight="130.0" prefWidth="700.0" style="-fx-border-color: #F1F1EF;">
-                            <children>
-                                <Label alignment="CENTER" prefHeight="22.0" prefWidth="232.0" text="Member Info">
-                                    <font>
-                                        <Font name="Arial Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="640.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                                <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
-                                    <font>
-                                        <Font name="Arial Bold" size="13.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <HBox layoutY="228.0" prefHeight="39.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
-                            <children>
-                                <Region prefHeight="30.0" prefWidth="300.0" />
-                                <TextField prefHeight="30.0" prefWidth="373.0" promptText="Email" translateX="10.0">
-                                    <font>
-                                        <Font name="Arial" size="13.0" />
-                                    </font>
-                                </TextField>
-                                <Region prefHeight="39.0" prefWidth="84.0" />
-                                <TextField prefHeight="30.0" prefWidth="103.0" promptText="Gender">
-                                    <font>
-                                        <Font name="Arial" size="13.0" />
-                                    </font>
-                                </TextField>
-                            </children>
-                        </HBox>
-                        <TextField layoutX="311.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="First Name">
-                            <font>
-                                <Font name="Arial" size="13.0" />
-                            </font>
+                        <TextField fx:id="email" prefWidth="186.0" promptText="email" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </TextField>
-                        <TextField layoutX="514.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="Last Name">
-                            <font>
-                                <Font name="Arial" size="13.0" />
-                            </font>
+                        <PasswordField fx:id="password" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </PasswordField>
+                        <AnchorPane prefHeight="33.0" prefWidth="217.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <Button fx:id="loginButton" layoutY="6.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="27.0" prefWidth="95.0" text="Login">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="185.0" text="Club Login" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <Label layoutX="-1.0" layoutY="17.0" text="Forgot password?" />
+                              <Hyperlink fx:id="changePasswordLink" layoutX="130.0" layoutY="14.0" onAction="#displayChangePasswordPane" text="CHANGE PASSWORD" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+                  <GridPane id="changePasswordPane" fx:id="changePasswordPane" prefHeight="250.0" prefWidth="500.0" visible="false">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0" minWidth="10.0" prefWidth="186.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Email:" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Old Password:" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="verifyEmail" prefWidth="186.0" promptText="email" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </TextField>
-                        <Button layoutX="311.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        <PasswordField fx:id="oldPassword" promptText="old password" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </PasswordField>
+                        <AnchorPane prefHeight="33.0" prefWidth="217.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <children>
+                              <Button fx:id="changePasswordButton" alignment="CENTER" layoutX="-1.0" layoutY="3.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="143.0" text="Change Password">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="185.0" text="User Change Password" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                           <children>
+                              <Label layoutX="-1.0" layoutY="9.0" text="Already know account?" />
+                              <Hyperlink fx:id="loginLink" layoutX="143.0" layoutY="6.0" onAction="#displayLoginPane" text="LOGIN" />
+                           </children>
+                        </AnchorPane>
+                        <PasswordField fx:id="newPassword" promptText="new password" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </PasswordField>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="New Password:" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="175.0" text="Confirm New Password:" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="confirmNewPassword" promptText="new password" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </PasswordField>
+                     </children>
+                  </GridPane>
+                  <Label fx:id="messageLabel" layoutX="375.0" layoutY="160.0" prefHeight="25.0" prefWidth="550.0" text="Message" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane id="memberSearchPane" fx:id="memberSearchPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #F9DCBF;" visible="false">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Region prefHeight="30.0" prefWidth="25.0" />
+                        <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMemberScreenChange" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
                         </Button>
-                        <Button layoutX="514.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE MEMBER" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="logoutButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#logoutAction" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #E57200;" text="LOG OUT" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
                         </Button>
-                        <Button layoutX="710.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
+                        <Region prefHeight="30.0" prefWidth="25.0" />
+                     </children>
+                  </HBox>
+                  <GridPane layoutY="30.0" prefHeight="90.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="First Name" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="128.0" text="Last Name" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="173.0" text="Email" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="searchFirstName" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="searchEmail" maxWidth="-Infinity" prefHeight="32.0" prefWidth="300.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="searchLastName" alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Button fx:id="searchMemberButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
                         </Button>
-                        <TextField layoutX="710.0" layoutY="192.0" prefHeight="30.0" prefWidth="149.0" promptText="DOB (MM/DD/YYYY)">
-                            <font>
-                                <Font name="Arial" size="13.0" />
-                            </font>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="151.0" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
+                        <ColumnConstraints maxWidth="678.0" minWidth="419.0" prefWidth="678.0" />
+                        <ColumnConstraints />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                        <RowConstraints />
+                        <RowConstraints maxHeight="53.0" minHeight="39.0" prefHeight="53.0" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Label layoutX="7.0" layoutY="131.0" prefHeight="21.0" prefWidth="1084.0" text="Member Information:">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="memberRosterTable" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
+                     <columns>
+                        <TableColumn fx:id="memberFirstNameColumn" maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn fx:id="memberLastNameColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                        <TableColumn fx:id="memberGenderColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Gender" />
+                        <TableColumn fx:id="memberEmailColumn" maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
+                        <TableColumn fx:id="memberAttendanceColumn" maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="memberDetailsLogPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="1220.0">
+                     <children>
+                        <Region prefHeight="30.0" prefWidth="10.0" />
+                        <Button fx:id="backButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #E57200;" text="BACK" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="30.0" prefWidth="500.0" />
+                     </children>
+                  </HBox>
+                  <VBox layoutX="200.0" layoutY="30.0" prefHeight="130.0" prefWidth="140.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Name">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Age : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Rank : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Weight Class : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="340.0" layoutY="30.0" prefHeight="130.0" prefWidth="700.0" style="-fx-border-color: #F1F1EF;">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="25.0" prefWidth="142.0" text="Member Details">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="640.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox layoutY="220.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Region prefHeight="30.0" prefWidth="300.0" />
+                        <TextField prefHeight="30.0" prefWidth="150.0" promptText="Enter event type here">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
                         </TextField>
-                        <TextField layoutX="311.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Attendance Num.">
-                            <font>
-                                <Font name="Arial" size="13.0" />
-                            </font>
+                        <TextField prefHeight="30.0" prefWidth="550.0" promptText="Enter event description here" translateX="10.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
                         </TextField>
-                        <TextField layoutX="514.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Rank">
-                            <font>
-                                <Font name="Arial" size="13.0" />
-                            </font>
+                     </children>
+                  </HBox>
+                  <HBox layoutY="260.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Region prefHeight="30.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="10.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="20.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="30.0" prefWidth="470.0" />
+                     </children>
+                  </HBox>
+                  <TableView layoutY="320.0" prefHeight="320.0" prefWidth="1220.0">
+                     <columns>
+                        <TableColumn maxWidth="170.89409065246582" prefWidth="170.89409065246582" style="-fx-alignment: CENTER;" text="Type (Practice/Comp)" />
+                        <TableColumn maxWidth="300.0" prefWidth="249.10592651367188" style="-fx-alignment: CENTER;" text="Date" />
+                        <TableColumn maxWidth="800.0" prefWidth="800.0" style="-fx-alignment: CENTER-LEFT;" text="Title/Description" />
+                     </columns>
+                  </TableView>
+                  <Label layoutY="290.0" prefHeight="25.0" prefWidth="300.0" text="Attended Events Log " translateX="5.0">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="MemberInfoPane" fx:id="addMemberPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="1220.0">
+                     <children>
+                        <Region prefHeight="30.0" prefWidth="10.0" />
+                        <Button fx:id="backButton1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #E57200;" text="BACK" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="30.0" prefWidth="500.0" />
+                     </children>
+                  </HBox>
+                  <VBox layoutX="200.0" layoutY="30.0" prefHeight="130.0" prefWidth="140.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Name">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Age : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Rank : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Weight Class : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="340.0" layoutY="30.0" prefHeight="130.0" prefWidth="700.0" style="-fx-border-color: #F1F1EF;">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="22.0" prefWidth="232.0" text="Member Info">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="640.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0" translateX="5.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox layoutY="228.0" prefHeight="39.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Region prefHeight="30.0" prefWidth="300.0" />
+                        <TextField prefHeight="30.0" prefWidth="373.0" promptText="Email" translateX="10.0">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
                         </TextField>
-                        <TextField layoutX="710.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Weight">
-                            <font>
-                                <Font name="Arial" size="13.0" />
-                            </font>
+                        <Region prefHeight="39.0" prefWidth="84.0" />
+                        <TextField prefHeight="30.0" prefWidth="103.0" promptText="Gender">
+                           <font>
+                              <Font name="Arial" size="13.0" />
+                           </font>
                         </TextField>
-                    </children>
-                </AnchorPane>
-            </children>
-        </AnchorPane>
-    </center>
-    <right>
-        <AnchorPane id="rightPane" prefHeight="660.0" prefWidth="30.0" style="-fx-background-color: #E57200;" BorderPane.alignment="CENTER" />
-    </right>
+                     </children>
+                  </HBox>
+                  <TextField layoutX="311.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="First Name">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="514.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="Last Name">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+                  <Button layoutX="311.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="514.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE MEMBER" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="710.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <TextField layoutX="710.0" layoutY="192.0" prefHeight="30.0" prefWidth="149.0" promptText="DOB (MM/DD/YYYY)">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="311.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Attendance Num.">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="514.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Rank">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="710.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Weight">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="alumniPane" fx:id="alumniPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #F9DCBF;" visible="false">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="returnToLoginButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #E57200;" text="Return to Login" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Region prefHeight="30.0" prefWidth="25.0" />
+                     </children>
+                  </HBox>
+                  <GridPane layoutY="30.0" prefHeight="90.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="First Name">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="128.0" text="Last Name" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="173.0" text="Email" GridPane.columnIndex="2">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="searchFirstName1" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="searchEmail1" maxWidth="-Infinity" prefHeight="32.0" prefWidth="300.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="searchLastName1" alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH ALUM" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="151.0" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
+                        <ColumnConstraints maxWidth="678.0" minWidth="419.0" prefWidth="678.0" />
+                        <ColumnConstraints />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints maxHeight="53.0" minHeight="39.0" prefHeight="53.0" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Label layoutX="7.0" layoutY="131.0" prefHeight="21.0" prefWidth="1084.0" text="Alum Information:">
+                     <font>
+                        <Font name="Arial Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="memberRosterTable1" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
+                     <columns>
+                        <TableColumn maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                        <TableColumn maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
+                        <TableColumn maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Class Year" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+   <right>
+      <AnchorPane id="rightPane" prefHeight="660.0" prefWidth="30.0" style="-fx-background-color: #E57200;" BorderPane.alignment="CENTER" />
+   </right>
 </BorderPane>
