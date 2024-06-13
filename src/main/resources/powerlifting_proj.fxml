@@ -237,7 +237,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="searchMemberButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                        <Button fx:id="searchMemberButton" mnemonicParsing="false" onAction="#searchMemberAction" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -253,13 +253,13 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="searchWeightClass" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="80.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <TextField fx:id="searchWeight" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="80.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="313.0" text="Best Total (KG)" GridPane.columnIndex="5">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="searchBestResult" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <TextField fx:id="searchResult" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="119.70077514648438" />
