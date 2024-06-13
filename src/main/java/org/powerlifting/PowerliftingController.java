@@ -95,6 +95,10 @@ public class PowerliftingController implements Initializable {
     @FXML
     private TextField emailField;
 
+    @FXML private AnchorPane alumniPane;
+    @FXML private Button viewAlumniButton;
+    @FXML private Button returnToLoginButton;
+
 
     private String loginEmail;
 
@@ -102,17 +106,19 @@ public class PowerliftingController implements Initializable {
         this.service = service;
     }
 
-    public void displayRegisterPane() {
+    public void displayChangePasswordPane() {
         loginPane.setVisible(false);
-        newEmail.setText("");
+        verifyEmail.setText("");
+        oldPassword.setText("");
         newPassword.setText("");
+        confirmNewPassword.setText("");
         messageLabel.setText("");
-        registerPane.setVisible(true);
+        changePasswordPane.setVisible(true);
     }
 
     public void displayLoginPane() {
         loginRegisterScreen.setVisible(true);
-        registerPane.setVisible(false);
+        changePasswordPane.setVisible(false);
         loginPane.setVisible(true);
         email.setText("");
         password.setText("");
@@ -150,29 +156,29 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void createUserAction() {
-        String enteredEmail = newEmail.getText();
-        String enteredPassword = newPassword.getText();
-//        For testing purposes:
-//        System.out.println("Entered Username: " + enteredUsername);
-//        System.out.println("Entered Password: " + enteredPassword);
-        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
-            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
-        } else {
-//            boolean userAlreadyExists = service.userExists(enteredUsername);
-            boolean placeholder_userExists = true;
-            if (placeholder_userExists) {
-                showMessage(messageLabel, "Username already exists. Please choose another username.", Color.RED);
-            } else {
-//              Placeholder to create and add user to database, needs to be implemented using dbDriver and service
-                boolean placeholder_addUser = false;
-                if (placeholder_addUser) {
-                    displayLoginPane();
-                    showMessage(messageLabel, "Registration successful. Please log in with your new credentials.", Color.GREEN);
-                }
-            }
-        }
-    }
+//    public void createUserAction() {
+//        String enteredEmail = verifyEmail.getText();
+//        String enteredPassword = newPassword.getText();
+////        For testing purposes:
+////        System.out.println("Entered Username: " + enteredUsername);
+////        System.out.println("Entered Password: " + enteredPassword);
+//        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
+//            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
+//        } else {
+////            boolean userAlreadyExists = service.userExists(enteredUsername);
+//            boolean placeholder_userExists = true;
+//            if (placeholder_userExists) {
+//                showMessage(messageLabel, "Username already exists. Please choose another username.", Color.RED);
+//            } else {
+////              Placeholder to create and add user to database, needs to be implemented using dbDriver and service
+//                boolean placeholder_addUser = false;
+//                if (placeholder_addUser) {
+//                    displayLoginPane();
+//                    showMessage(messageLabel, "Registration successful. Please log in with your new credentials.", Color.GREEN);
+//                }
+//            }
+//        }
+//    }
 
     public void logoutAction() {
         memberSearchPane.setVisible(false);
@@ -182,7 +188,7 @@ public class PowerliftingController implements Initializable {
 
     public void displayMemberSearch() {
         memberSearchPane.setVisible(true);
-        registerPane.setVisible(false);
+        changePasswordPane.setVisible(false);
         loginPane.setVisible(true);
         email.setText("");
         password.setText("");
@@ -286,9 +292,20 @@ public class PowerliftingController implements Initializable {
 //        }
 //    }
 
+
     public void displayAddMemberPane() {
         memberSearchPane.setVisible(false);
         addMemberPane.setVisible(true);
+    }
+
+    public void displayAlumniPane() {
+        loginRegisterScreen.setVisible(false);
+        alumniPane.setVisible(true);
+    }
+
+    public void returnToLogin() {
+        alumniPane.setVisible(false);
+        loginRegisterScreen.setVisible(true);
     }
 
 
