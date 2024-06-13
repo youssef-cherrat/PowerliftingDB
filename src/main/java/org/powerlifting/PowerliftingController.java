@@ -350,6 +350,11 @@ public class PowerliftingController implements Initializable {
         }
     }
 
+    public void changePassword(){
+        String e = verifyEmail.getText();
+        String oldPW = oldPassword.getText();
+        String newPW = newPassword.getText();
+        service.changePassword(e, oldPW, newPW);
     //add search for weight, result, gender
     public void searchMembersByWeight() {
         String weight = searchWeight.getText();

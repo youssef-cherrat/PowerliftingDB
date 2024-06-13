@@ -72,6 +72,14 @@ public class PowerliftingService {
         return members;
     }
 
+
+    public void changePassword(String email, String oldPassword, String newPassword){
+        // check if email matches with the old password
+        // if they do, change the password hash in data table with new password
+        try {
+            dbDriver.connect();
+            dbDriver.changePassword(email, oldPassword, newPassword);
+
     //search weight, result, gender
     public List<Member> searchMembersByWeight(float weight) {
         List<Member> members = new ArrayList<>();
