@@ -223,11 +223,16 @@ public class PowerliftingController implements Initializable {
             String password1 = firstName+lastName; // set to first name + last name for now when adding a new member
             int semesterId = 3; // Assuming a default semester ID, change as needed
 
-    //        int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
+            // int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
+            // Validate date format
+            if (!dob.matches("\\d{4}-\\d{2}-\\d{2}") || !gradDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new IllegalArgumentException("Invalid date format. Please use YYYY-MM-DD.");
+            }
 
             Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
 
             service.addMember(newMember);
+
             // Clear the fields after adding
             firstNameField.clear();
             lastNameField.clear();
@@ -237,7 +242,6 @@ public class PowerliftingController implements Initializable {
             gradDateField.clear();
             weightClassField.clear();
             bestResultField.clear();
-            attendanceField.clear();
 
             showMessage(addMemberMessageLabel, "Member added successfully!", Color.GREEN);
         } catch (SQLException e) {
@@ -250,21 +254,6 @@ public class PowerliftingController implements Initializable {
     }
 
 
-//    public void updateMemberAction() {
-//        String memberName = newEmail.getText();
-//        String memberDetails = newPassword.getText();
-//        if (memberName.isBlank() || memberDetails.isBlank()) {
-//            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
-//        } else {
-//            boolean placeholder_updateMember = true;
-//            if (placeholder_updateMember) {
-//                showMessage(messageLabel, "Member updated successfully.", Color.GREEN);
-//            } else {
-//                showMessage(messageLabel, "Failed to update member. Please try again.", Color.RED);
-//            }
-//        }
-//    }
-//
 //    public void deleteMemberAction() {
 //        String memberName = newEmail.getText();
 //        if (memberName.isBlank()) {

@@ -127,4 +127,19 @@ public class Member {
     public void setAge(int age) {
         Age = age;
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "Semester_ID=" + Semester_ID +
+                ", First_Name='" + First_Name + '\'' +
+                ", Last_Name='" + Last_Name + '\'' +
+                ", Date_of_Birth='" + Date_of_Birth + '\'' +
+                ", Grad_Date='" + Grad_Date + '\'' +
+                ", Weight_Class=" + Weight_Class +
+                ", Best_Total_KG=" + Best_Total_KG +
+                ", Gender='" + Gender + '\'' +
+                ", Email='" + Email + '\'' +
+                '}';
+    }
 }
