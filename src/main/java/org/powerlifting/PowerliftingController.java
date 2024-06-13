@@ -315,7 +315,7 @@ public class PowerliftingController implements Initializable {
 
         List<Member> members = service.searchMembers(firstName, lastName, email, gender, weight, result);
         if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given search criteria.", Color.RED);
+            showMessage(searchMessageLabel, "No members found with the given search criteria.", Color.RED);
         } else {
             displayMembers(members);
         }

@@ -482,7 +482,8 @@ public class DatabaseDriver {
                         resultSet.getString("Member_Gender"),
                         resultSet.getString("Member_Email"),
                         resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG")));
+                        resultSet.getFloat("Member_Best_Total_KG"),
+                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))));
             }
         }
         return members;
