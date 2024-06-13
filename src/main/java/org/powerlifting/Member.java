@@ -1,6 +1,5 @@
 package org.powerlifting;
 
-import java.sql.Date;
 
 public class Member {
     private int Member_ID;
@@ -9,15 +8,15 @@ public class Member {
     private String Gender;
     private String Email;
     private int Total_Practices_Attended;
-    private Date Date_of_Birth;
-    private Date Grad_Date;
+    private String Date_of_Birth;
+    private String Grad_Date;
     private float Weight_Class;
     private float Best_Total_KG;
     private String Password_Hash;
     private int Semester_ID;
 
     //for add member
-    public Member(int semester_ID, String first_Name, String last_Name, Date date_of_Birth, Date grad_Date, float weight_Class, float best_Total_KG, String gender, String email) {
+    public Member(int semester_ID, String first_Name, String last_Name, String date_of_Birth, String grad_Date, float weight_Class, float best_Total_KG, String gender, String email) {
         Semester_ID = semester_ID;
         First_Name = first_Name;
         Last_Name = last_Name;
@@ -89,16 +88,16 @@ public class Member {
     public void setTotal_Practices_Attended(int total_Practices_Attended) {
         Total_Practices_Attended = total_Practices_Attended;
     }
-    public Date getDate_of_Birth() {
+    public String getDate_of_Birth() {
         return Date_of_Birth;
     }
-    public void setDate_of_Birth(Date date_of_Birth) {
+    public void setDate_of_Birth(String date_of_Birth) {
         Date_of_Birth = date_of_Birth;
     }
-    public Date getGrad_Date() {
+    public String getGrad_Date() {
         return Grad_Date;
     }
-    public void setGrad_Date(Date grad_Date) {
+    public void setGrad_Date(String grad_Date) {
         Grad_Date = grad_Date;
     }
     public float getWeight_Class() {

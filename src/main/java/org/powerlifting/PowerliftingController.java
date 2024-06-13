@@ -33,6 +33,7 @@ public class PowerliftingController implements Initializable {
     @FXML private PasswordField newPassword;
     @FXML private PasswordField confirmNewPassword;
     @FXML private Button changePasswordButton;
+    @FXML private Label addMemberMessageLabel;
 
     @FXML private AnchorPane memberSearchPane;
     @FXML private Button searchMemberButton;
@@ -208,21 +209,22 @@ public class PowerliftingController implements Initializable {
 
 
     public void addMemberAction() {
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
-        String gender = genderField.getText();
-        String email = emailField.getText();
-        Date dob = Date.valueOf(dobField.getText());
-        Date gradDate = Date.valueOf(gradDateField.getText());
-        float weightClass = Float.parseFloat(weightClassField.getText());
-        float bestResult = Float.parseFloat(bestResultField.getText());
-        String passwordHash = ""; // Assuming you generate or set this value
-        int semesterId = 1; // Assuming a default semester ID, change as needed
-//        int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
-
-        Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
-
         try {
+            String firstName = firstNameField.getText();
+            String lastName = lastNameField.getText();
+            String gender = genderField.getText();
+            String email = emailField.getText();
+            String dob = dobField.getText();
+            String gradDate = gradDateField.getText();
+            float weightClass = Float.parseFloat(weightClassField.getText());
+            float bestResult = Float.parseFloat(bestResultField.getText());
+            String password1 = firstName+lastName; // set to first name + last name for now when adding a new member
+            int semesterId = 3; // Assuming a default semester ID, change as needed
+
+    //        int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
+
+            Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
+
             service.addMember(newMember);
             // Clear the fields after adding
             firstNameField.clear();
@@ -234,9 +236,14 @@ public class PowerliftingController implements Initializable {
             weightClassField.clear();
             bestResultField.clear();
             attendanceField.clear();
+
+            showMessage(addMemberMessageLabel, "Member added successfully!", Color.GREEN);
         } catch (SQLException e) {
             e.printStackTrace();
             // Show an error message if needed
+            showMessage(addMemberMessageLabel, "Failed to add member. Please try again.", Color.RED);
+        } catch (IllegalArgumentException e) {
+            showMessage(addMemberMessageLabel, "Please enter valid member details.", Color.RED);
         }
     }
 

@@ -517,12 +517,12 @@
                         <Font name="Arial Bold" size="13.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="dobField" layoutX="710.0" layoutY="192.0" prefHeight="30.0" prefWidth="149.0" promptText="DOB (MM/DD/YYYY)">
+                  <TextField fx:id="dobField" layoutX="710.0" layoutY="192.0" prefHeight="30.0" prefWidth="149.0" promptText="DOB (YYYY-MM-DD)">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="gradDateField" layoutX="311.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Graduation Date">
+                  <TextField fx:id="gradDateField" layoutX="311.0" layoutY="267.0" prefHeight="30.0" prefWidth="175.0" promptText="Grad Date (YYYY-MM-DD)">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
@@ -537,6 +537,11 @@
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
+                  <Label fx:id="addMemberMessageLabel" layoutX="516.0" layoutY="360.0" prefHeight="25.0" prefWidth="400.0" text="" visible="false">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane id="alumniPane" fx:id="alumniPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #F9DCBF;" visible="false">

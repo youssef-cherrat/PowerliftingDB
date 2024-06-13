@@ -406,8 +406,11 @@ public class DatabaseDriver {
                 int semesterId = rs.getInt("Semester_ID");
                 String firstName = rs.getString("Member_First_Name");
                 String lastName = rs.getString("Member_Last_Name");
-                Date dateOfBirth = rs.getDate("Member_Date_of_Birth");
-                Date gradDate = rs.getDate("Member_Grad_Date");
+                Date Date_dateOfBirth = rs.getDate("Member_Date_of_Birth");
+                //cast to string
+                String dateOfBirth = Date_dateOfBirth.toString();
+                Date Date_gradDate = rs.getDate("Member_Grad_Date");
+                String gradDate = Date_gradDate.toString();
                 float weightClass = rs.getFloat("Member_Weight_Class");
                 float bestTotalKg = rs.getFloat("Member_Best_Total_KG");
                 String gender = rs.getString("Member_Gender");
@@ -507,20 +510,18 @@ public class DatabaseDriver {
 
     //set password here
     public void addMember(Member member) throws SQLException {
-        String sql = "INSERT INTO Member (Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender, Member_Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Member (Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender, Member_Email, Member_Password_Hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            //do i need to set the pirmary key or does it do it automatically
             pstmt.setInt(1, member.getSemester_ID());
             pstmt.setString(2, member.getFirst_Name());
             pstmt.setString(3, member.getLast_Name());
-            pstmt.setDate(4, member.getDate_of_Birth());
-            pstmt.setDate(5, member.getGrad_Date());
+            pstmt.setDate(4, java.sql.Date.valueOf(member.getDate_of_Birth()));
+            pstmt.setDate(5, java.sql.Date.valueOf(member.getGrad_Date()));
             pstmt.setFloat(6, member.getWeight_Class());
             pstmt.setFloat(7, member.getBest_Total_KG());
             pstmt.setString(8, member.getGender());
             pstmt.setString(9, member.getEmail());
-            //append the first name and last name and primary key together
             String password = member.getFirst_Name() + member.getLast_Name();
             pstmt.setString(10, password);
             pstmt.executeUpdate();
