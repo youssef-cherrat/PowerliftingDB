@@ -14,6 +14,7 @@ public class Member {
     private float Best_Total_KG;
     private String Password_Hash;
     private int Semester_ID;
+    private int Age;
 
     //for add member
     public Member(int semester_ID, String first_Name, String last_Name, String date_of_Birth, String grad_Date, float weight_Class, float best_Total_KG, String gender, String email) {
@@ -119,4 +120,11 @@ public class Member {
         Semester_ID = semester_ID;
     }
 
+    public int getAge() {
+        return Age;
+    }
+
+    public void setAge(int age) {
+        Age = age;
+    }
 }

@@ -280,7 +280,7 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="memberRosterTable" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
+                  <TableView fx:id="memberRosterTable" layoutY="160.0" onMouseClicked="#displayMemberDetailsAction" prefHeight="470.0" prefWidth="1220.0">
                      <columns>
                         <TableColumn fx:id="memberFirstNameColumn" maxWidth="120.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="First Name" />
                         <TableColumn fx:id="memberLastNameColumn" maxWidth="120.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Last Name" />
@@ -294,7 +294,7 @@
                   <Label fx:id="searchMessageLabel" layoutX="10.0" layoutY="97.0" maxWidth="-Infinity" prefHeight="17.0" prefWidth="500.0" text="search label" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane id="memberDetailsLogPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
+            <AnchorPane id="memberDetailsLogPane" fx:id="memberDetailsPane" prefHeight="640.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;" visible="false">
                <children>
                   <HBox prefHeight="30.0" prefWidth="1220.0">
                      <children>
@@ -324,7 +324,7 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Rank : ">
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Gender : ">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
