@@ -79,6 +79,11 @@ public class PowerliftingService {
         try {
             dbDriver.connect();
             dbDriver.changePassword(email, oldPassword, newPassword);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     //search weight, result, gender
     public List<Member> searchMembersByWeight(float weight) {

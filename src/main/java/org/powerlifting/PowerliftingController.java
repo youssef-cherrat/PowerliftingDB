@@ -19,81 +19,49 @@ import java.util.ResourceBundle;
 public class PowerliftingController implements Initializable {
     PowerliftingService service;
 
-    @FXML
-    private Label messageLabel;
-    @FXML
-    private AnchorPane loginRegisterScreen;
-    @FXML
-    private Button closeButton;
-    @FXML
-    private GridPane loginPane;
-    @FXML
-    private GridPane registerPane;
-    @FXML
-    private TextField email;
-    @FXML
-    private PasswordField password;
-    @FXML
-    private TextField newEmail;
-    @FXML
-    private PasswordField newPassword;
+    @FXML private Label messageLabel;
+    @FXML private AnchorPane loginRegisterScreen;
+    @FXML private Button closeButton;
+    @FXML private GridPane loginPane;
+    @FXML private GridPane changePasswordPane;
+    @FXML private TextField email;
+    @FXML private PasswordField password;
+    @FXML private TextField verifyEmail;
+    @FXML private PasswordField oldPassword;
+    @FXML private PasswordField newPassword;
+    @FXML private PasswordField confirmNewPassword;
+    @FXML private Button changePasswordButton;
 
-    @FXML
-    private AnchorPane memberSearchPane;
-    @FXML
-    private Button searchMemberButton;
-    @FXML
-    private Button logoutButton;
-    @FXML
-    private Button addMemberButton;
-    @FXML
-    private TextField searchFirstName;
-    @FXML
-    private TextField searchLastName;
-    @FXML
-    private TextField searchEmail;
-    @FXML
-    private TextField searchWeight;
-    @FXML
-    private TextField searchResult;
-    @FXML
-    private TextField searchGender;
-    @FXML
-    private TableView<Member> memberRosterTable;
-    @FXML
-    private TableColumn<Member, String> memberFirstNameColumn;
-    @FXML
-    private TableColumn<Member, String> memberLastNameColumn;
-    @FXML
-    private TableColumn<Member, String> memberGenderColumn;
-    @FXML
-    private TableColumn<Member, String> memberEmailColumn;
-    @FXML
-    private TableColumn<Member, Integer> memberAttendanceColumn;
+    @FXML private AnchorPane memberSearchPane;
+    @FXML private Button searchMemberButton;
+    @FXML private Button logoutButton;
+    @FXML private Button addMemberButton;
+    @FXML private Label searchMessageLabel;
+    @FXML private TextField searchFirstName;
+    @FXML private TextField searchLastName;
+    @FXML private TextField searchGender;
+    @FXML private TextField searchEmail;
+    @FXML private TextField searchWeight;
+    @FXML private TextField searchResult;
+    @FXML private TableView<Member> memberRosterTable;
+    @FXML private TableColumn<Member, String> memberFirstNameColumn;
+    @FXML private TableColumn<Member, String> memberLastNameColumn;
+    @FXML private TableColumn<Member, String> memberGenderColumn;
+    @FXML private TableColumn<Member, String> memberEmailColumn;
+    @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
 
-    @FXML
-    private AnchorPane addMemberPane;
-    @FXML
-    private Button backButton1;
+    @FXML private AnchorPane addMemberPane;
+    @FXML private Button backButton1;
 
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField genderField;
-    @FXML
-    private TextField dobField;
-    @FXML
-    private TextField gradDateField;
-    @FXML
-    private TextField weightClassField;
-    @FXML
-    private TextField bestResultField;
-    @FXML
-    private TextField attendanceField;
-    @FXML
-    private TextField emailField;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private TextField genderField;
+    @FXML private TextField dobField;
+    @FXML private TextField gradDateField;
+    @FXML private TextField weightClassField;
+    @FXML private TextField bestResultField;
+    @FXML private TextField attendanceField;
+    @FXML private TextField emailField;
 
     @FXML private AnchorPane alumniPane;
     @FXML private Button viewAlumniButton;
@@ -350,13 +318,31 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void changePassword(){
+    public void changePasswordAction() {
         String e = verifyEmail.getText();
         String oldPW = oldPassword.getText();
         String newPW = newPassword.getText();
-        service.changePassword(e, oldPW, newPW);
-    //add search for weight, result, gender
-    public void searchMembersByWeight() {
+        String confirmPW = confirmNewPassword.getText();
+        boolean validCreds = service.checkCredentials(e, oldPW);
+        if (e.isBlank() || oldPW.isBlank() || newPW.isBlank() || confirmPW.isBlank()) {
+            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
+        }
+        else {
+            if (validCreds && (newPW.equals(confirmPW))) {
+                service.changePassword(e, oldPW, newPW);
+                showMessage(messageLabel, "Successfully updated password!", Color.GREEN);
+
+            } else {
+                if (validCreds) {
+                    showMessage(messageLabel, "Email and old password match, but please ensure new password matches with confirmation.", Color.RED);
+                } else {
+                    showMessage(messageLabel, "Please ensure email and old password match.", Color.RED);
+                }
+            }
+        }
+    }
+
+    public void searchMembersByWeight () {
         String weight = searchWeight.getText();
         //cast to float
         List<Member> members = service.searchMembersByWeight(Float.parseFloat(weight));
@@ -367,7 +353,7 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void searchMembersByResult() {
+    public void searchMembersByResult () {
         String result = searchResult.getText();
         //cast to float
         List<Member> members = service.searchMembersByResult(Float.parseFloat(result));
@@ -378,7 +364,7 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void searchMembersByGender() {
+    public void searchMembersByGender () {
         String result = searchGender.getText();
         List<Member> members = service.searchMembersByGender(result);
         if (members.isEmpty()) {
@@ -387,5 +373,4 @@ public class PowerliftingController implements Initializable {
             displayMembers(members);
         }
     }
-
 }
