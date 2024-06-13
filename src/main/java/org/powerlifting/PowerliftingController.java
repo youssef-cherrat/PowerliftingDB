@@ -172,49 +172,64 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-//    public void addMemberAction() {
-//        String newMemberName = newEmail.getText();
-//        String newMemberDetails = newPassword.getText();
-//        if (newMemberName.isBlank() || newMemberDetails.isBlank()) {
+    private void addMemberAction() {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String gender = genderField.getText();
+        String email = emailField.getText();
+        String dob = dobField.getText();
+        String weightClass = weightClassField.getText();
+        String bestResult = bestResultField.getText();
+        String attendance = attendanceField.getText();
+
+        Member newMember = new Member(firstName, lastName, gender, email, Integer.parseInt(attendance), dob, weightClass, bestResult);
+
+        try {
+            powerliftingService.addMember(newMember);
+            // Clear the fields after adding
+            firstNameField.clear();
+            lastNameField.clear();
+            genderField.clear();
+            emailField.clear();
+            dobField.clear();
+            weightClassField.clear();
+            bestResultField.clear();
+            attendanceField.clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Show an error message if needed
+        }
+    }
+
+
+//    public void updateMemberAction() {
+//        String memberName = newEmail.getText();
+//        String memberDetails = newPassword.getText();
+//        if (memberName.isBlank() || memberDetails.isBlank()) {
 //            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
 //        } else {
-//            boolean placeholder_addMember = true;
-//            if (placeholder_addMember) {
-//                showMessage(messageLabel, "Member added successfully.", Color.GREEN);
+//            boolean placeholder_updateMember = true;
+//            if (placeholder_updateMember) {
+//                showMessage(messageLabel, "Member updated successfully.", Color.GREEN);
 //            } else {
-//                showMessage(messageLabel, "Failed to add member. Please try again.", Color.RED);
+//                showMessage(messageLabel, "Failed to update member. Please try again.", Color.RED);
 //            }
 //        }
 //    }
-
-    public void updateMemberAction() {
-        String memberName = newEmail.getText();
-        String memberDetails = newPassword.getText();
-        if (memberName.isBlank() || memberDetails.isBlank()) {
-            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
-        } else {
-            boolean placeholder_updateMember = true;
-            if (placeholder_updateMember) {
-                showMessage(messageLabel, "Member updated successfully.", Color.GREEN);
-            } else {
-                showMessage(messageLabel, "Failed to update member. Please try again.", Color.RED);
-            }
-        }
-    }
-
-    public void deleteMemberAction() {
-        String memberName = newEmail.getText();
-        if (memberName.isBlank()) {
-            showMessage(messageLabel, "Please enter a valid member name.", Color.RED);
-        } else {
-            boolean placeholder_deleteMember = true;
-            if (placeholder_deleteMember) {
-                showMessage(messageLabel, "Member deleted successfully.", Color.GREEN);
-            } else {
-                showMessage(messageLabel, "Failed to delete member. Please try again.", Color.RED);
-            }
-        }
-    }
+//
+//    public void deleteMemberAction() {
+//        String memberName = newEmail.getText();
+//        if (memberName.isBlank()) {
+//            showMessage(messageLabel, "Please enter a valid member name.", Color.RED);
+//        } else {
+//            boolean placeholder_deleteMember = true;
+//            if (placeholder_deleteMember) {
+//                showMessage(messageLabel, "Member deleted successfully.", Color.GREEN);
+//            } else {
+//                showMessage(messageLabel, "Failed to delete member. Please try again.", Color.RED);
+//            }
+//        }
+//    }
 
     public void displayAddMemberPane() {
         memberSearchPane.setVisible(false);

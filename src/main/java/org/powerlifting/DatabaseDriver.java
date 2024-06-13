@@ -1,10 +1,6 @@
 package org.powerlifting;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -460,5 +456,22 @@ public class DatabaseDriver {
             }
         }
         return members;
+    }
+
+    public void addMember(Member member) throws SQLException {
+        String sql = "INSERT INTO Member (Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            //do i need to set the pirmary key or does it do it automatically
+            pstmt.setInt(1, member.getSemester_ID());
+            pstmt.setString(2, member.getFirst_Name());
+            pstmt.setString(3, member.getLast_Name());
+            pstmt.setDate(4, member.getDate_of_Birth());
+            pstmt.setDate(5, member.getGrad_Date());
+            pstmt.setFloat(6, member.getWeight_Class());
+            pstmt.setFloat(7, member.getBest_Total_KG());
+            pstmt.setString(8, member.getGender());
+            pstmt.executeUpdate();
+        }
     }
 }
