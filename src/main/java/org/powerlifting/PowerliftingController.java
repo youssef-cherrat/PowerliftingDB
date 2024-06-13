@@ -48,6 +48,8 @@ public class PowerliftingController implements Initializable {
     @FXML private TableColumn<Member, String> memberLastNameColumn;
     @FXML private TableColumn<Member, String> memberGenderColumn;
     @FXML private TableColumn<Member, String> memberEmailColumn;
+    @FXML private TableColumn<Member, Float>  memberWeightClassColumn;
+    @FXML private TableColumn<Member, Float>  memberBestResultColumn;
     @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
 
     @FXML private AnchorPane addMemberPane;
@@ -65,7 +67,7 @@ public class PowerliftingController implements Initializable {
 
     @FXML private AnchorPane alumniPane;
     @FXML private Button viewAlumniButton;
-    @FXML private Button returnToLoginButton;
+    @FXML private Button backFromAlumniButton;
 
 
     private String loginEmail;
@@ -168,8 +170,8 @@ public class PowerliftingController implements Initializable {
     }
 
     public void displayAllMembers() {
-        List<Member> memersList = service.getMemberData();
-        displayMembers(memersList);
+        List<Member> membersList = service.getMemberData();
+        displayMembers(membersList);
     }
 
     public void addMemberScreenChange() {
@@ -271,7 +273,7 @@ public class PowerliftingController implements Initializable {
         alumniPane.setVisible(true);
     }
 
-    public void returnToLogin() {
+    public void backFromAlumni() {
         alumniPane.setVisible(false);
         loginRegisterScreen.setVisible(true);
     }
@@ -284,6 +286,8 @@ public class PowerliftingController implements Initializable {
         memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Last_Name"));
         memberGenderColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Gender"));
         memberEmailColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
+        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Weight_Class"));
+        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
         memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
     }
 

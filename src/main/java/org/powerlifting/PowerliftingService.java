@@ -28,7 +28,7 @@ public class PowerliftingService {
         List<Member> membersList = new ArrayList<>();
         try {
             dbDriver.connect();
-            membersList = dbDriver.getMemberData();
+            membersList = dbDriver.getMemberDataForSearch();
             dbDriver.disconnect();
         } catch (SQLException e) {
             //

@@ -28,6 +28,16 @@ public class Member {
 
     }
 
+    public Member(String first_Name, String last_Name, String gender, String email, float weight_Class, float best_Total_KG, int total_Practices_Attended) {
+        First_Name = first_Name;
+        Last_Name = last_Name;
+        Gender = gender;
+        Email = email;
+        Weight_Class = weight_Class;
+        Best_Total_KG = best_Total_KG;
+        Total_Practices_Attended = total_Practices_Attended;
+    }
+
     public Member() {}
 
     public String getFirst_Name() {

@@ -282,11 +282,13 @@
                   </Label>
                   <TableView fx:id="memberRosterTable" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
                      <columns>
-                        <TableColumn fx:id="memberFirstNameColumn" maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
-                        <TableColumn fx:id="memberLastNameColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                        <TableColumn fx:id="memberFirstNameColumn" maxWidth="120.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn fx:id="memberLastNameColumn" maxWidth="120.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Last Name" />
                         <TableColumn fx:id="memberGenderColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Gender" />
-                        <TableColumn fx:id="memberEmailColumn" maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
-                        <TableColumn fx:id="memberAttendanceColumn" maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
+                        <TableColumn fx:id="memberEmailColumn" maxWidth="800.0" prefWidth="300.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
+                        <TableColumn fx:id="memberWeightClassColumn" prefWidth="150.0" text="Weight Class (KG)" />
+                        <TableColumn fx:id="memberBestResultColumn" prefWidth="150.0" text="Best Result (KG)" />
+                        <TableColumn fx:id="memberAttendanceColumn" maxWidth="497.8387451171875" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
                      </columns>
                   </TableView>
                   <Label fx:id="searchMessageLabel" layoutX="10.0" layoutY="97.0" maxWidth="-Infinity" prefHeight="17.0" prefWidth="500.0" text="search label" visible="false" />
@@ -552,7 +554,7 @@
                   <HBox prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="returnToLoginButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#returnToLogin" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #E57200;" text="Return to Login" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="backFromAlumniButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#backFromAlumni" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #E57200;" text="Back" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
