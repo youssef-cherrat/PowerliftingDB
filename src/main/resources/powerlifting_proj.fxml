@@ -307,14 +307,14 @@
                         <Region prefHeight="30.0" prefWidth="500.0" />
                      </children>
                   </HBox>
-                  <VBox layoutX="200.0" layoutY="30.0" prefHeight="130.0" prefWidth="140.0">
+                  <VBox layoutX="200.0" layoutY="30.0" prefHeight="160.0" prefWidth="140.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Name">
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Name : ">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -329,14 +329,19 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Weight Class : ">
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Weight (KG) : ">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="135.0" text="Best Total (KG) : ">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
                      </children>
                   </VBox>
-                  <VBox layoutX="340.0" layoutY="30.0" prefHeight="130.0" prefWidth="700.0" style="-fx-border-color: #F1F1EF;">
+                  <VBox layoutX="340.0" layoutY="30.0" prefHeight="160.0" prefWidth="700.0" style="-fx-border-color: #F1F1EF;">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" prefWidth="142.0" text="Member Details">
                            <font>
@@ -363,6 +368,11 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
+                        <Label prefHeight="30.0" prefWidth="120.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                   <HBox layoutY="220.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
@@ -382,30 +392,25 @@
                   </HBox>
                   <HBox layoutY="260.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
-                        <Region prefHeight="30.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
+                        <Region prefHeight="30.0" prefWidth="293.0" HBox.hgrow="ALWAYS" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="10.0">
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="20.0" visible="false">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="20.0">
-                           <font>
-                              <Font name="Arial Bold" size="13.0" />
-                           </font>
-                        </Button>
-                        <Region prefHeight="30.0" prefWidth="470.0" />
+                        <Region prefHeight="30.0" prefWidth="620.0" />
                      </children>
                   </HBox>
                   <TableView layoutY="320.0" prefHeight="320.0" prefWidth="1220.0">
                      <columns>
                         <TableColumn maxWidth="170.89409065246582" prefWidth="170.89409065246582" style="-fx-alignment: CENTER;" text="Type (Practice/Comp)" />
                         <TableColumn maxWidth="300.0" prefWidth="249.10592651367188" style="-fx-alignment: CENTER;" text="Date" />
-                        <TableColumn maxWidth="800.0" prefWidth="800.0" style="-fx-alignment: CENTER-LEFT;" text="Title/Description" />
+                        <TableColumn maxWidth="800.0" prefWidth="511.0" style="-fx-alignment: CENTER-LEFT;" text="Location" />
                      </columns>
                   </TableView>
                   <Label layoutY="290.0" prefHeight="25.0" prefWidth="300.0" text="Attended Events Log " translateX="5.0">
