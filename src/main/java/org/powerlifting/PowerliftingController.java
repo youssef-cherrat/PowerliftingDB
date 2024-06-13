@@ -72,6 +72,8 @@ public class PowerliftingController implements Initializable {
     @FXML private Button viewAlumniButton;
     @FXML private Button backFromAlumniButton;
 
+    @FXML private AnchorPane memberDetailsPane;
+
 
     private String loginEmail;
 
@@ -352,6 +354,24 @@ public class PowerliftingController implements Initializable {
                 }
             }
         }
+    }
+
+    public void displayMemberDetailsAction() {
+        Member member = memberRosterTable.getSelectionModel().getSelectedItem();
+        if (member != null) {
+            displayMemberDetailsActionHelper(member);
+        }
+    }
+
+    public void displayMemberDetailsActionHelper(Member member) {
+        searchMessageLabel.setText("");
+        memberSearchPane.setVisible(false);
+        memberDetailsPane.setVisible(true);
+        displayMemberDetails(member);
+    }
+
+    public void displayMemberDetails(Member member) {
+        //
     }
 
 }
