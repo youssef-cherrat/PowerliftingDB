@@ -513,11 +513,28 @@ public class DatabaseDriver {
         String sql = "INSERT INTO Member (Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender, Member_Email, Member_Password_Hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+//            System.out.println("Inserting member with details:");
+//            System.out.println("Semester_ID: " + member.getSemester_ID());
+//            System.out.println("First_Name: " + member.getFirst_Name());
+//            System.out.println("Last_Name: " + member.getLast_Name());
+//            System.out.println("Date_of_Birth: " + member.getDate_of_Birth());
+//            System.out.println("Grad_Date: " + member.getGrad_Date());
+//            System.out.println("Weight_Class: " + member.getWeight_Class());
+//            System.out.println("Best_Total_KG: " + member.getBest_Total_KG());
+//            System.out.println("Gender: " + member.getGender());
+//            System.out.println("Email: " + member.getEmail());
+//
+//            java.sql.Date Member_Date_of_Birth = java.sql.Date.valueOf(member.getDate_of_Birth());
+//            java.sql.Date Member_Grad_Date = java.sql.Date.valueOf(member.getGrad_Date());
+//
+//            System.out.println("After casting to Date: " + Member_Date_of_Birth);
+//            System.out.println("After casting to Date: " + Member_Grad_Date);
+
             pstmt.setInt(1, member.getSemester_ID());
             pstmt.setString(2, member.getFirst_Name());
             pstmt.setString(3, member.getLast_Name());
-            pstmt.setDate(4, java.sql.Date.valueOf(member.getDate_of_Birth()));
-            pstmt.setDate(5, java.sql.Date.valueOf(member.getGrad_Date()));
+            pstmt.setString(4, member.getDate_of_Birth());
+            pstmt.setString(5, member.getGrad_Date());
             pstmt.setFloat(6, member.getWeight_Class());
             pstmt.setFloat(7, member.getBest_Total_KG());
             pstmt.setString(8, member.getGender());
