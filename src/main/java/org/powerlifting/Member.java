@@ -16,7 +16,7 @@ public class Member {
     private int Semester_ID;
 
 
-    public Member(int semester_ID, String first_Name, String last_Name, Date date_of_Birth, Date grad_Date, float weight_Class, float best_Total_KG, String gender, String email, String password_Hash, int total_Practices_Attended) {
+    public Member(int semester_ID, String first_Name, String last_Name, Date date_of_Birth, Date grad_Date, float weight_Class, float best_Total_KG, String gender, String email) {
         Semester_ID = semester_ID;
         First_Name = first_Name;
         Last_Name = last_Name;

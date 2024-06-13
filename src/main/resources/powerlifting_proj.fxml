@@ -248,13 +248,13 @@
                            </font>
                         </Label>
                         <TextField fx:id="searchGender" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="313.0" text="Weight Class" GridPane.columnIndex="4">
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="313.0" text="Weight" GridPane.columnIndex="4">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
                         <TextField fx:id="searchWeightClass" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="80.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="313.0" text="Best Result" GridPane.columnIndex="5">
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="313.0" text="Best Total (KG)" GridPane.columnIndex="5">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -287,7 +287,7 @@
                         <TableColumn fx:id="memberGenderColumn" maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Gender" />
                         <TableColumn fx:id="memberEmailColumn" maxWidth="800.0" prefWidth="300.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
                         <TableColumn fx:id="memberWeightClassColumn" prefWidth="150.0" text="Weight Class (KG)" />
-                        <TableColumn fx:id="memberBestResultColumn" prefWidth="150.0" text="Best Result (KG)" />
+                        <TableColumn fx:id="memberBestResultColumn" prefWidth="150.0" text="Best Total (KG)" />
                         <TableColumn fx:id="memberAttendanceColumn" maxWidth="497.8387451171875" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
                      </columns>
                   </TableView>
@@ -489,60 +489,50 @@
                   <HBox layoutY="228.0" prefHeight="39.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
                         <Region prefHeight="30.0" prefWidth="300.0" />
-                        <TextField prefHeight="30.0" prefWidth="373.0" promptText="Email" translateX="10.0">
+                        <TextField fx:id="emailField" prefHeight="30.0" prefWidth="354.0" promptText="Email" translateX="10.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
                         <Region prefHeight="39.0" prefWidth="84.0" />
-                        <TextField prefHeight="30.0" prefWidth="103.0" promptText="Gender">
+                        <TextField fx:id="genderField" prefHeight="30.0" prefWidth="103.0" promptText="Gender">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
                      </children>
                   </HBox>
-                  <TextField layoutX="311.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="First Name">
+                  <TextField fx:id="firstNameField" layoutX="311.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="First Name">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="514.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="Last Name">
+                  <TextField fx:id="lastNameField" layoutX="514.0" layoutY="192.0" prefHeight="30.0" prefWidth="150.0" promptText="Last Name">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="311.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="addMemberButton" layoutX="516.0" layoutY="321.0" mnemonicParsing="false" onAction="#addMemberAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="514.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE MEMBER" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="710.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <TextField layoutX="710.0" layoutY="192.0" prefHeight="30.0" prefWidth="149.0" promptText="DOB (MM/DD/YYYY)">
+                  <TextField fx:id="dobField" layoutX="710.0" layoutY="192.0" prefHeight="30.0" prefWidth="149.0" promptText="DOB (MM/DD/YYYY)">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="311.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Attendance Num.">
+                  <TextField fx:id="gradDateField" layoutX="311.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Graduation Date">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="514.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Rank">
+                  <TextField fx:id="bestResultField" layoutX="514.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Best Total (KG)">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="710.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Weight">
+                  <TextField fx:id="weightClassField" layoutX="710.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Weight">
                      <font>
                         <Font name="Arial" size="13.0" />
                      </font>

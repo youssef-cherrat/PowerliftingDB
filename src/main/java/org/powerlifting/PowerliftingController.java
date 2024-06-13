@@ -210,9 +210,9 @@ public class PowerliftingController implements Initializable {
         float bestResult = Float.parseFloat(bestResultField.getText());
         String passwordHash = ""; // Assuming you generate or set this value
         int semesterId = 1; // Assuming a default semester ID, change as needed
-        int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
+//        int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
 
-        Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email, passwordHash, totalPracticesAttended);
+        Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
 
         try {
             service.addMember(newMember);
