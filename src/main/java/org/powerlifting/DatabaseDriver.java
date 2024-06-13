@@ -1,9 +1,11 @@
 package org.powerlifting;
 
 import javax.swing.plaf.nimbus.State;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.security.MessageDigest;
 
 public class DatabaseDriver {
 
@@ -410,10 +412,10 @@ public class DatabaseDriver {
                 float bestTotalKg = rs.getFloat("Member_Best_Total_KG");
                 String gender = rs.getString("Member_Gender");
                 String email = rs.getString("Member_Email");
-                String passwordHash = rs.getString("Member_Password_Hash");
-                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
+//                String passwordHash = rs.getString("Member_Password_Hash");
+//                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
 
-                members.add(new Member(semesterId, firstName, lastName, dateOfBirth, gradDate, weightClass, bestTotalKg, gender, email, passwordHash, totalPracticesAttended));
+                members.add(new Member(semesterId, firstName, lastName, dateOfBirth, gradDate, weightClass, bestTotalKg, gender, email));
             }
             rs.close();
         } catch (SQLException e) {
@@ -438,146 +440,54 @@ public class DatabaseDriver {
         return totalPracticesAttended;
     }
 
-    public List<Member> searchMembersByFirstName(String firstName) throws SQLException {
+    public List<Member> searchMembers(String firstName, String lastName, String email, String gender, Float weight, Float result) throws SQLException {
         List<Member> members = new ArrayList<>();
-        String query = "SELECT * FROM Member WHERE Member_First_Name LIKE '%" + firstName + "%';";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
+        StringBuilder query = new StringBuilder("SELECT * FROM Member WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        if (firstName != null && !firstName.isEmpty()) {
+            query.append(" AND Member_First_Name LIKE ?");
+            params.add("%" + firstName + "%");
+        }
+        if (lastName != null && !lastName.isEmpty()) {
+            query.append(" AND Member_Last_Name LIKE ?");
+            params.add("%" + lastName + "%");
+        }
+        if (email != null && !email.isEmpty()) {
+            query.append(" AND Member_Email LIKE ?");
+            params.add("%" + email + "%");
+        }
+        if (gender != null && !gender.isEmpty()) {
+            query.append(" AND Member_Gender = ?");
+            params.add(gender);
+        }
+        if (weight != null) {
+            query.append(" AND Member_Weight_Class = ?");
+            params.add(weight);
+        }
+        if (result != null) {
+            query.append(" AND Member_Best_Total_KG = ?");
+            params.add(result);
+        }
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                pstmt.setObject(i + 1, params.get(i));
+            }
+            ResultSet resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
                 members.add(new Member(
-                        resultSet.getInt("Semester_ID"),
                         resultSet.getString("Member_First_Name"),
                         resultSet.getString("Member_Last_Name"),
-                        resultSet.getDate("Member_Date_of_Birth"),
-                        resultSet.getDate("Member_Grad_Date"),
-                        resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
                         resultSet.getString("Member_Gender"),
                         resultSet.getString("Member_Email"),
-                        resultSet.getString("Member_Password_Hash"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))
-                ));
+                        resultSet.getFloat("Member_Weight_Class"),
+                        resultSet.getFloat("Member_Best_Total_KG")));
             }
         }
         return members;
     }
-
-
-    public List<Member> searchMembersByLastName(String lastName) throws SQLException {
-        List<Member> members = new ArrayList<>();
-        String query = "SELECT * FROM Member WHERE Member_Last_Name LIKE '%" + lastName + "%';";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                members.add(new Member(
-                        resultSet.getInt("Semester_ID"),
-                        resultSet.getString("Member_First_Name"),
-                        resultSet.getString("Member_Last_Name"),
-                        resultSet.getDate("Member_Date_of_Birth"),
-                        resultSet.getDate("Member_Grad_Date"),
-                        resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
-                        resultSet.getString("Member_Gender"),
-                        resultSet.getString("Member_Email"),
-                        resultSet.getString("Member_Password_Hash"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))
-                ));
-            }
-        }
-        return members;
-    }
-
-
-    public List<Member> searchMembersByEmail(String email) throws SQLException {
-        List<Member> members = new ArrayList<>();
-        String query = "SELECT * FROM Member WHERE Member_Email LIKE '%" + email + "%';";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                members.add(new Member(
-                        resultSet.getInt("Semester_ID"),
-                        resultSet.getString("Member_First_Name"),
-                        resultSet.getString("Member_Last_Name"),
-                        resultSet.getDate("Member_Date_of_Birth"),
-                        resultSet.getDate("Member_Grad_Date"),
-                        resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
-                        resultSet.getString("Member_Gender"),
-                        resultSet.getString("Member_Email"),
-                        resultSet.getString("Member_Password_Hash"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))
-                ));
-            }
-        }
-        return members;
-    }
-
-    public List<Member> searchMembersByWeightClass(float weightClass) throws SQLException {
-        List<Member> members = new ArrayList<>();
-        String query = "SELECT * FROM Member WHERE Member_Weight_Class = " + weightClass + ";";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                members.add(new Member(
-                        resultSet.getInt("Semester_ID"),
-                        resultSet.getString("Member_First_Name"),
-                        resultSet.getString("Member_Last_Name"),
-                        resultSet.getDate("Member_Date_of_Birth"),
-                        resultSet.getDate("Member_Grad_Date"),
-                        resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
-                        resultSet.getString("Member_Gender"),
-                        resultSet.getString("Member_Email"),
-                        resultSet.getString("Member_Password_Hash"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))
-                ));
-            }
-        }
-        return members;
-    }
-
-    public List<Member> searchMembersByBestResult(float bestResult) throws SQLException {
-        List<Member> members = new ArrayList<>();
-        String query = "SELECT * FROM Member WHERE Member_Best_Total_KG = " + bestResult + ";";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                members.add(new Member(
-                        resultSet.getInt("Semester_ID"),
-                        resultSet.getString("Member_First_Name"),
-                        resultSet.getString("Member_Last_Name"),
-                        resultSet.getDate("Member_Date_of_Birth"),
-                        resultSet.getDate("Member_Grad_Date"),
-                        resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
-                        resultSet.getString("Member_Gender"),
-                        resultSet.getString("Member_Email"),
-                        resultSet.getString("Member_Password_Hash"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))
-                ));
-            }
-        }
-        return members;
-    }
-
-    public List<Member> searchMembersByGender(String gender) throws SQLException {
-        List<Member> members = new ArrayList<>();
-        String query = "SELECT * FROM Member WHERE Member_Gender = '" + gender + "';";
-        try (Statement statement = connection.createStatement(); ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                members.add(new Member(
-                        resultSet.getInt("Semester_ID"),
-                        resultSet.getString("Member_First_Name"),
-                        resultSet.getString("Member_Last_Name"),
-                        resultSet.getDate("Member_Date_of_Birth"),
-                        resultSet.getDate("Member_Grad_Date"),
-                        resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
-                        resultSet.getString("Member_Gender"),
-                        resultSet.getString("Member_Email"),
-                        resultSet.getString("Member_Password_Hash"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))
-                ));
-            }
-        }
-        return members;
-    }
-
+    //hash password***
     public void changePassword(String email, String oldPassword, String newPassword) throws SQLException{
         String query = "UPDATE Member SET Member_Password_Hash = '" + newPassword + "' WHERE Member_Email = '" + email + "'";
         try{
@@ -593,9 +503,10 @@ public class DatabaseDriver {
             e.printStackTrace();
         }
     }
-  
+
+    //set password here
     public void addMember(Member member) throws SQLException {
-        String sql = "INSERT INTO Member (Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Member (Semester_ID, Member_First_Name, Member_Last_Name, Member_Date_of_Birth, Member_Grad_Date, Member_Weight_Class, Member_Best_Total_KG, Member_Gender, Member_Email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             //do i need to set the pirmary key or does it do it automatically
@@ -607,7 +518,30 @@ public class DatabaseDriver {
             pstmt.setFloat(6, member.getWeight_Class());
             pstmt.setFloat(7, member.getBest_Total_KG());
             pstmt.setString(8, member.getGender());
+            pstmt.setString(9, member.getEmail());
+            //append the first name and last name and primary key together
+            String password = member.getFirst_Name() + member.getLast_Name();
             pstmt.executeUpdate();
         }
     }
+    //
+    public static String hashString(String input) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(input.getBytes("UTF-8"));
+            return bytesToHex(hashBytes);
+        } catch (NoSuchAlgorithmException | java.io.UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
 }

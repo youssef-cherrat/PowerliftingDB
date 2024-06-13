@@ -36,42 +36,89 @@ public class PowerliftingService {
         return membersList;
     }
 
-    public List<Member> searchMembersByFirstName(String firstName) {
+//    public List<Member> searchMembersByFirstName(String firstName) {
+//        List<Member> members = new ArrayList<>();
+//        try {
+//            dbDriver.connect();
+//            members = dbDriver.searchMembersByFirstName(firstName);
+//            dbDriver.disconnect();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return members;
+//    }
+//
+//    public List<Member> searchMembersByLastName(String lastName) {
+//        List<Member> members = new ArrayList<>();
+//        try {
+//            dbDriver.connect();
+//            members = dbDriver.searchMembersByLastName(lastName);
+//            dbDriver.disconnect();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return members;
+//    }
+//
+//    public List<Member> searchMembersByEmail(String email) {
+//        List<Member> members = new ArrayList<>();
+//        try {
+//            dbDriver.connect();
+//            members = dbDriver.searchMembersByEmail(email);
+//            dbDriver.disconnect();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return members;
+//    }
+//search weight, result, gender
+//public List<Member> searchMembersByWeight(float weight) {
+//    List<Member> members = new ArrayList<>();
+//    try {
+//        dbDriver.connect();
+//        members = dbDriver.searchMembersByWeightClass(weight);
+//        dbDriver.disconnect();
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//    }
+//    return members;
+//}
+//
+//    public List<Member> searchMembersByResult(float result) {
+//        List<Member> members = new ArrayList<>();
+//        try {
+//            dbDriver.connect();
+//            members = dbDriver.searchMembersByBestResult(result);
+//            dbDriver.disconnect();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return members;
+//    }
+//
+//    public List<Member> searchMembersByGender(String gender) {
+//        List<Member> members = new ArrayList<>();
+//        try {
+//            dbDriver.connect();
+//            members = dbDriver.searchMembersByGender(gender);
+//            dbDriver.disconnect();
+//        } catch(SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return members;
+//    }
+
+    public List<Member> searchMembers(String firstName, String lastName, String email, String gender, Float weight, Float result) {
         List<Member> members = new ArrayList<>();
         try {
             dbDriver.connect();
-            members = dbDriver.searchMembersByFirstName(firstName);
+            members = dbDriver.searchMembers(firstName, lastName, email, gender, weight, result);
             dbDriver.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return members;
     }
-
-    public List<Member> searchMembersByLastName(String lastName) {
-        List<Member> members = new ArrayList<>();
-        try {
-            dbDriver.connect();
-            members = dbDriver.searchMembersByLastName(lastName);
-            dbDriver.disconnect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return members;
-    }
-
-    public List<Member> searchMembersByEmail(String email) {
-        List<Member> members = new ArrayList<>();
-        try {
-            dbDriver.connect();
-            members = dbDriver.searchMembersByEmail(email);
-            dbDriver.disconnect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return members;
-    }
-
 
     public void changePassword(String email, String oldPassword, String newPassword){
         // check if email matches with the old password
@@ -85,42 +132,7 @@ public class PowerliftingService {
         }
     }
 
-    //search weight, result, gender
-    public List<Member> searchMembersByWeight(float weight) {
-        List<Member> members = new ArrayList<>();
-        try {
-            dbDriver.connect();
-            members = dbDriver.searchMembersByWeightClass(weight);
-            dbDriver.disconnect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return members;
-    }
 
-    public List<Member> searchMembersByResult(float result) {
-        List<Member> members = new ArrayList<>();
-        try {
-            dbDriver.connect();
-            members = dbDriver.searchMembersByBestResult(result);
-            dbDriver.disconnect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return members;
-    }
-
-    public List<Member> searchMembersByGender(String gender) {
-        List<Member> members = new ArrayList<>();
-        try {
-            dbDriver.connect();
-            members = dbDriver.searchMembersByGender(gender);
-            dbDriver.disconnect();
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-        return members;
-    }
     public void addMember(Member member) throws SQLException {
         try {
             dbDriver.connect();

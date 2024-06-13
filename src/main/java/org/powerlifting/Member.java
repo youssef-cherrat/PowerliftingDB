@@ -3,6 +3,7 @@ package org.powerlifting;
 import java.sql.Date;
 
 public class Member {
+    private int Member_ID;
     private String First_Name;
     private String Last_Name;
     private String Gender;
@@ -15,7 +16,7 @@ public class Member {
     private String Password_Hash;
     private int Semester_ID;
 
-
+    //for add member
     public Member(int semester_ID, String first_Name, String last_Name, Date date_of_Birth, Date grad_Date, float weight_Class, float best_Total_KG, String gender, String email) {
         Semester_ID = semester_ID;
         First_Name = first_Name;
@@ -25,9 +26,18 @@ public class Member {
         Weight_Class = weight_Class;
         Best_Total_KG = best_Total_KG;
         Gender = gender;
-
+        Email = email;
+    }
+    public Member(String first_Name, String last_Name, String gender, String email, float weight_Class, float best_Total_KG) {
+        First_Name = first_Name;
+        Last_Name = last_Name;
+        Gender = gender;
+        Email = email;
+        Weight_Class = weight_Class;
+        Best_Total_KG = best_Total_KG;
     }
 
+    //for displaying member detail screen
     public Member(String first_Name, String last_Name, String gender, String email, float weight_Class, float best_Total_KG, int total_Practices_Attended) {
         First_Name = first_Name;
         Last_Name = last_Name;

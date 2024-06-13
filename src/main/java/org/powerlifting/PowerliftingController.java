@@ -185,20 +185,6 @@ public class PowerliftingController implements Initializable {
     }
 
 
-    public void searchMemberAction() {
-        String searchQuery = email.getText();
-        if (searchQuery.isBlank()) {
-            showMessage(messageLabel, "Please enter a valid search query.", Color.RED);
-        } else {
-            boolean placeholder_searchResult = true;
-            if (placeholder_searchResult) {
-                messageLabel.setVisible(false);
-            } else {
-                showMessage(messageLabel, "No members found matching the search query.", Color.RED);
-            }
-        }
-    }
-
     public void addMemberAction() {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
@@ -291,32 +277,23 @@ public class PowerliftingController implements Initializable {
         memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
     }
 
-
-    public void searchMembersByFirstName() {
+    public void searchMemberAction() {
         String firstName = searchFirstName.getText();
-        List<Member> members = service.searchMembersByFirstName(firstName);
-        if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given first name.", Color.RED);
-        } else {
-            displayMembers(members);
-        }
-    }
-
-    public void searchMembersByLastName() {
         String lastName = searchLastName.getText();
-        List<Member> members = service.searchMembersByLastName(lastName);
-        if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given last name.", Color.RED);
-        } else {
-            displayMembers(members);
-        }
-    }
-
-    public void searchMembersByEmail() {
         String email = searchEmail.getText();
-        List<Member> members = service.searchMembersByEmail(email);
+        String gender = searchGender.getText();
+        Float weight = null;
+        if (!searchWeight.getText().isBlank()) {
+            weight = Float.parseFloat(searchWeight.getText());
+        }
+        Float result = null;
+        if (!searchResult.getText().isBlank()) {
+            result = Float.parseFloat(searchResult.getText());
+        }
+
+        List<Member> members = service.searchMembers(firstName, lastName, email, gender, weight, result);
         if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given email.", Color.RED);
+            showMessage(messageLabel, "No members found with the given search criteria.", Color.RED);
         } else {
             displayMembers(members);
         }
@@ -346,35 +323,4 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-    public void searchMembersByWeight () {
-        String weight = searchWeight.getText();
-        //cast to float
-        List<Member> members = service.searchMembersByWeight(Float.parseFloat(weight));
-        if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given weight.", Color.RED);
-        } else {
-            displayMembers(members);
-        }
-    }
-
-    public void searchMembersByResult () {
-        String result = searchResult.getText();
-        //cast to float
-        List<Member> members = service.searchMembersByResult(Float.parseFloat(result));
-        if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given result.", Color.RED);
-        } else {
-            displayMembers(members);
-        }
-    }
-
-    public void searchMembersByGender () {
-        String result = searchGender.getText();
-        List<Member> members = service.searchMembersByGender(result);
-        if (members.isEmpty()) {
-            showMessage(messageLabel, "No members found with the given gender.", Color.RED);
-        } else {
-            displayMembers(members);
-        }
-    }
 }
