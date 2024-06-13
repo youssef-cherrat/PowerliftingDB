@@ -10,6 +10,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -17,36 +19,81 @@ import java.util.ResourceBundle;
 public class PowerliftingController implements Initializable {
     PowerliftingService service;
 
-    @FXML private Label messageLabel;
-    @FXML private AnchorPane loginRegisterScreen;
-    @FXML private Button closeButton;
-    @FXML private GridPane loginPane;
-    @FXML private GridPane changePasswordPane;
-    @FXML private TextField email;
-    @FXML private PasswordField password;
-    @FXML private TextField verifyEmail;
-    @FXML private PasswordField oldPassword;
-    @FXML private PasswordField newPassword;
-    @FXML private PasswordField confirmNewPassword;
-    @FXML private Button changePasswordButton;
+    @FXML
+    private Label messageLabel;
+    @FXML
+    private AnchorPane loginRegisterScreen;
+    @FXML
+    private Button closeButton;
+    @FXML
+    private GridPane loginPane;
+    @FXML
+    private GridPane registerPane;
+    @FXML
+    private TextField email;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private TextField newEmail;
+    @FXML
+    private PasswordField newPassword;
 
+    @FXML
+    private AnchorPane memberSearchPane;
+    @FXML
+    private Button searchMemberButton;
+    @FXML
+    private Button logoutButton;
+    @FXML
+    private Button addMemberButton;
+    @FXML
+    private TextField searchFirstName;
+    @FXML
+    private TextField searchLastName;
+    @FXML
+    private TextField searchEmail;
+    @FXML
+    private TextField searchWeight;
+    @FXML
+    private TextField searchResult;
+    @FXML
+    private TextField searchGender;
+    @FXML
+    private TableView<Member> memberRosterTable;
+    @FXML
+    private TableColumn<Member, String> memberFirstNameColumn;
+    @FXML
+    private TableColumn<Member, String> memberLastNameColumn;
+    @FXML
+    private TableColumn<Member, String> memberGenderColumn;
+    @FXML
+    private TableColumn<Member, String> memberEmailColumn;
+    @FXML
+    private TableColumn<Member, Integer> memberAttendanceColumn;
 
-    @FXML private AnchorPane memberSearchPane;
-    @FXML private Button searchMemberButton;
-    @FXML private Button logoutButton;
-    @FXML private Button addMemberButton;
-    @FXML private TextField searchFirstName;
-    @FXML private TextField searchLastName;
-    @FXML private TextField searchEmail;
-    @FXML private TableView<Member> memberRosterTable;
-    @FXML private TableColumn<Member, String> memberFirstNameColumn;
-    @FXML private TableColumn<Member, String> memberLastNameColumn;
-    @FXML private TableColumn<Member, String> memberGenderColumn;
-    @FXML private TableColumn<Member, String> memberEmailColumn;
-    @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
+    @FXML
+    private AnchorPane addMemberPane;
+    @FXML
+    private Button backButton1;
 
-    @FXML private AnchorPane addMemberPane;
-    @FXML private Button backButton1;
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField genderField;
+    @FXML
+    private TextField dobField;
+    @FXML
+    private TextField gradDateField;
+    @FXML
+    private TextField weightClassField;
+    @FXML
+    private TextField bestResultField;
+    @FXML
+    private TextField attendanceField;
+    @FXML
+    private TextField emailField;
 
     @FXML private AnchorPane alumniPane;
     @FXML private Button viewAlumniButton;
@@ -182,21 +229,40 @@ public class PowerliftingController implements Initializable {
         }
     }
 
-//    public void addMemberAction() {
-//        String newMemberName = newEmail.getText();
-//        String newMemberDetails = newPassword.getText();
-//        if (newMemberName.isBlank() || newMemberDetails.isBlank()) {
-//            showMessage(messageLabel, "Please enter valid member details.", Color.RED);
-//        } else {
-//            boolean placeholder_addMember = true;
-//            if (placeholder_addMember) {
-//                showMessage(messageLabel, "Member added successfully.", Color.GREEN);
-//            } else {
-//                showMessage(messageLabel, "Failed to add member. Please try again.", Color.RED);
-//            }
-//        }
-//    }
-//
+    public void addMemberAction() {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String gender = genderField.getText();
+        String email = emailField.getText();
+        Date dob = Date.valueOf(dobField.getText());
+        Date gradDate = Date.valueOf(gradDateField.getText());
+        float weightClass = Float.parseFloat(weightClassField.getText());
+        float bestResult = Float.parseFloat(bestResultField.getText());
+        String passwordHash = ""; // Assuming you generate or set this value
+        int semesterId = 1; // Assuming a default semester ID, change as needed
+        int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
+
+        Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email, passwordHash, totalPracticesAttended);
+
+        try {
+            service.addMember(newMember);
+            // Clear the fields after adding
+            firstNameField.clear();
+            lastNameField.clear();
+            genderField.clear();
+            emailField.clear();
+            dobField.clear();
+            gradDateField.clear();
+            weightClassField.clear();
+            bestResultField.clear();
+            attendanceField.clear();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Show an error message if needed
+        }
+    }
+
+
 //    public void updateMemberAction() {
 //        String memberName = newEmail.getText();
 //        String memberDetails = newPassword.getText();
@@ -225,6 +291,7 @@ public class PowerliftingController implements Initializable {
 //            }
 //        }
 //    }
+
 
     public void displayAddMemberPane() {
         memberSearchPane.setVisible(false);
@@ -288,6 +355,37 @@ public class PowerliftingController implements Initializable {
         String oldPW = oldPassword.getText();
         String newPW = newPassword.getText();
         service.changePassword(e, oldPW, newPW);
+    //add search for weight, result, gender
+    public void searchMembersByWeight() {
+        String weight = searchWeight.getText();
+        //cast to float
+        List<Member> members = service.searchMembersByWeight(Float.parseFloat(weight));
+        if (members.isEmpty()) {
+            showMessage(messageLabel, "No members found with the given weight.", Color.RED);
+        } else {
+            displayMembers(members);
+        }
+    }
+
+    public void searchMembersByResult() {
+        String result = searchResult.getText();
+        //cast to float
+        List<Member> members = service.searchMembersByResult(Float.parseFloat(result));
+        if (members.isEmpty()) {
+            showMessage(messageLabel, "No members found with the given result.", Color.RED);
+        } else {
+            displayMembers(members);
+        }
+    }
+
+    public void searchMembersByGender() {
+        String result = searchGender.getText();
+        List<Member> members = service.searchMembersByGender(result);
+        if (members.isEmpty()) {
+            showMessage(messageLabel, "No members found with the given gender.", Color.RED);
+        } else {
+            displayMembers(members);
+        }
     }
 
 }

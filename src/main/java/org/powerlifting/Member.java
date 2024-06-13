@@ -1,19 +1,31 @@
 package org.powerlifting;
 
+import java.sql.Date;
+
 public class Member {
     private String First_Name;
     private String Last_Name;
     private String Gender;
     private String Email;
     private int Total_Practices_Attended;
+    private Date Date_of_Birth;
+    private Date Grad_Date;
+    private float Weight_Class;
+    private float Best_Total_KG;
+    private String Password_Hash;
+    private int Semester_ID;
 
 
-    public Member(String first_Name, String last_Name, String gender, String email, int total_Practices_Attended) {
+    public Member(int semester_ID, String first_Name, String last_Name, Date date_of_Birth, Date grad_Date, float weight_Class, float best_Total_KG, String gender, String email, String password_Hash, int total_Practices_Attended) {
+        Semester_ID = semester_ID;
         First_Name = first_Name;
         Last_Name = last_Name;
+        Date_of_Birth = date_of_Birth;
+        Grad_Date = grad_Date;
+        Weight_Class = weight_Class;
+        Best_Total_KG = best_Total_KG;
         Gender = gender;
-        Email = email;
-        Total_Practices_Attended = total_Practices_Attended;
+
     }
 
     public Member() {}
@@ -57,4 +69,35 @@ public class Member {
     public void setTotal_Practices_Attended(int total_Practices_Attended) {
         Total_Practices_Attended = total_Practices_Attended;
     }
+    public Date getDate_of_Birth() {
+        return Date_of_Birth;
+    }
+    public void setDate_of_Birth(Date date_of_Birth) {
+        Date_of_Birth = date_of_Birth;
+    }
+    public Date getGrad_Date() {
+        return Grad_Date;
+    }
+    public void setGrad_Date(Date grad_Date) {
+        Grad_Date = grad_Date;
+    }
+    public float getWeight_Class() {
+        return Weight_Class;
+    }
+    public void setWeight_Class(float weight_Class) {
+        Weight_Class = weight_Class;
+    }
+    public float getBest_Total_KG() {
+        return Best_Total_KG;
+    }
+    public void setBest_Total_KG(float best_Total_KG) {
+        Best_Total_KG = best_Total_KG;
+    }
+    public int getSemester_ID() {
+        return Semester_ID;
+    }
+    public void setSemester_ID(int semester_ID) {
+        Semester_ID = semester_ID;
+    }
+
 }

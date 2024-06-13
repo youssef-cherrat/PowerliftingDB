@@ -72,15 +72,59 @@ public class PowerliftingService {
         return members;
     }
 
+
     public void changePassword(String email, String oldPassword, String newPassword){
         // check if email matches with the old password
         // if they do, change the password hash in data table with new password
         try {
             dbDriver.connect();
             dbDriver.changePassword(email, oldPassword, newPassword);
+
+    //search weight, result, gender
+    public List<Member> searchMembersByWeight(float weight) {
+        List<Member> members = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            members = dbDriver.searchMembersByWeightClass(weight);
             dbDriver.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return members;
     }
+
+    public List<Member> searchMembersByResult(float result) {
+        List<Member> members = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            members = dbDriver.searchMembersByBestResult(result);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
+
+    public List<Member> searchMembersByGender(String gender) {
+        List<Member> members = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            members = dbDriver.searchMembersByGender(gender);
+            dbDriver.disconnect();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return members;
+    }
+    public void addMember(Member member) throws SQLException {
+        try {
+            dbDriver.connect();
+            dbDriver.addMember(member);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            dbDriver.disconnect();
+            throw e;
+        }
+    }
+
 }

@@ -1,5 +1,21 @@
 # Powerlifting Club Database
 
+## How to Run
+
+**Ensure professional IntellJ is installed**
+
+1. git fetch origin
+2. git pull
+3. (FOR MAC ONLY) do chmod +x ./gradlew then ./gradlew build
+4. (FOR WINDOWS) ./gradlew build
+5. Download this version of JavaFX https://gluonhq.com/products/javafx/ (17.0.9 - ensure it is SDK)
+6. Ensure IntellJ is installed -> go to run Configurations -> VM options -> paste the path to the lib folder in the JavaFX SDK
+7. Click add VM options, put this --module-path "yourpath" --add-modules javafx.controls,javafx.fxml
+8. put your path to the unzipped folder of java fx sdk in the VM options
+9. ensure module info is powerlifting.main 
+10. ![images/img.png](images/img.png)
+11. Run program
+
 ## Overview
 
 This project aims to build a database for the Powerlifting Club at the University of Virginia (UVA). The database tracks member attendance, competition requirements, and membership information to streamline administrative tasks, provide accurate and accessible records, and enhance member engagement.
@@ -35,7 +51,7 @@ Powerlifting is a strength sport consisting of three events: squat, bench, and d
 
 ## Entity Relationship Diagram (ERD)
 
-![ERD](PL_Lucid.png)
+![images/PL_Lucid_chat.png](images/PL_Lucid_chat.png)
 
 ## Database Schema
 
