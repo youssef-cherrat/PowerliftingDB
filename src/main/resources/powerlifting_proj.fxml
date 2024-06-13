@@ -191,7 +191,7 @@
                   <HBox prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
                         <Region prefHeight="30.0" prefWidth="25.0" />
-                        <Button fx:id="addMemberButton" mnemonicParsing="false" onAction="#addMemberScreenChange" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="addMemberScreenChangeButton" mnemonicParsing="false" onAction="#addMemberScreenChange" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
