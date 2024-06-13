@@ -465,14 +465,16 @@ public class DatabaseDriver {
 
     public void changePassword(String email, String oldPassword, String newPassword) throws SQLException{
         Member member = new Member();
-        String query = "UPDATE Member SET Member_Password_Hash = " + newPassword + " WHERE Member_Email = " + email + " AND Member_Password_Hash = " + oldPassword;
+        String query = "UPDATE Member SET Member_Password_Hash = '" + newPassword + "' WHERE Member_Email = '" + email + "'";
         try{
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            if(rs.next()){
-                System.out.println("changed password");
+            int rs = statement.executeUpdate(query);
+            System.out.println(rs);
+            if(rs != 0){
+                System.out.println("Successfully changed password");
+            } else {
+                System.out.println("ERROR");
             }
-            rs.close();
         } catch (SQLException e){
             e.printStackTrace();
         }
