@@ -1,5 +1,6 @@
 package org.powerlifting;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -461,4 +462,20 @@ public class DatabaseDriver {
         }
         return members;
     }
+
+    public void changePassword(String email, String oldPassword, String newPassword) throws SQLException{
+        Member member = new Member();
+        String query = "UPDATE Member SET Member_Password_Hash = " + newPassword + " WHERE Member_Email = " + email + " AND Member_Password_Hash = " + oldPassword;
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            if(rs.next()){
+                System.out.println("changed password");
+            }
+            rs.close();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
 }
