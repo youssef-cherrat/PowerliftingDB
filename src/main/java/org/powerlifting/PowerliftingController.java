@@ -287,9 +287,7 @@ public class PowerliftingController implements Initializable {
         String e = verifyEmail.getText();
         String oldPW = oldPassword.getText();
         String newPW = newPassword.getText();
-        //System.out.println("email: " + e + " old: " +  oldPW + " new: " + newPW);
         service.changePassword(e, oldPW, newPW);
-        //System.out.println("old: " + oldPW +" new: " + newPW);
     }
 
 }
