@@ -466,17 +466,7 @@
                                 <Font name="Arial" size="13.0" />
                             </font>
                         </TextField>
-                        <Button layoutX="311.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="514.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="UPDATE MEMBER" textAlignment="CENTER" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Bold" size="13.0" />
-                            </font>
-                        </Button>
-                        <Button layoutX="710.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE">
+                        <Button layoutX="535.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD MEMBER" textAlignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="Arial Bold" size="13.0" />
                             </font>
@@ -491,12 +481,12 @@
                                 <Font name="Arial" size="13.0" />
                             </font>
                         </TextField>
-                        <TextField layoutX="514.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Rank">
+                        <TextField layoutX="514.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Best Result">
                             <font>
                                 <Font name="Arial" size="13.0" />
                             </font>
                         </TextField>
-                        <TextField layoutX="710.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Weight">
+                        <TextField layoutX="710.0" layoutY="267.0" prefHeight="30.0" prefWidth="150.0" promptText="Weight Class">
                             <font>
                                 <Font name="Arial" size="13.0" />
                             </font>
