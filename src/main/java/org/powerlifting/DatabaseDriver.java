@@ -654,10 +654,35 @@ public class DatabaseDriver {
     }
     //delete member
     public void deleteMember(int memberId) throws SQLException {
-        String sql = "DELETE FROM Member WHERE Member_ID = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, memberId);
-            pstmt.executeUpdate();
+        String deleteMemberSql = "DELETE FROM Member WHERE Member_ID = ?";
+        String deleteCompetitionMemberSql = "DELETE FROM Competition_Member WHERE Member_ID = ?";
+        String deleteAttendanceSql = "DELETE FROM Attendance WHERE Member_ID = ?";
+        try (PreparedStatement deleteMemberStmt = connection.prepareStatement(deleteMemberSql);
+             PreparedStatement deleteCompetitionMemberStmt = connection.prepareStatement(deleteCompetitionMemberSql);
+             PreparedStatement deleteAttendanceStmt = connection.prepareStatement(deleteAttendanceSql)) {
+
+            // managing transaction for more optimal and consistent deletion/update
+            connection.setAutoCommit(false);
+
+            // deleting member and making sure relevant records for attendance/practices and competitions are deleted
+
+            deleteMemberStmt.setInt(1, memberId);
+            deleteMemberStmt.executeUpdate();
+
+
+            deleteCompetitionMemberStmt.setInt(1, memberId);
+            deleteCompetitionMemberStmt.executeUpdate();
+
+
+            deleteAttendanceStmt.setInt(1, memberId);
+            deleteAttendanceStmt.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(true);
         }
     }
 
