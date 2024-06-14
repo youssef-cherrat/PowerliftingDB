@@ -366,12 +366,33 @@ public class DatabaseDriver {
 
     // Method to check member credentials
     public boolean checkCredentials(String email, String passwordHash) throws SQLException {
-        Statement statement = connection.createStatement();
-        String query = "SELECT * FROM Member WHERE Member_Email = '" + email + "' AND Member_Password_Hash = '" + passwordHash + "';";
-        ResultSet resultSet = statement.executeQuery(query);
-        boolean valid = resultSet.next();
-        resultSet.close();
-        return valid;
+//        Statement statement = connection.createStatement();
+//        String query = "SELECT * FROM Member WHERE Member_Email = '" + email + "' AND Member_Password_Hash = '" + passwordHash + "';";
+        String execQuery = "SELECT * FROM Executive WHERE Executive_Email = ? AND Executive_Password_Hash = ?";
+        String memberQuery = "SELECT * FROM Member WHERE Member_Email = ? AND Member_Password_Hash = ?";
+        try (PreparedStatement execStmt = connection.prepareStatement(execQuery);
+             PreparedStatement memberStmt = connection.prepareStatement(memberQuery)) {
+            execStmt.setString(1, email);
+            execStmt.setString(2, passwordHash);
+            ResultSet execRs = execStmt.executeQuery();
+            boolean validExec = execRs.next();
+            execRs.close();
+
+            if (validExec) {
+                return true;
+            }
+
+            memberStmt.setString(1, email);
+            memberStmt.setString(2, passwordHash);
+            ResultSet memberRs = memberStmt.executeQuery();
+            boolean validMember = memberRs.next();
+            memberRs.close();
+            return validMember;
+        }
+//        ResultSet resultSet = statement.executeQuery(query);
+//        boolean valid = resultSet.next();
+//        resultSet.close();
+//        return valid;
     }
 
     public List<Member> getMemberDataForSearch() throws SQLException {
