@@ -80,6 +80,10 @@ public class PowerliftingController implements Initializable {
     @FXML private Label memberDetailsGenderLabel;
     @FXML private Label memberDetailsWeightLabel;
     @FXML private Label memberDetailsBestTotalLabel;
+    @FXML private TableView<Event> eventsLogTable;
+    @FXML private TableColumn<Event, String> eventTypeColumn;
+    @FXML private TableColumn<Event, String> eventDateColumn;
+    @FXML private TableColumn<Event, String> eventLocationColumn;
 
     @FXML private TableView<Alumni> alumniRosterTable;
     @FXML private TableColumn<Alumni, String> alumniFirstNameColumn;
@@ -308,27 +312,6 @@ public class PowerliftingController implements Initializable {
         loginRegisterScreen.setVisible(true);
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayLoginPane();
-        // Initialize member table columns
-        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
-        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
-        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<>("Gender"));
-        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
-        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<>("Weight_Class"));
-        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<>("Best_Total_KG"));
-        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<>("Total_Practices_Attended"));
-
-        // Initialize alumni table columns
-        alumniFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
-        alumniLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
-        alumniEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
-        alumniClassYearColumn.setCellValueFactory(new PropertyValueFactory<>("Class_Year"));
-    }
-
-
     public void searchMemberAction() {
         String firstName = searchFirstName.getText();
         String lastName = searchLastName.getText();
@@ -389,6 +372,7 @@ public class PowerliftingController implements Initializable {
         memberSearchPane.setVisible(false);
         memberDetailsPane.setVisible(true);
         displayMemberDetails(member);
+        displayMemberEvents(member);
     }
 
     public void displayMemberDetails(Member member) {
@@ -415,6 +399,27 @@ public class PowerliftingController implements Initializable {
         return 0;
     }
 
+    public void displayMemberEvents(Member member) {
+        int memberId = member.getMember_ID();
+        List<Event> eventsList = service.searchMemberEvents(memberId);
+        eventsLogTable.getItems().setAll(eventsList);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayLoginPane();
+        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("First_Name"));
+        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Last_Name"));
+        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Gender"));
+        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
+        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Weight_Class"));
+        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
+        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
+
+        eventTypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Type"));
+        eventDateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Date"));
+        eventLocationColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Location"));
+    }
 
     //display alum
     public void displayAlumni() {

@@ -145,6 +145,18 @@ public class PowerliftingService {
         }
     }
 
+    public List<Event> searchMemberEvents (int memberId) {
+        List<Event> eventsList = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            eventsList = dbDriver.searchMemberEvents(memberId);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            //
+        }
+        return eventsList;
+    }
+
     //load alum data
     public List<Alumni> getAlumniData() {
         List<Alumni> alumniList = new ArrayList<>();
