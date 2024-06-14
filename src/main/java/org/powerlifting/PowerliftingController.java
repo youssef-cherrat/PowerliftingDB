@@ -229,6 +229,10 @@ public class PowerliftingController implements Initializable {
         loginRegisterScreen.setVisible(false);
         addMemberPane.setVisible(false);
         memberDetailsPane.setVisible(false);
+        addEventType.setText("");
+        addEventDate.setText("");
+        addEventLocation.setText("");
+        addEventMessageLabel.setText("");
         displayMemberSearch();
     }
 
@@ -497,6 +501,11 @@ public class PowerliftingController implements Initializable {
 
         if (eventType.isEmpty() || eventDate.isEmpty() || eventLocation.isEmpty()) {
             showMessage(addEventMessageLabel, "Please fill all event fields", Color.RED);
+            return;
+        }
+
+        if (!eventDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            showMessage(addEventMessageLabel, "Invalid date format", Color.RED);
             return;
         }
 

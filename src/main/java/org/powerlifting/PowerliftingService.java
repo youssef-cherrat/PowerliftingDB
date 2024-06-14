@@ -221,15 +221,24 @@ public class PowerliftingService {
     }
 
     public void addPracticeEvent(int memberId, String eventDate, String eventLocation) throws SQLException {
-        dbDriver.connect();
-        dbDriver.addPracticeEvent(memberId, eventDate, eventLocation);
-        dbDriver.disconnect();
+        try {
+            dbDriver.connect();
+            dbDriver.addPracticeEvent(memberId, eventDate, eventLocation);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            dbDriver.disconnect();
+            throw e;
+        }
     }
 
     public void addCompetitionEvent(int memberId, String eventDate, String eventLocation) throws SQLException {
-        dbDriver.connect();
-        dbDriver.addCompetitionEvent(memberId, eventDate, eventLocation);
-        dbDriver.disconnect();
+        try {
+            dbDriver.connect();
+            dbDriver.addCompetitionEvent(memberId, eventDate, eventLocation);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            dbDriver.disconnect();
+            throw e;
+        }
     }
-
 }

@@ -732,47 +732,75 @@ public class DatabaseDriver {
 
     //add practice
     public void addPracticeEvent(int memberId, String eventDate, String eventLocation) throws SQLException {
+        String selectPracticeSQL = "SELECT Practice_ID FROM Practice WHERE Date = ? AND Location = ?";
         String insertPracticeSQL = "INSERT INTO Practice (Date, Location) VALUES (?, ?)";
         String insertAttendanceSQL = "INSERT INTO Attendance (Member_ID, Practice_ID, Status) VALUES (?, ?, 'Present')";
 
-        try (PreparedStatement practiceStmt = connection.prepareStatement(insertPracticeSQL, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement selectPracticeStmt = connection.prepareStatement(selectPracticeSQL);
+             PreparedStatement practiceStmt = connection.prepareStatement(insertPracticeSQL, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement attendanceStmt = connection.prepareStatement(insertAttendanceSQL)) {
 
-            practiceStmt.setString(1, eventDate);
-            practiceStmt.setString(2, eventLocation);
-            practiceStmt.executeUpdate();
+            selectPracticeStmt.setString(1, eventDate);
+            selectPracticeStmt.setString(2, eventLocation);
+            ResultSet rs = selectPracticeStmt.executeQuery();
 
-            ResultSet generatedKeys = practiceStmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int practiceId = generatedKeys.getInt(1);
-                attendanceStmt.setInt(1, memberId);
-                attendanceStmt.setInt(2, practiceId);
-                attendanceStmt.executeUpdate();
+            int practiceId;
+            if (rs.next()) {
+                practiceId = rs.getInt("Practice_ID");
+            } else {
+                practiceStmt.setString(1, eventDate);
+                practiceStmt.setString(2, eventLocation);
+                practiceStmt.executeUpdate();
+
+                ResultSet generatedKeys = practiceStmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    practiceId = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Failed to insert Practice event, no ID obtained.");
+                }
             }
+            attendanceStmt.setInt(1, memberId);
+            attendanceStmt.setInt(2, practiceId);
+            attendanceStmt.executeUpdate();
         }
     }
 
     //add competition
     public void addCompetitionEvent(int memberId, String eventDate, String eventLocation) throws SQLException {
+        String selectCompetitionSQL = "SELECT Competition_ID FROM Competition WHERE Competition_Date = ? AND Location = ?";
         String insertCompetitionSQL = "INSERT INTO Competition (Location, Competition_Date) VALUES (?, ?)";
         String insertCompetitionMemberSQL = "INSERT INTO Competition_Member (Competition_ID, Member_ID) VALUES (?, ?)";
 
-        try (PreparedStatement competitionStmt = connection.prepareStatement(insertCompetitionSQL, Statement.RETURN_GENERATED_KEYS);
+        try (PreparedStatement selectCompetitionStmt = connection.prepareStatement(selectCompetitionSQL);
+             PreparedStatement competitionStmt = connection.prepareStatement(insertCompetitionSQL, Statement.RETURN_GENERATED_KEYS);
              PreparedStatement competitionMemberStmt = connection.prepareStatement(insertCompetitionMemberSQL)) {
 
-            competitionStmt.setString(1, eventLocation);
-            competitionStmt.setString(2, eventDate);
-            competitionStmt.executeUpdate();
+            selectCompetitionStmt.setString(1, eventDate);
+            selectCompetitionStmt.setString(2, eventLocation);
+            ResultSet rs = selectCompetitionStmt.executeQuery();
 
-            ResultSet generatedKeys = competitionStmt.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                int competitionId = generatedKeys.getInt(1);
-                competitionMemberStmt.setInt(1, competitionId);
-                competitionMemberStmt.setInt(2, memberId);
-                competitionMemberStmt.executeUpdate();
+            int competitionId;
+            if (rs.next()) {
+                competitionId = rs.getInt("Competition_ID");
+            } else {
+                competitionStmt.setString(1, eventLocation);
+                competitionStmt.setString(2, eventDate);
+                competitionStmt.executeUpdate();
+
+                ResultSet generatedKeys = competitionStmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    competitionId = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Failed to insert Competition event, no ID obtained.");
+                }
             }
+
+            competitionMemberStmt.setInt(1, competitionId);
+            competitionMemberStmt.setInt(2, memberId);
+            competitionMemberStmt.executeUpdate();
         }
     }
+
 
 
 }
