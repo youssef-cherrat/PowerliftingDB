@@ -373,6 +373,11 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
+                        <Button fx:id="deleteMemberButton" layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#deleteMemberAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
                      </children>
                   </VBox>
                   <HBox layoutY="220.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">

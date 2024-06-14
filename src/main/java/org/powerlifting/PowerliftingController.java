@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -454,6 +455,36 @@ public class PowerliftingController implements Initializable {
     public void displayAlumni(List<Alumni> alumniList) {
         alumniRosterTable.getItems().setAll(alumniList);
     }
+
+    //to delete member
+    public void deleteMemberAction() {
+        Member member = memberRosterTable.getSelectionModel().getSelectedItem();
+        if (member != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Member");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this member?");
+
+            ButtonType buttonTypeYes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.NO);
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes) {
+                try {
+                    service.deleteMember(member.getMember_ID());
+                    displayAllMembers();
+                    showMessage(searchMessageLabel, "Member deleted successfully.", Color.GREEN);
+                    backButtonAction();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showMessage(searchMessageLabel, "Failed to delete member. Please try again.", Color.RED);
+                }
+            }
+        }
+    }
+
 
 
 }

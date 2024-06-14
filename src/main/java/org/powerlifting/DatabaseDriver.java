@@ -642,5 +642,13 @@ public class DatabaseDriver {
         }
         return alumniList;
     }
+    //delete member
+    public void deleteMember(int memberId) throws SQLException {
+        String sql = "DELETE FROM Member WHERE Member_ID = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, memberId);
+            pstmt.executeUpdate();
+        }
+    }
 
 }

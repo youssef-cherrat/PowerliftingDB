@@ -183,5 +183,16 @@ public class PowerliftingService {
         return alumniList;
     }
 
+    //delete member
+    public void deleteMember(int memberId) throws SQLException {
+        try {
+            dbDriver.connect();
+            dbDriver.deleteMember(memberId);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            dbDriver.disconnect();
+            throw e;
+        }
+    }
 
 }
