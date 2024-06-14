@@ -96,6 +96,7 @@ public class PowerliftingController implements Initializable {
     @FXML private TableColumn<Event, String> eventDateColumn;
     @FXML private TableColumn<Event, String> eventLocationColumn;
 
+    @FXML private Label alumniSearchMessageLabel;
     @FXML private TableView<Alumni> alumniRosterTable;
     @FXML private TableColumn<Alumni, String> alumniFirstNameColumn;
     @FXML private TableColumn<Alumni, String> alumniLastNameColumn;
@@ -238,45 +239,51 @@ public class PowerliftingController implements Initializable {
 
 
     public void addMemberAction() {
-        try {
-            String firstName = firstNameField.getText();
-            String lastName = lastNameField.getText();
-            String gender = genderField.getText();
-            String email = emailField.getText();
-            String dob = dobField.getText();
-            String gradDate = gradDateField.getText();
-            float weightClass = Float.parseFloat(weightClassField.getText());
-            float bestResult = Float.parseFloat(bestResultField.getText());
-            String password1 = firstName+lastName; // set to first name + last name for now when adding a new member
-            int semesterId = 3; // Assuming a default semester ID, change as needed
+        if (firstNameField.getText().isBlank() || lastNameField.getText().isBlank() || genderField.getText().isBlank()
+                || emailField.getText().isBlank() || dobField.getText().isBlank() || gradDateField.getText().isBlank()
+                || weightClassField.getText().isBlank() || bestResultField.getText().isBlank()) {
+            showMessage(addMemberMessageLabel, "Please fill out all fields.", Color.RED);
+        } else {
+            try {
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                String gender = genderField.getText();
+                String email = emailField.getText();
+                String dob = dobField.getText();
+                String gradDate = gradDateField.getText();
+                float weightClass = Float.parseFloat(weightClassField.getText());
+                float bestResult = Float.parseFloat(bestResultField.getText());
+                String password1 = firstName + lastName; // set to first name + last name for now when adding a new member
+                int semesterId = 3; // Assuming a default semester ID, change as needed
 
-            // int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
-            // Validate date format
-            if (!dob.matches("\\d{4}-\\d{2}-\\d{2}") || !gradDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                throw new IllegalArgumentException("Invalid date format. Please use YYYY-MM-DD.");
+                // int totalPracticesAttended = Integer.parseInt(attendanceField.getText());
+                // Validate date format
+                if (!dob.matches("\\d{4}-\\d{2}-\\d{2}") || !gradDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    throw new IllegalArgumentException("Invalid date format. Please use YYYY-MM-DD.");
+                }
+
+                Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
+
+                service.addMember(newMember);
+
+                // Clear the fields after adding
+                firstNameField.clear();
+                lastNameField.clear();
+                genderField.clear();
+                emailField.clear();
+                dobField.clear();
+                gradDateField.clear();
+                weightClassField.clear();
+                bestResultField.clear();
+
+                showMessage(addMemberMessageLabel, "Member added successfully!", Color.GREEN);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Show an error message if needed
+                showMessage(addMemberMessageLabel, "Failed to add member. Please try again.", Color.RED);
+            } catch (IllegalArgumentException e) {
+                showMessage(addMemberMessageLabel, "Please enter valid member details.", Color.RED);
             }
-
-            Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
-
-            service.addMember(newMember);
-
-            // Clear the fields after adding
-            firstNameField.clear();
-            lastNameField.clear();
-            genderField.clear();
-            emailField.clear();
-            dobField.clear();
-            gradDateField.clear();
-            weightClassField.clear();
-            bestResultField.clear();
-
-            showMessage(addMemberMessageLabel, "Member added successfully!", Color.GREEN);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // Show an error message if needed
-            showMessage(addMemberMessageLabel, "Failed to add member. Please try again.", Color.RED);
-        } catch (IllegalArgumentException e) {
-            showMessage(addMemberMessageLabel, "Please enter valid member details.", Color.RED);
         }
     }
 
@@ -315,6 +322,7 @@ public class PowerliftingController implements Initializable {
         if (members.isEmpty()) {
             showMessage(searchMessageLabel, "No members found with the given search criteria.", Color.RED);
         } else {
+            searchMessageLabel.setText("");
             displayMembers(members);
         }
     }
@@ -408,27 +416,7 @@ public class PowerliftingController implements Initializable {
         addEventMessageLabel.setText("");
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayLoginPane();
-        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("First_Name"));
-        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Last_Name"));
-        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Gender"));
-        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
-        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Weight_Class"));
-        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
-        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
 
-        // Initialize alumni table columns
-        alumniFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
-        alumniLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
-        alumniEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
-        alumniClassYearColumn.setCellValueFactory(new PropertyValueFactory<>("Class_Year"));
-
-        eventTypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Type"));
-        eventDateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Date"));
-        eventLocationColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Location"));
-    }
 
     //display alum
     public void displayAlumni() {
@@ -448,9 +436,10 @@ public class PowerliftingController implements Initializable {
 
         List<Alumni> alumniList = service.searchAlumni(firstName, lastName, email, classYear);
         if (alumniList.isEmpty()) {
-            showMessage(searchMessageLabel, "No alumni found with the given search criteria.", Color.RED);
+            showMessage(alumniSearchMessageLabel, "No alumni found with the given search criteria.", Color.RED);
         } else {
             displayAlumni(alumniList);
+            alumniSearchMessageLabel.setText("");
         }
     }
 
@@ -486,7 +475,6 @@ public class PowerliftingController implements Initializable {
             }
         }
     }
-
 
     public void addEventAction() {
         String eventType = addEventType.getText();
@@ -527,6 +515,25 @@ public class PowerliftingController implements Initializable {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        displayLoginPane();
+        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("First_Name"));
+        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Last_Name"));
+        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Gender"));
+        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
+        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Weight_Class"));
+        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
+        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
 
+        // Initialize alumni table columns
+        alumniFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
+        alumniLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
+        alumniEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        alumniClassYearColumn.setCellValueFactory(new PropertyValueFactory<>("Class_Year"));
 
+        eventTypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Type"));
+        eventDateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Date"));
+        eventLocationColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Location"));
+    }
 }

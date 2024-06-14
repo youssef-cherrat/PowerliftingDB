@@ -503,7 +503,7 @@ public class DatabaseDriver {
             params.add("%" + email + "%");
         }
         if (gender != null && !gender.isEmpty()) {
-            query.append(" AND Member_Gender = ?");
+            query.append(" AND Member_Gender LIKE ?");
             params.add(gender);
         }
         if (weight != null) {
