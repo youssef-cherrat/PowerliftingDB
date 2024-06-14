@@ -36,6 +36,18 @@ public class PowerliftingService {
         return userType;
     }
 
+    public Member getMemberFromLogin(String email, String password) {
+        Member member = null;
+        try {
+            dbDriver.connect();
+            member = dbDriver.getMemberFromLogin(email, password);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            // ignore
+        }
+        return member;
+    }
+
     public List<Member> getMemberData() {
         List<Member> membersList = new ArrayList<>();
         try {

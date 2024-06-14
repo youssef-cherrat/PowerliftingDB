@@ -407,27 +407,33 @@ public class DatabaseDriver {
         }
     }
 
-    public List<Member> getMemberDataForSearch() throws SQLException {
-        List<Member> members = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Member;");
-            while (rs.next()) {
+    public Member getMemberFromLogin(String email, String passwordHash) throws SQLException {
+        Member member = null;
+        String sql = "SELECT * FROM Member WHERE Member_Email = ? AND Member_Password_Hash = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, email);
+            statement.setString(2, passwordHash);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                int memberId = rs.getInt("Member_ID");
+                int semesterId = rs.getInt("Semester_ID");
                 String firstName = rs.getString("Member_First_Name");
                 String lastName = rs.getString("Member_Last_Name");
+                String gender = rs.getString("Member_Gender");
+                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
+                String dateOfBirth = rs.getString("Member_Date_of_Birth");
+                String gradDate = rs.getString("Member_Grad_Date");
                 float weightClass = rs.getFloat("Member_Weight_Class");
                 float bestTotalKg = rs.getFloat("Member_Best_Total_KG");
-                String gender = rs.getString("Member_Gender");
-                String email = rs.getString("Member_Email");
-                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
 
-                members.add(new Member(firstName, lastName, gender, email, weightClass, bestTotalKg, totalPracticesAttended));
+                member = new Member(memberId, semesterId, firstName, lastName, gender, email, totalPracticesAttended, dateOfBirth, gradDate,weightClass, bestTotalKg);
             }
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return members;
+        return member;
     }
 
     public List<Member> getAllMemberData() throws SQLException {

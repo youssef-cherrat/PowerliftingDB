@@ -77,6 +77,8 @@ public class PowerliftingController implements Initializable {
     @FXML private Button backFromAlumniButton;
 
     @FXML private AnchorPane memberDetailsPane;
+    @FXML private Button backButton;
+    @FXML private Button deleteMemberButton;
     @FXML private Label memberDetailsNameLabel;
     @FXML private Label memberDetailsAgeLabel;
     @FXML private Label memberDetailsGenderLabel;
@@ -177,7 +179,16 @@ public class PowerliftingController implements Initializable {
                 loginEmail = enteredEmail;
                 userType = service.checkUserRole(enteredEmail, hashed_password);
                 loginRegisterScreen.setVisible(false);
-                displayMemberSearch();
+                if (userType.equalsIgnoreCase("Executive")) {
+                    displayMemberSearch();
+                } else {
+                    // members can only view their own page (and alumni page)
+                    Member member = service.getMemberFromLogin(enteredEmail, hashed_password);
+                    if (member != null) {
+                        displayMemberDetailsActionHelper(member);
+                        disableMemberDetailsButtons();
+                    }
+                }
             } else {
                 showMessage(messageLabel, "Invalid email or password. Please enter a valid combination.", Color.RED);
             }
@@ -187,6 +198,7 @@ public class PowerliftingController implements Initializable {
     public void logoutAction() {
         memberSearchPane.setVisible(false);
         messageLabel.setText("");
+        enableMemberDetailsButtons();
         displayLoginPane();
     }
 
@@ -372,6 +384,22 @@ public class PowerliftingController implements Initializable {
         int memberId = member.getMember_ID();
         List<Event> eventsList = service.searchMemberEvents(memberId);
         eventsLogTable.getItems().setAll(eventsList);
+    }
+
+    public void disableMemberDetailsButtons() {
+        // disable all buttons only execs can use (for when member is logged in)
+        backButton.setDisable(true);
+        addEventButton.setDisable(true);
+        deleteMemberButton.setDisable(true);
+        showMessage(addEventMessageLabel, "Logged in as member.", Color.BLACK);
+    }
+
+    public void enableMemberDetailsButtons() {
+        // disable all buttons only execs can use (for when member is logged in)
+        backButton.setDisable(false);
+        addEventButton.setDisable(false);
+        deleteMemberButton.setDisable(false);
+        addEventMessageLabel.setText("");
     }
 
     @Override
