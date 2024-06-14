@@ -608,7 +608,7 @@ public class DatabaseDriver {
                 "p.Location AS Event_Location " +
                 "FROM Attendance a " +
                 "JOIN Practice p ON a.Practice_ID = p.Practice_ID " +
-                "WHERE a.Member_ID = ? " +
+                "WHERE a.Member_ID = ? AND a.Status = 'Present' " +
                 "UNION ALL " +
                 "SELECT 'Competition' AS Event_Type, " +
                 "c.Competition_Date AS Event_Date, " +
