@@ -416,6 +416,12 @@ public class PowerliftingController implements Initializable {
         memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
         memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
 
+        // Initialize alumni table columns
+        alumniFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
+        alumniLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
+        alumniEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        alumniClassYearColumn.setCellValueFactory(new PropertyValueFactory<>("Class_Year"));
+
         eventTypeColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Type"));
         eventDateColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Date"));
         eventLocationColumn.setCellValueFactory(new PropertyValueFactory<Event, String>("Event_Location"));
