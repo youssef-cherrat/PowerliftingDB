@@ -651,4 +651,49 @@ public class DatabaseDriver {
         }
     }
 
+    //add practice
+    public void addPracticeEvent(int memberId, String eventDate, String eventLocation) throws SQLException {
+        String insertPracticeSQL = "INSERT INTO Practice (Date, Location) VALUES (?, ?)";
+        String insertAttendanceSQL = "INSERT INTO Attendance (Member_ID, Practice_ID, Status) VALUES (?, ?, 'Present')";
+
+        try (PreparedStatement practiceStmt = connection.prepareStatement(insertPracticeSQL, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement attendanceStmt = connection.prepareStatement(insertAttendanceSQL)) {
+
+            practiceStmt.setString(1, eventDate);
+            practiceStmt.setString(2, eventLocation);
+            practiceStmt.executeUpdate();
+
+            ResultSet generatedKeys = practiceStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int practiceId = generatedKeys.getInt(1);
+                attendanceStmt.setInt(1, memberId);
+                attendanceStmt.setInt(2, practiceId);
+                attendanceStmt.executeUpdate();
+            }
+        }
+    }
+
+    //add competition
+    public void addCompetitionEvent(int memberId, String eventDate, String eventLocation) throws SQLException {
+        String insertCompetitionSQL = "INSERT INTO Competition (Location, Competition_Date) VALUES (?, ?)";
+        String insertCompetitionMemberSQL = "INSERT INTO Competition_Member (Competition_ID, Member_ID) VALUES (?, ?)";
+
+        try (PreparedStatement competitionStmt = connection.prepareStatement(insertCompetitionSQL, Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement competitionMemberStmt = connection.prepareStatement(insertCompetitionMemberSQL)) {
+
+            competitionStmt.setString(1, eventLocation);
+            competitionStmt.setString(2, eventDate);
+            competitionStmt.executeUpdate();
+
+            ResultSet generatedKeys = competitionStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int competitionId = generatedKeys.getInt(1);
+                competitionMemberStmt.setInt(1, competitionId);
+                competitionMemberStmt.setInt(2, memberId);
+                competitionMemberStmt.executeUpdate();
+            }
+        }
+    }
+
+
 }

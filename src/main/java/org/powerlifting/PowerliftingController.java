@@ -497,15 +497,36 @@ public class PowerliftingController implements Initializable {
         String eventType = addEventType.getText();
         String eventDate = addEventDate.getText();
         String eventLocation = addEventLocation.getText();
-        if (eventType.equalsIgnoreCase("practice")) {
+        Member member = memberRosterTable.getSelectionModel().getSelectedItem();
 
-        } else if (eventType.equalsIgnoreCase("competition")) {
-
-        } else {
-            showMessage(addEventMessageLabel, "Please enter valid practice or competition", Color.RED);
+        if (member == null) {
+            showMessage(addEventMessageLabel, "No member selected", Color.RED);
+            return;
         }
 
+        if (eventType.isEmpty() || eventDate.isEmpty() || eventLocation.isEmpty()) {
+            showMessage(addEventMessageLabel, "Please fill all event fields", Color.RED);
+            return;
+        }
+
+        try {
+            if (eventType.equalsIgnoreCase("practice")) {
+                service.addPracticeEvent(member.getMember_ID(), eventDate, eventLocation);
+            } else if (eventType.equalsIgnoreCase("competition")) {
+                service.addCompetitionEvent(member.getMember_ID(), eventDate, eventLocation);
+            } else {
+                showMessage(addEventMessageLabel, "Invalid event type. Use 'practice' or 'competition'", Color.RED);
+                return;
+            }
+
+            showMessage(addEventMessageLabel, "Event added successfully!", Color.GREEN);
+            displayMemberEvents(member); // Refresh the events table for the member
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showMessage(addEventMessageLabel, "Failed to add event. Please try again.", Color.RED);
+        }
     }
+
 
 
 }
