@@ -145,4 +145,17 @@ public class PowerliftingService {
         }
     }
 
+    //load alum data
+    public List<Alumni> getAlumniData() {
+        List<Alumni> alumniList = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            alumniList = dbDriver.getAllAlumniData();
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return alumniList;
+    }
+
 }

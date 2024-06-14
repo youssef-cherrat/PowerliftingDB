@@ -81,6 +81,13 @@ public class PowerliftingController implements Initializable {
     @FXML private Label memberDetailsWeightLabel;
     @FXML private Label memberDetailsBestTotalLabel;
 
+    @FXML private TableView<Alumni> alumniRosterTable;
+    @FXML private TableColumn<Alumni, String> alumniFirstNameColumn;
+    @FXML private TableColumn<Alumni, String> alumniLastNameColumn;
+    @FXML private TableColumn<Alumni, String> alumniEmailColumn;
+    @FXML private TableColumn<Alumni, Integer> alumniClassYearColumn;
+
+
 
 
     private String loginEmail;
@@ -286,6 +293,7 @@ public class PowerliftingController implements Initializable {
     public void displayAlumniPane() {
         loginRegisterScreen.setVisible(false);
         alumniPane.setVisible(true);
+        displayAlumni();
     }
 
     public void backFromAlumni() {
@@ -297,14 +305,22 @@ public class PowerliftingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         displayLoginPane();
-        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("First_Name"));
-        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Last_Name"));
-        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Gender"));
-        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
-        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Weight_Class"));
-        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
-        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
+        // Initialize member table columns
+        memberFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
+        memberLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
+        memberGenderColumn.setCellValueFactory(new PropertyValueFactory<>("Gender"));
+        memberEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<>("Weight_Class"));
+        memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<>("Best_Total_KG"));
+        memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<>("Total_Practices_Attended"));
+
+        // Initialize alumni table columns
+        alumniFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));
+        alumniLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("Last_Name"));
+        alumniEmailColumn.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        alumniClassYearColumn.setCellValueFactory(new PropertyValueFactory<>("Class_Year"));
     }
+
 
     public void searchMemberAction() {
         String firstName = searchFirstName.getText();
@@ -390,6 +406,13 @@ public class PowerliftingController implements Initializable {
             return Period.between(birthDate, currentDate).getYears();
         }
         return 0;
+    }
+
+
+    //display alum
+    public void displayAlumni() {
+        List<Alumni> alumniList = service.getAlumniData();
+        alumniRosterTable.getItems().setAll(alumniList);
     }
 
 }

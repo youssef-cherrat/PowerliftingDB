@@ -547,5 +547,26 @@ public class DatabaseDriver {
         }
     }
 
+    //fetch alum
+    public List<Alumni> getAllAlumniData() throws SQLException {
+        List<Alumni> alumniList = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Alumni;");
+            while (rs.next()) {
+                int alumniId = rs.getInt("Alumni_ID");
+                String firstName = rs.getString("Alumni_First_Name");
+                String lastName = rs.getString("Alumni_Last_Name");
+                int classYear = rs.getInt("Alumni_Class_Year");
+                String email = rs.getString("Alumni_Email");
+                int semesterId = rs.getInt("Semester_ID");
 
+                alumniList.add(new Alumni(alumniId, firstName, lastName, classYear, email, semesterId));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return alumniList;
+    }
 }
