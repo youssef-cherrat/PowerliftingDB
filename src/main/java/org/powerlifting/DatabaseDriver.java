@@ -543,8 +543,13 @@ public class DatabaseDriver {
     }
 
     //hash password***
-    public void changePassword(String email, String oldPassword, String newPassword) throws SQLException{
-        String query = "UPDATE Member SET Member_Password_Hash = '" + newPassword + "' WHERE Member_Email = '" + email + "'";
+    public void changePassword(String email, String oldPassword, String newPassword, String userType) throws SQLException{
+        String query = "";
+        if (userType.equalsIgnoreCase("member")) {
+            query = "UPDATE Member SET Member_Password_Hash = '" + newPassword + "' WHERE Member_Email = '" + email + "'";
+        } else {
+            query = "UPDATE Executive SET Executive_Password_Hash = '" + newPassword + "' WHERE Executive_Email = '" + email + "'";
+        }
         try{
             Statement statement = connection.createStatement();
             int rs = statement.executeUpdate(query);

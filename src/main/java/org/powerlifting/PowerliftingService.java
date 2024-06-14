@@ -146,12 +146,12 @@ public class PowerliftingService {
     }
 
 
-    public void changePassword(String email, String oldPassword, String newPassword){
+    public void changePassword(String email, String oldPassword, String newPassword, String userType){
         // check if email matches with the old password
         // if they do, change the password hash in data table with new password
         try {
             dbDriver.connect();
-            dbDriver.changePassword(email, oldPassword, newPassword);
+            dbDriver.changePassword(email, oldPassword, newPassword, userType);
             dbDriver.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();

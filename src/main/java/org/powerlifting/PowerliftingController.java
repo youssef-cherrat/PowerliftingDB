@@ -329,12 +329,13 @@ public class PowerliftingController implements Initializable {
         }
         else {
             if (validCreds && (newPW.equals(confirmPW))) {
-                service.changePassword(e, oldPW, hashednewPW);
+                String user_type = service.checkUserRole(e, oldPW);
+                service.changePassword(e, oldPW, hashednewPW, user_type);
                 showMessage(messageLabel, "Successfully updated password!", Color.GREEN);
 
             } else {
                 if (validCreds) {
-                    showMessage(messageLabel, "Email and old password match, but please ensure new password matches with confirmation.", Color.RED);
+                    showMessage(messageLabel, "Please ensure credentials are valid.", Color.RED);
                 } else {
                     showMessage(messageLabel, "Please ensure email and old password match.", Color.RED);
                 }
