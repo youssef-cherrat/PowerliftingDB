@@ -49,6 +49,7 @@ public class PowerliftingController implements Initializable {
     @FXML private TextField searchEmail;
     @FXML private TextField searchWeight;
     @FXML private TextField searchResult;
+    @FXML private TextField searchSemester;
     @FXML private TableView<Member> memberRosterTable;
     @FXML private TableColumn<Member, String> memberFirstNameColumn;
     @FXML private TableColumn<Member, String> memberLastNameColumn;
@@ -333,14 +334,16 @@ public class PowerliftingController implements Initializable {
         if (!searchResult.getText().isBlank()) {
             result = Float.parseFloat(searchResult.getText());
         }
+        String semester = searchSemester.getText();
 
-        List<Member> members = service.searchMembers(firstName, lastName, email, gender, weight, result);
+        List<Member> members = service.searchMembers(firstName, lastName, email, gender, weight, result, semester);
         if (members.isEmpty()) {
             showMessage(searchMessageLabel, "No members found with the given search criteria.", Color.RED);
         } else {
             displayMembers(members);
         }
     }
+
 
     public void changePasswordAction() {
         String e = verifyEmail.getText();
