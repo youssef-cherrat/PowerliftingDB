@@ -227,7 +227,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="searchEmail" maxWidth="-Infinity" prefHeight="32.0" prefWidth="250.0" translateX="5.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <TextField fx:id="searchEmail" maxWidth="-Infinity" prefHeight="32.0" prefWidth="150.0" translateX="5.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
@@ -237,7 +237,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button fx:id="searchMemberButton" mnemonicParsing="false" onAction="#searchMemberAction" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                        <Button fx:id="searchMemberButton" mnemonicParsing="false" onAction="#searchMemberAction" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="7" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -259,7 +259,7 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="Semester" GridPane.columnIndex="6">
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="Semester" GridPane.columnIndex="6" GridPane.halignment="CENTER">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -272,13 +272,14 @@
                         <TextField fx:id="searchResult" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                      <columnConstraints>
-                        <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="119.70077514648438" />
-                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="145.29922485351562" />
-                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="97.46420288085938" />
-                        <ColumnConstraints maxWidth="678.0" minWidth="222.5511474609375" prefWidth="233.03579711914062" />
-                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="119.77874755859375" />
-                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="126.68414306640625" />
-                        <ColumnConstraints maxWidth="613.6547241210938" minWidth="222.649658203125" prefWidth="413.31585693359375" />
+                        <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="122.63938903808594" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="115.35006713867188" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="92.017822265625" />
+                        <ColumnConstraints maxWidth="678.0" minWidth="156.83551025390625" prefWidth="156.83551025390625" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="0.0" prefWidth="96.44976806640625" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="114.23907470703125" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="261.19696044921875" />
+                        <ColumnConstraints maxWidth="613.6547241210938" minWidth="222.649658203125" prefWidth="262.80303955078125" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints maxHeight="21.824813842773438" minHeight="16.0" prefHeight="21.824813842773438" />
