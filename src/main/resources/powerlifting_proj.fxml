@@ -584,12 +584,14 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="Class Year" GridPane.columnIndex="3">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+
+                        <!-- TextFields for searching -->
                         <TextField fx:id="searchFirstName1" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets right="5.0" />
-                           </GridPane.margin>
-                        </TextField>
-                        <TextField fx:id="searchEmail1" maxWidth="-Infinity" prefHeight="32.0" prefWidth="300.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
@@ -599,7 +601,19 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH ALUM" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <TextField fx:id="searchEmail1" maxWidth="-Infinity" prefHeight="32.0" prefWidth="300.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="searchClassYear" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
+
+                        <!-- Search Button -->
+                        <Button fx:id="searchAlumniButton" mnemonicParsing="false" onAction="#searchAlumniAction" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: #E57200;" text="SEARCH ALUM" textAlignment="CENTER" textFill="WHITE" translateX="5.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -609,6 +623,7 @@
                         <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="151.0" />
                         <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
                         <ColumnConstraints maxWidth="678.0" minWidth="419.0" prefWidth="678.0" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
                         <ColumnConstraints />
                      </columnConstraints>
                      <rowConstraints>
@@ -621,12 +636,12 @@
                         <Font name="Arial Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="memberRosterTable1" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
+                  <TableView fx:id="alumniRosterTable" layoutY="160.0" prefHeight="470.0" prefWidth="1220.0">
                      <columns>
-                        <TableColumn maxWidth="120.0" prefWidth="110.0" style="-fx-alignment: CENTER;" text="First Name" />
-                        <TableColumn maxWidth="120.0" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Last Name" />
-                        <TableColumn maxWidth="800.0" prefWidth="600.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
-                        <TableColumn maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Class Year" />
+                        <TableColumn fx:id="alumniFirstNameColumn" maxWidth="120.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="First Name" />
+                        <TableColumn fx:id="alumniLastNameColumn" maxWidth="120.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Last Name" />
+                        <TableColumn fx:id="alumniEmailColumn" maxWidth="800.0" prefWidth="300.0" style="-fx-alignment: CENTER-LEFT;" text="Email" />
+                        <TableColumn fx:id="alumniClassYearColumn" maxWidth="200.0" prefWidth="160.0" style="-fx-alignment: CENTER;" text="Class Year" />
                      </columns>
                   </TableView>
                </children>
