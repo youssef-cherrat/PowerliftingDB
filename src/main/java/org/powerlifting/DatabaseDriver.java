@@ -403,22 +403,24 @@ public class DatabaseDriver {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Member;");
             while (rs.next()) {
+                int memberId = rs.getInt("Member_ID");
                 int semesterId = rs.getInt("Semester_ID");
                 String firstName = rs.getString("Member_First_Name");
                 String lastName = rs.getString("Member_Last_Name");
-                Date Date_dateOfBirth = rs.getDate("Member_Date_of_Birth");
-                //cast to string
-                String dateOfBirth = Date_dateOfBirth.toString();
-                Date Date_gradDate = rs.getDate("Member_Grad_Date");
-                String gradDate = Date_gradDate.toString();
-                float weightClass = rs.getFloat("Member_Weight_Class");
-                float bestTotalKg = rs.getFloat("Member_Best_Total_KG");
                 String gender = rs.getString("Member_Gender");
                 String email = rs.getString("Member_Email");
+                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
+                String dateOfBirth = rs.getString("Member_Date_of_Birth");
+                String gradDate = rs.getString("Member_Grad_Date");
+                float weightClass = rs.getFloat("Member_Weight_Class");
+                float bestTotalKg = rs.getFloat("Member_Best_Total_KG");
+
+
 //                String passwordHash = rs.getString("Member_Password_Hash");
 //                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
 
-                members.add(new Member(semesterId, firstName, lastName, dateOfBirth, gradDate, weightClass, bestTotalKg, gender, email));
+//                members.add(new Member(semesterId, firstName, lastName, dateOfBirth, gradDate, weightClass, bestTotalKg, gender, email));
+                members.add(new Member(memberId, semesterId, firstName, lastName, gender, email, totalPracticesAttended, dateOfBirth, gradDate,weightClass, bestTotalKg));
             }
             rs.close();
         } catch (SQLException e) {

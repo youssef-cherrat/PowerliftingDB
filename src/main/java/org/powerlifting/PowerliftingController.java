@@ -14,6 +14,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -73,6 +75,12 @@ public class PowerliftingController implements Initializable {
     @FXML private Button backFromAlumniButton;
 
     @FXML private AnchorPane memberDetailsPane;
+    @FXML private Label memberDetailsNameLabel;
+    @FXML private Label memberDetailsAgeLabel;
+    @FXML private Label memberDetailsGenderLabel;
+    @FXML private Label memberDetailsWeightLabel;
+    @FXML private Label memberDetailsBestTotalLabel;
+
 
 
     private String loginEmail;
@@ -206,6 +214,7 @@ public class PowerliftingController implements Initializable {
     public void backButtonAction() {
         loginRegisterScreen.setVisible(false);
         addMemberPane.setVisible(false);
+        memberDetailsPane.setVisible(false);
         displayMemberSearch();
     }
 
@@ -360,7 +369,27 @@ public class PowerliftingController implements Initializable {
     }
 
     public void displayMemberDetails(Member member) {
-        //
+        String name = member.getFirst_Name() + " " + member.getLast_Name();
+        String dob = member.getDate_of_Birth();
+        LocalDate birthDate = LocalDate.parse(dob);
+        int age = calculateAge(birthDate);
+        String gender = member.getGender();
+        float weight = member.getWeight_Class();
+        float best_total = member.getBest_Total_KG();
+
+        memberDetailsNameLabel.setText(name);
+        memberDetailsAgeLabel.setText(String.valueOf(age));
+        memberDetailsGenderLabel.setText(gender);
+        memberDetailsWeightLabel.setText(String.valueOf(weight));
+        memberDetailsBestTotalLabel.setText(String.valueOf(best_total));
+    }
+
+    public int calculateAge (LocalDate birthDate) {
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate != null && birthDate != null) {
+            return Period.between(birthDate, currentDate).getYears();
+        }
+        return 0;
     }
 
 }
