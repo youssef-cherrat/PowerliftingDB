@@ -29,20 +29,20 @@ public class Event {
         Event_Type = event_Type;
     }
 
-    public String getDate() {
+    public String getEvent_Date() {
         return Event_Date;
     }
 
-    public void setDate(String date) {
-        Event_Date = date;
+    public void setEvent_Date(String event_Date) {
+        Event_Date = event_Date;
     }
 
-    public String getLocation() {
+    public String getEvent_Location() {
         return Event_Location;
     }
 
-    public void setLocation(String location) {
-        Event_Location = location;
+    public void setEvent_Location(String event_Location) {
+        Event_Location = event_Location;
     }
 
     @Override

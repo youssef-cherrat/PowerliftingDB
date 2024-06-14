@@ -571,7 +571,7 @@ public class DatabaseDriver {
                 String eventDate = rs.getString("Event_Date");
                 String eventLocation = rs.getString("Event_Location");
                 Event event = new Event(memberId, eventType, eventDate, eventLocation);
-                System.out.println(event);
+//                System.out.println(event);
                 eventsList.add(event);
             }
         } catch (SQLException e) {
