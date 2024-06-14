@@ -27,12 +27,12 @@
                   <Font name="Arial Bold" size="36.0" />
                </font>
             </Label>
-            <Button fx:id="closeButton" layoutX="1144.0" layoutY="13.0" mnemonicParsing="false" onAction="#closeAction" prefHeight="25.0" prefWidth="127.0" style="-fx-background-color: #e57200;" text="Close Application" textFill="WHITE">
+            <Button fx:id="closeButton" layoutX="1092.0" layoutY="13.0" mnemonicParsing="false" onAction="#closeAction" prefHeight="28.0" prefWidth="180.0" style="-fx-background-color: #e57200;" text="Close Application" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="viewAlumniButton" layoutX="6.0" layoutY="15.0" mnemonicParsing="false" onAction="#displayAlumniPane" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: #e57200;" text="View Alumni" textFill="WHITE">
+            <Button fx:id="viewAlumniButton" layoutX="6.0" layoutY="15.0" mnemonicParsing="false" onAction="#displayAlumniPane" prefHeight="28.0" prefWidth="180.0" style="-fx-background-color: #e57200;" text="View Alumni" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -373,11 +373,6 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Button fx:id="deleteMemberButton" layoutX="600.0" layoutY="400.0" mnemonicParsing="false" onAction="#deleteMemberAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Arial Bold" size="13.0" />
-                           </font>
-                        </Button>
                      </children>
                   </VBox>
                   <HBox layoutY="220.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
@@ -398,23 +393,28 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
+                        <Button fx:id="deleteMemberButton" mnemonicParsing="false" onAction="#deleteMemberAction" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE MEMBER" textAlignment="CENTER" textFill="WHITE" translateX="100.0">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox layoutY="260.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
                         <Region prefHeight="30.0" prefWidth="333.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="addEventButton" mnemonicParsing="false" onAction="#addEventAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="addEventButton" mnemonicParsing="false" onAction="#addEventAction" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
+                        <Label fx:id="addEventMessageLabel" prefHeight="30.0" prefWidth="523.0" translateX="15.0" />
                         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="DELETE EVENT" textAlignment="CENTER" textFill="WHITE" translateX="20.0" visible="false">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Label fx:id="addEventMessageLabel" prefHeight="17.0" prefWidth="136.0" />
-                        <Region prefHeight="30.0" prefWidth="620.0" />
+                        <Region prefHeight="30.0" prefWidth="213.0" />
                      </children>
                   </HBox>
                   <TableView fx:id="eventsLogTable" layoutY="320.0" prefHeight="320.0" prefWidth="1220.0">
@@ -585,12 +585,12 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="173.0" text="Email" GridPane.columnIndex="2">
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="173.0" text="Email" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="Class Year" GridPane.columnIndex="3">
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="104.0" text="Class Year" GridPane.columnIndex="3">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -602,17 +602,17 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="searchLastName1" alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TextField fx:id="searchLastName1" alignment="CENTER" prefHeight="33.0" prefWidth="217.0" translateX="5.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="searchEmail1" maxWidth="-Infinity" prefHeight="32.0" prefWidth="300.0" translateX="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <TextField fx:id="searchEmail1" maxWidth="-Infinity" prefHeight="32.0" prefWidth="300.0" translateX="5.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="searchClassYear" alignment="CENTER" prefHeight="33.0" prefWidth="134.0" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <TextField fx:id="searchClassYear" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="100.0" translateX="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets right="5.0" />
                            </GridPane.margin>
@@ -628,9 +628,9 @@
                      <columnConstraints>
                         <ColumnConstraints maxWidth="853.0" minWidth="99.0" prefWidth="151.0" />
                         <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
-                        <ColumnConstraints maxWidth="678.0" minWidth="419.0" prefWidth="678.0" />
-                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="130.0" />
-                        <ColumnConstraints />
+                        <ColumnConstraints maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+                        <ColumnConstraints maxWidth="622.0" minWidth="19.0" prefWidth="377.0" />
+                        <ColumnConstraints maxWidth="470.0" minWidth="220.0" prefWidth="262.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints />
