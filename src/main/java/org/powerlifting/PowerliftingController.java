@@ -87,6 +87,13 @@ public class PowerliftingController implements Initializable {
     @FXML private TableColumn<Alumni, String> alumniEmailColumn;
     @FXML private TableColumn<Alumni, Integer> alumniClassYearColumn;
 
+    //search alum
+    @FXML private TextField searchClassYear;
+    @FXML private Button searchAlumniButton;
+    @FXML private TextField searchFirstName1;
+    @FXML private TextField searchLastName1;
+    @FXML private TextField searchEmail1;
+
 
 
 
@@ -414,5 +421,28 @@ public class PowerliftingController implements Initializable {
         List<Alumni> alumniList = service.getAlumniData();
         alumniRosterTable.getItems().setAll(alumniList);
     }
+
+    //search alum
+    public void searchAlumniAction() {
+        String firstName = searchFirstName1.getText();
+        String lastName = searchLastName1.getText();
+        String email = searchEmail1.getText();
+        Integer classYear = null;
+        if (!searchClassYear.getText().isBlank()) {
+            classYear = Integer.parseInt(searchClassYear.getText());
+        }
+
+        List<Alumni> alumniList = service.searchAlumni(firstName, lastName, email, classYear);
+        if (alumniList.isEmpty()) {
+            showMessage(searchMessageLabel, "No alumni found with the given search criteria.", Color.RED);
+        } else {
+            displayAlumni(alumniList);
+        }
+    }
+
+    public void displayAlumni(List<Alumni> alumniList) {
+        alumniRosterTable.getItems().setAll(alumniList);
+    }
+
 
 }

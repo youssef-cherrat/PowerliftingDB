@@ -569,4 +569,45 @@ public class DatabaseDriver {
         }
         return alumniList;
     }
+
+    public List<Alumni> searchAlumni(String firstName, String lastName, String email, Integer classYear) throws SQLException {
+        List<Alumni> alumniList = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM Alumni WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+
+        if (firstName != null && !firstName.isEmpty()) {
+            query.append(" AND Alumni_First_Name LIKE ?");
+            params.add("%" + firstName + "%");
+        }
+        if (lastName != null && !lastName.isEmpty()) {
+            query.append(" AND Alumni_Last_Name LIKE ?");
+            params.add("%" + lastName + "%");
+        }
+        if (email != null && !email.isEmpty()) {
+            query.append(" AND Alumni_Email LIKE ?");
+            params.add("%" + email + "%");
+        }
+        if (classYear != null) {
+            query.append(" AND Alumni_Class_Year = ?");
+            params.add(classYear);
+        }
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                pstmt.setObject(i + 1, params.get(i));
+            }
+            ResultSet resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                alumniList.add(new Alumni(
+                        resultSet.getInt("Alumni_ID"),
+                        resultSet.getString("Alumni_First_Name"),
+                        resultSet.getString("Alumni_Last_Name"),
+                        resultSet.getInt("Alumni_Class_Year"),
+                        resultSet.getString("Alumni_Email"),
+                        resultSet.getInt("Semester_ID")));
+            }
+        }
+        return alumniList;
+    }
+
 }
