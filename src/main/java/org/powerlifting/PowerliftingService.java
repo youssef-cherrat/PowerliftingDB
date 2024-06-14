@@ -145,4 +145,16 @@ public class PowerliftingService {
         }
     }
 
+    public List<Event> searchMemberEvents (int memberId) {
+        List<Event> eventsList = new ArrayList<>();
+        try {
+            dbDriver.connect();
+            eventsList = dbDriver.searchMemberEvents(memberId);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            //
+        }
+        return eventsList;
+    }
+
 }

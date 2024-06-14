@@ -411,11 +411,11 @@
                         <Region prefHeight="30.0" prefWidth="620.0" />
                      </children>
                   </HBox>
-                  <TableView layoutY="320.0" prefHeight="320.0" prefWidth="1220.0">
+                  <TableView fx:id="eventsLogTable" layoutY="320.0" prefHeight="320.0" prefWidth="1220.0">
                      <columns>
-                        <TableColumn maxWidth="170.89409065246582" prefWidth="170.89409065246582" style="-fx-alignment: CENTER;" text="Type (Practice/Comp)" />
-                        <TableColumn maxWidth="300.0" prefWidth="249.10592651367188" style="-fx-alignment: CENTER;" text="Date" />
-                        <TableColumn maxWidth="800.0" prefWidth="511.0" style="-fx-alignment: CENTER-LEFT;" text="Location" />
+                        <TableColumn fx:id="eventTypeColumn" maxWidth="170.89409065246582" prefWidth="170.89409065246582" style="-fx-alignment: CENTER;" text="Type (Practice/Comp)" />
+                        <TableColumn fx:id="eventDateColumn" maxWidth="300.0" prefWidth="249.10592651367188" style="-fx-alignment: CENTER;" text="Date" />
+                        <TableColumn fx:id="eventLocationColumn" maxWidth="800.0" prefWidth="511.0" style="-fx-alignment: CENTER-LEFT;" text="Location" />
                      </columns>
                   </TableView>
                   <Label layoutY="290.0" prefHeight="25.0" prefWidth="300.0" text="Attended Events Log " translateX="5.0">

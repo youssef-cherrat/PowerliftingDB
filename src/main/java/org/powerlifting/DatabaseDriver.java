@@ -547,5 +547,38 @@ public class DatabaseDriver {
         }
     }
 
+    public List<Event> searchMemberEvents(int memberId) throws SQLException {
+        List<Event> eventsList = new ArrayList<>();
+        String sql = "SELECT 'Practice' AS Event_Type, " +
+                "p.Date AS Event_Date, " +
+                "p.Location AS Event_Location " +
+                "FROM Attendance a " +
+                "JOIN Practice p ON a.Practice_ID = p.Practice_ID " +
+                "WHERE a.Member_ID = ? " +
+                "UNION ALL " +
+                "SELECT 'Competition' AS Event_Type, " +
+                "c.Competition_Date AS Event_Date, " +
+                "c.Location AS Event_Location " +
+                "FROM Competition_Member cm " +
+                "JOIN Competition c ON cm.Competition_ID = c.Competition_ID " +
+                "WHERE cm.Member_ID = ?;";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setInt(1, memberId);
+            pstmt.setInt(2, memberId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String eventType = rs.getString("Event_Type");
+                String eventDate = rs.getString("Event_Date");
+                String eventLocation = rs.getString("Event_Location");
+                Event event = new Event(memberId, eventType, eventDate, eventLocation);
+                System.out.println(event);
+                eventsList.add(event);
+            }
+        } catch (SQLException e) {
+            //
+        }
+        return eventsList;
+    }
+
 
 }
