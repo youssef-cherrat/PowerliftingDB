@@ -197,6 +197,7 @@ public class PowerliftingController implements Initializable {
 
     public void logoutAction() {
         memberSearchPane.setVisible(false);
+        memberDetailsPane.setVisible(false);
         messageLabel.setText("");
         enableMemberDetailsButtons();
         displayLoginPane();
