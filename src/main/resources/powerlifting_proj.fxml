@@ -383,7 +383,7 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="addEventDate" prefHeight="30.0" prefWidth="154.0" promptText="Enter date here" translateX="10.0">
+                        <TextField fx:id="addEventDate" prefHeight="30.0" prefWidth="210.0" promptText="Enter date here (YYYY-MM-DD)" translateX="10.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
