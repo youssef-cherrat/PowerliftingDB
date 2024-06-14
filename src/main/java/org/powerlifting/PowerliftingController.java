@@ -100,17 +100,14 @@ public class PowerliftingController implements Initializable {
     @FXML private TableColumn<Alumni, String> alumniEmailColumn;
     @FXML private TableColumn<Alumni, Integer> alumniClassYearColumn;
 
-    //search alum
     @FXML private TextField searchClassYear;
     @FXML private Button searchAlumniButton;
     @FXML private TextField searchFirstName1;
     @FXML private TextField searchLastName1;
     @FXML private TextField searchEmail1;
 
-
-
-
     private String loginEmail;
+    private String userType;
 
     public void setService(PowerliftingService service) {
         this.service = service;
@@ -169,7 +166,7 @@ public class PowerliftingController implements Initializable {
         String enteredEmail = email.getText();
         String enteredPassword = password.getText();
         if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
-            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
+            showMessage(messageLabel, "Please enter a valid email and password.", Color.RED);
         } else {
 //            check if creds are valid, dependent on dbDriver
 //            if valid, display member search screen and set login screen to invis
@@ -178,37 +175,14 @@ public class PowerliftingController implements Initializable {
             boolean validCreds = service.checkCredentials(enteredEmail, hashed_password);
             if (validCreds) {
                 loginEmail = enteredEmail;
+                userType = service.checkUserRole(enteredEmail, hashed_password);
                 loginRegisterScreen.setVisible(false);
                 displayMemberSearch();
             } else {
-                showMessage(messageLabel, "Invalid username or password. Please enter a valid combination.", Color.RED);
+                showMessage(messageLabel, "Invalid email or password. Please enter a valid combination.", Color.RED);
             }
         }
     }
-
-//    public void createUserAction() {
-//        String enteredEmail = verifyEmail.getText();
-//        String enteredPassword = newPassword.getText();
-////        For testing purposes:
-////        System.out.println("Entered Username: " + enteredUsername);
-////        System.out.println("Entered Password: " + enteredPassword);
-//        if (enteredEmail.isBlank() || enteredPassword.isBlank()) {
-//            showMessage(messageLabel, "Please enter a valid username and password.", Color.RED);
-//        } else {
-////            boolean userAlreadyExists = service.userExists(enteredUsername);
-//            boolean placeholder_userExists = true;
-//            if (placeholder_userExists) {
-//                showMessage(messageLabel, "Username already exists. Please choose another username.", Color.RED);
-//            } else {
-////              Placeholder to create and add user to database, needs to be implemented using dbDriver and service
-//                boolean placeholder_addUser = false;
-//                if (placeholder_addUser) {
-//                    displayLoginPane();
-//                    showMessage(messageLabel, "Registration successful. Please log in with your new credentials.", Color.GREEN);
-//                }
-//            }
-//        }
-//    }
 
     public void logoutAction() {
         memberSearchPane.setVisible(false);
@@ -288,22 +262,6 @@ public class PowerliftingController implements Initializable {
             showMessage(addMemberMessageLabel, "Please enter valid member details.", Color.RED);
         }
     }
-
-
-//    public void deleteMemberAction() {
-//        String memberName = newEmail.getText();
-//        if (memberName.isBlank()) {
-//            showMessage(messageLabel, "Please enter a valid member name.", Color.RED);
-//        } else {
-//            boolean placeholder_deleteMember = true;
-//            if (placeholder_deleteMember) {
-//                showMessage(messageLabel, "Member deleted successfully.", Color.GREEN);
-//            } else {
-//                showMessage(messageLabel, "Failed to delete member. Please try again.", Color.RED);
-//            }
-//        }
-//    }
-
 
     public void displayAddMemberPane() {
         memberSearchPane.setVisible(false);

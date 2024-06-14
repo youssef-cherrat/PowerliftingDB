@@ -24,6 +24,18 @@ public class PowerliftingService {
         return userValid;
     }
 
+    public String checkUserRole(String email, String password) {
+        String userType = "";
+        try {
+            dbDriver.connect();
+            userType = dbDriver.checkUserRole(email, password);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            // ignore
+        }
+        return userType;
+    }
+
     public List<Member> getMemberData() {
         List<Member> membersList = new ArrayList<>();
         try {

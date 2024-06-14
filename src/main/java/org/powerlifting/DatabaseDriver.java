@@ -366,8 +366,6 @@ public class DatabaseDriver {
 
     // Method to check member credentials
     public boolean checkCredentials(String email, String passwordHash) throws SQLException {
-//        Statement statement = connection.createStatement();
-//        String query = "SELECT * FROM Member WHERE Member_Email = '" + email + "' AND Member_Password_Hash = '" + passwordHash + "';";
         String execQuery = "SELECT * FROM Executive WHERE Executive_Email = ? AND Executive_Password_Hash = ?";
         String memberQuery = "SELECT * FROM Member WHERE Member_Email = ? AND Member_Password_Hash = ?";
         try (PreparedStatement execStmt = connection.prepareStatement(execQuery);
@@ -389,10 +387,24 @@ public class DatabaseDriver {
             memberRs.close();
             return validMember;
         }
-//        ResultSet resultSet = statement.executeQuery(query);
-//        boolean valid = resultSet.next();
-//        resultSet.close();
-//        return valid;
+    }
+
+    public String checkUserRole (String email, String passwordHash) throws SQLException {
+        // only called if validUser, so we know it is either an executive or member
+        String execQuery = "SELECT * FROM Executive WHERE Executive_Email = ? AND Executive_Password_Hash = ?";
+        try (PreparedStatement execStmt = connection.prepareStatement(execQuery)) {
+            execStmt.setString(1, email);
+            execStmt.setString(2, passwordHash);
+            ResultSet execRs = execStmt.executeQuery();
+            boolean validExec = execRs.next();
+            execRs.close();
+
+            if (validExec) {
+                return "Executive";
+            }
+            // must be a member
+            return "Member";
+        }
     }
 
     public List<Member> getMemberDataForSearch() throws SQLException {
