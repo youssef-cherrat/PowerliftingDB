@@ -383,17 +383,17 @@
                   <HBox layoutY="220.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
                         <Region prefHeight="30.0" prefWidth="300.0" />
-                        <TextField prefHeight="30.0" prefWidth="150.0" promptText="Enter event type here">
+                        <TextField fx:id="addEventType" prefHeight="30.0" prefWidth="150.0" promptText="Enter event type here">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <TextField prefHeight="30.0" prefWidth="154.0" promptText="Enter date here" translateX="10.0">
+                        <TextField fx:id="addEventDate" prefHeight="30.0" prefWidth="154.0" promptText="Enter date here" translateX="10.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
                         </TextField>
-                        <TextField prefHeight="30.0" prefWidth="169.0" promptText="Enter location here" translateX="20.0">
+                        <TextField fx:id="addEventLocation" prefHeight="30.0" prefWidth="169.0" promptText="Enter location here" translateX="20.0">
                            <font>
                               <Font name="Arial" size="13.0" />
                            </font>
@@ -402,8 +402,8 @@
                   </HBox>
                   <HBox layoutY="260.0" prefHeight="30.0" prefWidth="1220.0" style="-fx-background-color: #BFE7F7;">
                      <children>
-                        <Region prefHeight="30.0" prefWidth="293.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
+                        <Region prefHeight="30.0" prefWidth="333.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="addEventButton" mnemonicParsing="false" onAction="#addEventAction" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E57200;" text="ADD EVENT" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -413,6 +413,7 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Button>
+                        <Label fx:id="addEventMessageLabel" prefHeight="17.0" prefWidth="136.0" />
                         <Region prefHeight="30.0" prefWidth="620.0" />
                      </children>
                   </HBox>

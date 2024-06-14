@@ -81,6 +81,13 @@ public class PowerliftingController implements Initializable {
     @FXML private Label memberDetailsGenderLabel;
     @FXML private Label memberDetailsWeightLabel;
     @FXML private Label memberDetailsBestTotalLabel;
+
+    @FXML private TextField addEventType;
+    @FXML private TextField addEventDate;
+    @FXML private TextField addEventLocation;
+    @FXML private Button addEventButton;
+    @FXML private Label addEventMessageLabel;
+
     @FXML private TableView<Event> eventsLogTable;
     @FXML private TableColumn<Event, String> eventTypeColumn;
     @FXML private TableColumn<Event, String> eventDateColumn;
@@ -485,6 +492,20 @@ public class PowerliftingController implements Initializable {
         }
     }
 
+
+    public void addEventAction() {
+        String eventType = addEventType.getText();
+        String eventDate = addEventDate.getText();
+        String eventLocation = addEventLocation.getText();
+        if (eventType.equalsIgnoreCase("practice")) {
+
+        } else if (eventType.equalsIgnoreCase("competition")) {
+
+        } else {
+            showMessage(addEventMessageLabel, "Please enter valid practice or competition", Color.RED);
+        }
+
+    }
 
 
 }
