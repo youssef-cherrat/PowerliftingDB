@@ -259,6 +259,16 @@
                               <Font name="Arial Bold" size="13.0" />
                            </font>
                         </Label>
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="150.0" text="Semester" GridPane.columnIndex="6">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="searchSemester" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="150.0" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                        </TextField>
                         <TextField fx:id="searchResult" alignment="CENTER" maxWidth="-Infinity" prefHeight="33.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                      <columnConstraints>

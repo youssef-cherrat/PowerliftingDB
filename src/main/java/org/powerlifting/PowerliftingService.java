@@ -109,17 +109,18 @@ public class PowerliftingService {
 //        return members;
 //    }
 
-    public List<Member> searchMembers(String firstName, String lastName, String email, String gender, Float weight, Float result) {
+    public List<Member> searchMembers(String firstName, String lastName, String email, String gender, Float weight, Float result, String semester) {
         List<Member> members = new ArrayList<>();
         try {
             dbDriver.connect();
-            members = dbDriver.searchMembers(firstName, lastName, email, gender, weight, result);
+            members = dbDriver.searchMembers(firstName, lastName, email, gender, weight, result, semester);
             dbDriver.disconnect();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return members;
     }
+
 
     public void changePassword(String email, String oldPassword, String newPassword){
         // check if email matches with the old password

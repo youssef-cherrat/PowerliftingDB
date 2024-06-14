@@ -445,9 +445,10 @@ public class DatabaseDriver {
         return totalPracticesAttended;
     }
 
-    public List<Member> searchMembers(String firstName, String lastName, String email, String gender, Float weight, Float result) throws SQLException {
+    public List<Member> searchMembers(String firstName, String lastName, String email, String gender, Float weight, Float result, String semester) throws SQLException {
         List<Member> members = new ArrayList<>();
-        StringBuilder query = new StringBuilder("SELECT * FROM Member WHERE 1=1");
+        StringBuilder query = new StringBuilder("SELECT * FROM Member");
+        query.append(" JOIN Semester ON Member.Semester_ID = Semester.Semester_ID WHERE 1=1");
         List<Object> params = new ArrayList<>();
 
         if (firstName != null && !firstName.isEmpty()) {
@@ -474,6 +475,10 @@ public class DatabaseDriver {
             query.append(" AND Member_Best_Total_KG = ?");
             params.add(result);
         }
+        if (semester != null && !semester.isEmpty()) {
+            query.append(" AND Semester.Session_Name = ?");
+            params.add(semester);
+        }
 
         try (PreparedStatement pstmt = connection.prepareStatement(query.toString())) {
             for (int i = 0; i < params.size(); i++) {
@@ -482,17 +487,22 @@ public class DatabaseDriver {
             ResultSet resultSet = pstmt.executeQuery();
             while (resultSet.next()) {
                 members.add(new Member(
+                        resultSet.getInt("Member_ID"),
+                        resultSet.getInt("Semester_ID"),
                         resultSet.getString("Member_First_Name"),
                         resultSet.getString("Member_Last_Name"),
                         resultSet.getString("Member_Gender"),
                         resultSet.getString("Member_Email"),
+                        getTotalPracticesAttended(resultSet.getInt("Member_ID")),
+                        resultSet.getString("Member_Date_of_Birth"),
+                        resultSet.getString("Member_Grad_Date"),
                         resultSet.getFloat("Member_Weight_Class"),
-                        resultSet.getFloat("Member_Best_Total_KG"),
-                        getTotalPracticesAttended(resultSet.getInt("Member_ID"))));
+                        resultSet.getFloat("Member_Best_Total_KG")));
             }
         }
         return members;
     }
+
     //hash password***
     public void changePassword(String email, String oldPassword, String newPassword) throws SQLException{
         String query = "UPDATE Member SET Member_Password_Hash = '" + newPassword + "' WHERE Member_Email = '" + email + "'";
