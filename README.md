@@ -35,7 +35,7 @@ This project aims to build a database for the Powerlifting Club at the Universit
 
 ## Description
 
-Powerlifting is a strength sport consisting of three events: squat, bench, and deadlift. The total weight in KG determines placings in competitions. The Powerlifting Club at UVA requires members to attend practices and participate in sanctioned competitions. The database will manage member information, attendance records, and competition participation efficiently.
+Powerlifting is a strength sport consisting of three events: squat, bench, and deadlift. The total weight in KG determines placings in competitions. The Powerlifting Club at UVA requires members to attend practices and participate in sanctioned competitions. The database will manage member information, attendance records, and competition participation efficiently. Can add members/alumni/events as needed via application, given the main developer is in charge of executive team, they can add execs in console.
 
 ## Business Rules
 
