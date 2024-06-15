@@ -262,9 +262,15 @@ public class PowerliftingController implements Initializable {
                     throw new IllegalArgumentException("Invalid date format. Please use YYYY-MM-DD.");
                 }
 
+                LocalDate graduationDate = LocalDate.parse(gradDate);
+
                 Member newMember = new Member(semesterId, firstName, lastName, dob, gradDate, weightClass, bestResult, gender, email);
 
-                service.addMember(newMember);
+                if (graduationDate.isBefore(LocalDate.now())) {
+                    service.addAlumni(newMember);
+                } else {
+                    service.addMember(newMember);
+                }
 
                 // Clear the fields after adding
                 firstNameField.clear();

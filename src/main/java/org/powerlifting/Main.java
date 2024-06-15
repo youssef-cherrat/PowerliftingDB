@@ -21,6 +21,7 @@ public class Main extends Application {
         DatabaseDriver db = new DatabaseDriver();
         PowerliftingService service = new PowerliftingService(db);
         controller.setService(service);
+        service.convertMembersToAlumni(); // convert any existing members who graduated to alumni upon app launch
 
         Scene scene = new Scene(root);
         stage.setTitle("UVA Club Powerlifting Application");

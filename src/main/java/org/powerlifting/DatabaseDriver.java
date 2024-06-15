@@ -3,6 +3,7 @@ package org.powerlifting;
 import javax.swing.plaf.nimbus.State;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.security.MessageDigest;
@@ -798,6 +799,76 @@ public class DatabaseDriver {
             competitionMemberStmt.setInt(1, competitionId);
             competitionMemberStmt.setInt(2, memberId);
             competitionMemberStmt.executeUpdate();
+        }
+    }
+
+    public void addAlumni(Member member) throws SQLException {
+        String insertAlumniSql = "INSERT INTO Alumni (Alumni_First_Name, Alumni_Last_Name, Alumni_Class_Year, Alumni_Email, Semester_ID) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = connection.prepareStatement(insertAlumniSql)) {
+            pstmt.setString(1, member.getFirst_Name());
+            pstmt.setString(2, member.getLast_Name());
+            pstmt.setInt(3, LocalDate.parse(member.getGrad_Date()).getYear());
+            pstmt.setString(4, member.getEmail());
+            pstmt.setInt(5, member.getSemester_ID());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            rollback();
+            throw e;
+        }
+    }
+
+    public void convertMembersToAlumni() throws SQLException {
+        String selectMembersSql = "SELECT * FROM Member WHERE Member_Grad_Date < DATE('now')";
+        String insertAlumniSql = "INSERT INTO Alumni (Alumni_First_Name, Alumni_Last_Name, Alumni_Class_Year, Alumni_Email, Semester_ID) VALUES (?, ?, ?, ?, ?)";
+        String deleteMemberSql = "DELETE FROM Member WHERE Member_ID = ?";
+        String deleteCompetitionMemberSql = "DELETE FROM Competition_Member WHERE Member_ID = ?";
+        String deleteAttendanceSql = "DELETE FROM Attendance WHERE Member_ID = ?";
+
+        try (PreparedStatement selectMembersStmt = connection.prepareStatement(selectMembersSql);
+             PreparedStatement insertAlumniStmt = connection.prepareStatement(insertAlumniSql);
+             PreparedStatement deleteMemberStmt = connection.prepareStatement(deleteMemberSql);
+             PreparedStatement deleteCompetitionMemberStmt = connection.prepareStatement(deleteCompetitionMemberSql);
+             PreparedStatement deleteAttendanceStmt = connection.prepareStatement(deleteAttendanceSql)) {
+
+            connection.setAutoCommit(false);
+
+            ResultSet rs = selectMembersStmt.executeQuery();
+            while (rs.next()) {
+                int memberId = rs.getInt("Member_ID");
+                String firstName = rs.getString("Member_First_Name");
+                String lastName = rs.getString("Member_Last_Name");
+                int classYear = rs.getDate("Member_Grad_Date").toLocalDate().getYear();
+                String email = rs.getString("Member_Email");
+                int semesterId = rs.getInt("Semester_ID");
+
+                insertAlumniStmt.setString(1, firstName);
+                insertAlumniStmt.setString(2, lastName);
+                insertAlumniStmt.setInt(3, classYear);
+                insertAlumniStmt.setString(4, email);
+                insertAlumniStmt.setInt(5, semesterId);
+                insertAlumniStmt.addBatch();
+
+                deleteMemberStmt.setInt(1, memberId);
+                deleteMemberStmt.addBatch();
+
+                deleteCompetitionMemberStmt.setInt(1, memberId);
+                deleteCompetitionMemberStmt.addBatch();
+
+                deleteAttendanceStmt.setInt(1, memberId);
+                deleteAttendanceStmt.addBatch();
+            }
+
+            insertAlumniStmt.executeBatch();
+            deleteMemberStmt.executeBatch();
+            deleteCompetitionMemberStmt.executeBatch();
+            deleteAttendanceStmt.executeBatch();
+
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        } finally {
+            connection.setAutoCommit(true);
         }
     }
 

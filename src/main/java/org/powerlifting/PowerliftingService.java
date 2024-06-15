@@ -170,6 +170,27 @@ public class PowerliftingService {
         }
     }
 
+    public void addAlumni(Member member) throws SQLException {
+        try {
+            dbDriver.connect();
+            dbDriver.addAlumni(member);
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            dbDriver.disconnect();
+            throw e;
+        }
+    }
+
+    public void convertMembersToAlumni() {
+        try {
+            dbDriver.connect();
+            dbDriver.convertMembersToAlumni();
+            dbDriver.disconnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Event> searchMemberEvents (int memberId) {
         List<Event> eventsList = new ArrayList<>();
         try {
