@@ -58,6 +58,7 @@ public class PowerliftingController implements Initializable {
     @FXML private TableColumn<Member, Float>  memberWeightClassColumn;
     @FXML private TableColumn<Member, Float>  memberBestResultColumn;
     @FXML private TableColumn<Member, Integer> memberAttendanceColumn;
+    @FXML private TableColumn<Member, String> memberSemesterColumn; // Add the new column
 
     @FXML private AnchorPane addMemberPane;
     @FXML private Button backButton1;
@@ -531,6 +532,7 @@ public class PowerliftingController implements Initializable {
         memberWeightClassColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Weight_Class"));
         memberBestResultColumn.setCellValueFactory(new PropertyValueFactory<Member, Float>("Best_Total_KG"));
         memberAttendanceColumn.setCellValueFactory(new PropertyValueFactory<Member, Integer>("Total_Practices_Attended"));
+        memberSemesterColumn.setCellValueFactory(new PropertyValueFactory<Member, String>("semesterName")); // Bind the new column
 
         // Initialize alumni table columns
         alumniFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("First_Name"));

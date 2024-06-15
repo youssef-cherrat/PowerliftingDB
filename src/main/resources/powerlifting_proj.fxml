@@ -300,6 +300,7 @@
                         <TableColumn fx:id="memberWeightClassColumn" prefWidth="150.0" text="Weight (KG)" />
                         <TableColumn fx:id="memberBestResultColumn" prefWidth="150.0" text="Best Total (KG)" />
                         <TableColumn fx:id="memberAttendanceColumn" maxWidth="497.8387451171875" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Attendance Record" />
+                        <TableColumn fx:id="memberSemesterColumn" prefWidth="150.0" text="Semester" />
                      </columns>
                   </TableView>
                   <Label fx:id="searchMessageLabel" layoutX="10.0" layoutY="97.0" maxWidth="-Infinity" prefHeight="17.0" prefWidth="500.0" text="search label" visible="false" />

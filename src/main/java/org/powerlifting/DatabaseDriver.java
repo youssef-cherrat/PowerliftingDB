@@ -441,7 +441,10 @@ public class DatabaseDriver {
         List<Member> members = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Member;");
+            String query = "SELECT Member.*, Semester.Session_Name " +
+                    "FROM Member " +
+                    "JOIN Semester ON Member.Semester_ID = Semester.Semester_ID";
+            ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 int memberId = rs.getInt("Member_ID");
                 int semesterId = rs.getInt("Semester_ID");
@@ -454,13 +457,13 @@ public class DatabaseDriver {
                 String gradDate = rs.getString("Member_Grad_Date");
                 float weightClass = rs.getFloat("Member_Weight_Class");
                 float bestTotalKg = rs.getFloat("Member_Best_Total_KG");
-
+                String semesterName = rs.getString("Session_Name");
 
 //                String passwordHash = rs.getString("Member_Password_Hash");
 //                int totalPracticesAttended = getTotalPracticesAttended(rs.getInt("Member_ID"));
 
 //                members.add(new Member(semesterId, firstName, lastName, dateOfBirth, gradDate, weightClass, bestTotalKg, gender, email));
-                members.add(new Member(memberId, semesterId, firstName, lastName, gender, email, totalPracticesAttended, dateOfBirth, gradDate,weightClass, bestTotalKg));
+                members.add(new Member(memberId, semesterId, firstName, lastName, gender, email, totalPracticesAttended, dateOfBirth, gradDate,weightClass, bestTotalKg, semesterName));
             }
             rs.close();
         } catch (SQLException e) {

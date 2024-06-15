@@ -14,6 +14,7 @@ public class Member {
     private float Best_Total_KG;
     private String Password_Hash;
     private int Semester_ID;
+    private String semesterName; // Add this field
 
     //for add member
     public Member(int semester_ID, String first_Name, String last_Name, String date_of_Birth, String grad_Date, float weight_Class, float best_Total_KG, String gender, String email) {
@@ -60,6 +61,31 @@ public class Member {
         Weight_Class = weight_Class;
         Best_Total_KG = best_Total_KG;
     }
+
+    public Member(int member_ID, int semester_ID, String first_Name, String last_Name, String gender, String email, int total_Practices_Attended, String date_of_Birth, String grad_Date, float weight_Class, float best_Total_KG, String semesterName) {
+        Member_ID = member_ID;
+        Semester_ID = semester_ID;
+        First_Name = first_Name;
+        Last_Name = last_Name;
+        Gender = gender;
+        Email = email;
+        Total_Practices_Attended = total_Practices_Attended;
+        Date_of_Birth = date_of_Birth;
+        Grad_Date = grad_Date;
+        Weight_Class = weight_Class;
+        Best_Total_KG = best_Total_KG;
+        this.semesterName = semesterName;
+    }
+
+    // Add getter and setter for semesterName
+    public String getSemesterName() {
+        return semesterName;
+    }
+
+    public void setSemesterName(String semesterName) {
+        this.semesterName = semesterName;
+    }
+
 
     public Member() {}
 
