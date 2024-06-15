@@ -837,7 +837,8 @@ public class DatabaseDriver {
                 int memberId = rs.getInt("Member_ID");
                 String firstName = rs.getString("Member_First_Name");
                 String lastName = rs.getString("Member_Last_Name");
-                int classYear = rs.getDate("Member_Grad_Date").toLocalDate().getYear();
+                String gradDate = rs.getString("Member_Grad_Date"); // Retrieve grad date as string
+                int classYear = LocalDate.parse(gradDate).getYear();
                 String email = rs.getString("Member_Email");
                 int semesterId = rs.getInt("Semester_ID");
 
@@ -871,7 +872,5 @@ public class DatabaseDriver {
             connection.setAutoCommit(true);
         }
     }
-
-
 
 }
